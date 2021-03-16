@@ -12,14 +12,13 @@ public class DLList<T> implements DLListInterface<T>, Serializable {
     private Node lastNode;
     private int numOfEntries;
 
-    public DLList() {
-        clear();
+    public DLList() {    
     }
 
     private class Node implements Serializable {
 
         private T data;
-        private Node next;
+        private Node next ;
         private Node previous;
 
         private Node(T data) {
