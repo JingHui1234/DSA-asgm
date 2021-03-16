@@ -120,7 +120,6 @@
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="jdcDate" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jtfEventName" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jtfNoParticipant" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jcbCategory" alignment="0" pref="216" max="32767" attributes="0"/>
@@ -214,10 +213,7 @@
                       <Component id="jtfNoParticipant" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLabel13" pref="32" max="32767" attributes="0"/>
-                      <Component id="jdcDate" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel13" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel18" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
@@ -425,8 +421,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Time"/>
           </Properties>
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jdcDate">
         </Component>
       </SubComponents>
     </Container>
