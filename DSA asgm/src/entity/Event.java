@@ -30,7 +30,7 @@ public class Event implements Serializable{
     public Event() {
     }
 
-    public Event(String society, String organizer, String name, String category, int numOfParticipant, LocalDate date, LocalTime startTime, LocalTime endTime) {
+    public Event(String society, String organizer, String name, String category, LocalDate date, LocalTime startTime, LocalTime endTime, int numOfParticipant) {
         this.society = society;
         this.organizer = organizer;
         this.name = name;

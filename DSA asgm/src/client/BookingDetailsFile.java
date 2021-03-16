@@ -1,3 +1,5 @@
+package client;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,9 +8,7 @@
 
 
 import adt.ArrayList;
-import entity.BookingDetails;
-import entity.Event;
-import entity.Venue;
+import entity.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -42,11 +42,10 @@ public class BookingDetailsFile {
                 LocalTime startTime = LocalTime.parse(bookingDetails[5]);
                 LocalTime endTime = LocalTime.parse(bookingDetails[6]);
                 int numOfParticipants = Integer.parseInt(bookingDetails[7]);
-                String bookedVenue1 = bookingDetails[8];
-                String bookedVenue2 = bookingDetails[9];
-                String bookedVenue3 = bookingDetails[10];
+                String bookedVenue = bookingDetails[8];
+               
 
-                BookingDetails bookingdetails = new BookingDetails(new Event(society, organizer, name, category, date, startTime, endTime, numOfParticipants), bookedVenue1, bookedVenue2, bookedVenue3);
+                BookingDetails bookingdetails = new BookingDetails(new Event(society, organizer, name, category, date, startTime, endTime, numOfParticipants), bookedVenue);
                 bookingList.insert(bookingdetails);
             }
 
@@ -61,7 +60,11 @@ public class BookingDetailsFile {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(fileName, true));
-            writer.write(bookingDetails.getEvent().getSociety() + "|" + bookingDetails.getEvent().getOrganizer() + "|" + bookingDetails.getEvent().getName() + "|" + bookingDetails.getEvent().getCategory() + "|" + bookingDetails.getEvent().getDate() + "|" + bookingDetails.getEvent().getStartTime() + "|" + bookingDetails.getEvent().getEndTime() + "|" + bookingDetails.getEvent().getNumOfParticipant() + "|" + bookingDetails.getBookedVenue1() + "|" + bookingDetails.getBookedVenue2() + "|" + bookingDetails.getBookedVenue3());
+            writer.write(bookingDetails.getEvent().getSociety() + "|" + bookingDetails.getEvent().getOrganizer() + "|" + 
+                    bookingDetails.getEvent().getName() + "|" + bookingDetails.getEvent().getCategory() + "|" + 
+                    bookingDetails.getEvent().getDate() + "|" + bookingDetails.getEvent().getStartTime() + "|" + 
+                    bookingDetails.getEvent().getEndTime() + "|" + bookingDetails.getEvent().getNumOfParticipant() 
+                    + "|" + bookingDetails.getBookedVenue());
             writer.newLine();
 
             writer.close();
@@ -78,7 +81,11 @@ public class BookingDetailsFile {
 
             for (int i = 1; i <= bookingList.length(); i++) {
                 BookingDetails bookingDetails = bookingList.getEntry(i);
-                writer.write(bookingDetails.getEvent().getSociety() + "|" + bookingDetails.getEvent().getOrganizer() + "|" + bookingDetails.getEvent().getName() + "|" + bookingDetails.getEvent().getCategory() + "|" + bookingDetails.getEvent().getDate() + "|" + bookingDetails.getEvent().getStartTime() + "|" + bookingDetails.getEvent().getEndTime() + "|" + bookingDetails.getEvent().getNumOfParticipant() + "|" + bookingDetails.getBookedVenue1() + "|" + bookingDetails.getBookedVenue2() + "|" + bookingDetails.getBookedVenue3());
+                writer.write(bookingDetails.getEvent().getSociety() + "|" + bookingDetails.getEvent().getOrganizer() 
+                        + "|" + bookingDetails.getEvent().getName() + "|" + bookingDetails.getEvent().getCategory() + "|" 
+                        + bookingDetails.getEvent().getDate() + "|" + bookingDetails.getEvent().getStartTime() + "|" + 
+                        bookingDetails.getEvent().getEndTime() + "|" + bookingDetails.getEvent().getNumOfParticipant() + "|" +
+                        bookingDetails.getBookedVenue());
                 writer.newLine();
             }
             writer.close();
