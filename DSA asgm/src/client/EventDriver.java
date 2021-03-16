@@ -148,44 +148,24 @@ public class EventDriver extends javax.swing.JFrame {
 
         jtfNo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtfNo.setEnabled(false);
-        jtfNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfNoActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("No. ");
 
         jtfSociety.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtfSociety.setEnabled(false);
-        jtfSociety.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfSocietyActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Organizer");
 
         jtfOrganizer.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtfOrganizer.setEnabled(false);
-        jtfOrganizer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfOrganizerActionPerformed(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Event Name");
 
         jtfName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtfName.setEnabled(false);
-        jtfName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfNameActionPerformed(evt);
-            }
-        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Category");
@@ -195,41 +175,21 @@ public class EventDriver extends javax.swing.JFrame {
 
         jtfDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtfDate.setEnabled(false);
-        jtfDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfDateActionPerformed(evt);
-            }
-        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Time");
 
         jtfStartTime.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtfStartTime.setEnabled(false);
-        jtfStartTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfStartTimeActionPerformed(evt);
-            }
-        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("To");
 
         jtfEndTime.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtfEndTime.setEnabled(false);
-        jtfEndTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfEndTimeActionPerformed(evt);
-            }
-        });
 
         jtfpnum.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtfpnum.setEnabled(false);
-        jtfpnum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfpnumActionPerformed(evt);
-            }
-        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Participant No.");
@@ -245,7 +205,6 @@ public class EventDriver extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Venue");
 
-        jtbSearchName.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jtbSearchName.setText("Search Event Name");
         jtbSearchName.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jtbSearchName.addActionListener(new java.awt.event.ActionListener() {
@@ -254,7 +213,6 @@ public class EventDriver extends javax.swing.JFrame {
             }
         });
 
-        jtbSummary.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jtbSummary.setText("Summary");
         jtbSummary.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jtbSummary.addActionListener(new java.awt.event.ActionListener() {
@@ -522,38 +480,6 @@ public class EventDriver extends javax.swing.JFrame {
                           "3. " +  model.getValueAt(selectedRowIndex, 11).toString());
         
     }//GEN-LAST:event_jtbEventListMouseClicked
-
-    private void jtfNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNoActionPerformed
-
-    private void jtfSocietyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSocietyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfSocietyActionPerformed
-
-    private void jtfOrganizerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfOrganizerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfOrganizerActionPerformed
-
-    private void jtfNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNameActionPerformed
-
-    private void jtfDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfDateActionPerformed
-
-    private void jtfStartTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfStartTimeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfStartTimeActionPerformed
-
-    private void jtfEndTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEndTimeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfEndTimeActionPerformed
-
-    private void jtfpnumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfpnumActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfpnumActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
        eventFile.rewrite((DLList)eventList, "Event.dat");
