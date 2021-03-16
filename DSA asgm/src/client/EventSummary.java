@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package client;
 
 import adt.DLList;
@@ -25,8 +20,7 @@ public class EventSummary extends javax.swing.JFrame {
         initComponents();
         eventList = eventFile.reader("Event.dat");
         this.getContentPane().setBackground(Color.WHITE);
-        displaySummary();
-        
+        displaySummary();     
     }
 
     /**

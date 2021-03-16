@@ -52,7 +52,7 @@ public class EventFile {
                 LocalTime endTime = LocalTime.parse(eventDetails[6]);
                 int partiNo = Integer.parseInt(eventDetails[7]);
                 
-                Event event = new Event(society, organizer, name, category, partiNo, date, startTime, endTime);
+                Event event = new Event(society, organizer, name, category, date, startTime, endTime,partiNo);
                 eventList.add(event);
             }
 

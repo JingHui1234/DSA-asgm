@@ -55,7 +55,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jLabel1" pref="659" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" pref="0" max="32767" attributes="0"/>
+              <Component id="jPanel1" pref="649" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -120,9 +120,9 @@
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="jdcDate" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jtfEventName" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jtfNoParticipant" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jdcDate" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jcbCategory" alignment="0" pref="216" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -214,17 +214,19 @@
                       <Component id="jtfNoParticipant" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel13" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="jdcDate" alignment="1" min="-2" pref="29" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jLabel13" pref="32" max="32767" attributes="0"/>
+                      <Component id="jdcDate" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel15" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="jsFromTime" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel18" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="jLabel17" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="jsToTime" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel15" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="jsFromTime" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="jLabel17" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="jsToTime" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -243,11 +245,6 @@
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Society"/>
-          </Properties>
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jdcDate">
-          <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="d MMM y"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jcbSociety">
@@ -428,6 +425,8 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Time"/>
           </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="jdcDate">
         </Component>
       </SubComponents>
     </Container>

@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package client;
 
-import adt.DLList;
-import adt.DLListInterface;
-import entity.Event;
+import adt.*;
+import entity.*;
 import java.awt.Font;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
@@ -20,8 +14,10 @@ import javax.swing.table.DefaultTableModel;
 public class EventDriver extends javax.swing.JFrame {
 
     private DLListInterface<Event> eventList = new DLList<>();
+    private ListInterface<BookingDetails> bookingList = new ArrayList<>();
    
     private final EventFile eventFile = new EventFile();
+    private final BookingDetailsFile bdfile = new BookingDetailsFile();
 
     public EventDriver() {
         initComponents();
@@ -29,6 +25,7 @@ public class EventDriver extends javax.swing.JFrame {
         jtbEventList.getTableHeader().setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
 
         eventList = eventFile.reader("Event.dat");
+        bookingList = bdfile.reader("BookingDetailsFile.txt");
        
         displayEventList();
         
@@ -36,7 +33,6 @@ public class EventDriver extends javax.swing.JFrame {
         jbtCancel.setVisible(false);
         jcbCategory.setSelectedIndex(-1);
         
-
     }
 
     /**
@@ -73,12 +69,14 @@ public class EventDriver extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jbtClear = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jtfDate1 = new javax.swing.JTextField();
         jtbSearchName = new javax.swing.JButton();
         jtbSummary = new javax.swing.JButton();
         jcbCategory = new javax.swing.JComboBox<>();
         jbtOK = new javax.swing.JButton();
         jbtCancel = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtfVenue = new javax.swing.JTextArea();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -247,14 +245,6 @@ public class EventDriver extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Venue");
 
-        jtfDate1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jtfDate1.setEnabled(false);
-        jtfDate1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfDate1ActionPerformed(evt);
-            }
-        });
-
         jtbSearchName.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jtbSearchName.setText("Search Event Name");
         jtbSearchName.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -293,6 +283,16 @@ public class EventDriver extends javax.swing.JFrame {
             }
         });
 
+        jtfVenue.setBackground(new java.awt.Color(204, 204, 204));
+        jtfVenue.setColumns(20);
+        jtfVenue.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jtfVenue.setRows(5);
+        jtfVenue.setEnabled(false);
+        jScrollPane1.setViewportView(jtfVenue);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("From");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -304,9 +304,16 @@ public class EventDriver extends javax.swing.JFrame {
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jtbSearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jtbSummary, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jbtOK, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(46, 46, 46)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -320,48 +327,42 @@ public class EventDriver extends javax.swing.JFrame {
                                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(50, 50, 50)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jtfName)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(2, 2, 2)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jtfOrganizer, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jtfSociety, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jtfNo, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addComponent(jtfpnum)
-                                            .addComponent(jtfDate, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jtfStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel9)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jtfEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jtfDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jcbCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                .addGap(50, 50, 50)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfName)
+                                    .addComponent(jtfpnum)
+                                    .addComponent(jcbCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jbtOK, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel12)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jbtCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(73, 73, 73))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtbSearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jtbSummary, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jtfStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jtfEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane1)
+                                    .addComponent(jtfDate)
+                                    .addComponent(jtfOrganizer)
+                                    .addComponent(jtfSociety, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jtfNo, javax.swing.GroupLayout.Alignment.TRAILING))))
                         .addGap(53, 53, 53))
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1005, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbtAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jbtDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(jbtClear, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(jbtClose, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbtAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(jbtDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addComponent(jbtClear, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
+                        .addComponent(jbtClose, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(111, 111, 111))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbtCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(145, 145, 145))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,35 +414,25 @@ public class EventDriver extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jtfStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jtfEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbtOK)
                             .addComponent(jbtCancel))
-                        .addGap(29, 29, 29)))
+                        .addGap(34, 34, 34)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jbtDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jbtClear, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jbtClose, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jbtAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68))
+                .addGap(44, 44, 44))
         );
-
-        jbtAdd.getAccessibleContext().setAccessibleParent(null);
-        jLabel1.getAccessibleContext().setAccessibleParent(null);
-        jLabel3.getAccessibleContext().setAccessibleParent(null);
-        jLabel4.getAccessibleContext().setAccessibleParent(null);
-        jLabel5.getAccessibleContext().setAccessibleParent(null);
-        jLabel6.getAccessibleContext().setAccessibleParent(null);
-        jLabel7.getAccessibleContext().setAccessibleParent(null);
-        jLabel8.getAccessibleContext().setAccessibleParent(null);
-        jLabel10.getAccessibleContext().setAccessibleParent(null);
-        jLabel11.getAccessibleContext().setAccessibleParent(null);
 
         pack();
         setLocationRelativeTo(null);
@@ -461,6 +452,14 @@ public class EventDriver extends javax.swing.JFrame {
                 Event deletedEvent = eventList.remove(deletePos);
 
                 if (deletedEvent != null) {
+                    for (int i = 1; i <= bookingList.length(); i++) {
+
+                        if (deletedEvent.equals(bookingList.getEntry(i).getEvent())) {
+                            bookingList.remove(i);
+
+                        }            
+                    }
+                    
                     displayEventList();
                     
                     // reset all the textfiled
@@ -473,6 +472,7 @@ public class EventDriver extends javax.swing.JFrame {
                     jtfStartTime.setText("");
                     jtfEndTime.setText("");
                     jtfpnum.setText("");
+                    jtfVenue.setText("");
                     
                     // prompt messages to notify succeed in deletion
                     Icon icon = new javax.swing.ImageIcon(getClass().getResource("/images/tick.png"));
@@ -491,13 +491,15 @@ public class EventDriver extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtDeleteActionPerformed
 
     private void jbtAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAddActionPerformed
-       eventFile.rewrite((DLList)eventList, "Event.dat");          
+       eventFile.rewrite((DLList)eventList, "Event.dat");
+       bdfile.rewrite((ArrayList)bookingList, "BookingDetailsFile.txt");
        new EventRegistrationDriver().setVisible(true);
        this.dispose(); // close current frame
     }//GEN-LAST:event_jbtAddActionPerformed
 
     private void jbtCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCloseActionPerformed
         eventFile.rewrite((DLList)eventList, "Event.dat");
+        bdfile.rewrite((ArrayList)bookingList, "BookingDetailsFile.txt");
         this.dispose();
     }//GEN-LAST:event_jbtCloseActionPerformed
 
@@ -515,6 +517,9 @@ public class EventDriver extends javax.swing.JFrame {
         jtfStartTime.setText(model.getValueAt(selectedRowIndex, 6).toString());
         jtfEndTime.setText(model.getValueAt(selectedRowIndex, 7).toString());
         jtfpnum.setText(model.getValueAt(selectedRowIndex, 8).toString());
+        jtfVenue.setText("1. " + model.getValueAt(selectedRowIndex, 9).toString()+"\n"+
+                          "2. " +  model.getValueAt(selectedRowIndex, 10).toString()+"\n"+
+                          "3. " +  model.getValueAt(selectedRowIndex, 11).toString());
         
     }//GEN-LAST:event_jtbEventListMouseClicked
 
@@ -551,7 +556,8 @@ public class EventDriver extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfpnumActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-//       eventFile.rewrite((DLList)eventList, "Event.dat");    
+       eventFile.rewrite((DLList)eventList, "Event.dat");
+       bdfile.rewrite((ArrayList)bookingList, "BookingDetailsFile.txt");        
        this.dispose();
     }//GEN-LAST:event_formWindowClosing
 
@@ -574,10 +580,6 @@ public class EventDriver extends javax.swing.JFrame {
         } 
  
     }//GEN-LAST:event_jbtClearActionPerformed
-
-    private void jtfDate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDate1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfDate1ActionPerformed
 
     private void jtbSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbSearchNameActionPerformed
         jtbEventList.getSelectionModel().clearSelection(); // remove focus from jtable
@@ -715,6 +717,7 @@ public class EventDriver extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -723,6 +726,7 @@ public class EventDriver extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton jbtAdd;
     private javax.swing.JButton jbtCancel;
@@ -735,13 +739,13 @@ public class EventDriver extends javax.swing.JFrame {
     private javax.swing.JButton jtbSearchName;
     private javax.swing.JButton jtbSummary;
     private javax.swing.JTextField jtfDate;
-    private javax.swing.JTextField jtfDate1;
     private javax.swing.JTextField jtfEndTime;
     private javax.swing.JTextField jtfName;
     private javax.swing.JTextField jtfNo;
     private javax.swing.JTextField jtfOrganizer;
     private javax.swing.JTextField jtfSociety;
     private javax.swing.JTextField jtfStartTime;
+    private javax.swing.JTextArea jtfVenue;
     private javax.swing.JTextField jtfpnum;
     // End of variables declaration//GEN-END:variables
 
@@ -751,40 +755,37 @@ public class EventDriver extends javax.swing.JFrame {
         Event event;
         String venue1 = "-";
         String venue2 = "-";
-        String venue3 = "-";           
+        String venue3 = "-";     
+        
 
         tblModel.setNumRows(0);
         try{
-             for (int i = 0; i < eventList.size(); i++) {
-            event = eventList.getEntry(i + 1);
-//            
-            // booking details to find the corresponding venue
-//            int venueCount = 0;
-//            for (int j = 0; j < bookingdetaillist.size(); j++) {
-//                
-//                if(event.equals(bk.getentry().event)){
-//                    venueCount++;
-//                    switch(venueCount){
-//                        case 1:
-//                            venue1 = 
-//                            break;
-//                        case 2:
-//                            venue2 = 
-//                            break;
-//                        case 3:
-//                            venue3 = 
-//                    }
-//                            
-//                }
-//            }
-           
+             for (int i = 1; i <= eventList.size(); i++) {
+            event = eventList.getEntry(i);
             
-            String data[] = {Integer.toString(i + 1), event.getSociety(),
+            // booking details to find the corresponding venue
+            int venueCount = 0;
+            for (int j = 1; j <= bookingList.length(); j++) {
+                
+                if(event.equals(bookingList.getEntry(j).getEvent())){
+                    venueCount++;
+                    switch(venueCount){
+                        case 1 -> venue1 = bookingList.getEntry(j).getBookedVenue();
+                        case 2 -> venue2 = bookingList.getEntry(j).getBookedVenue();
+                        case 3 -> venue3 = bookingList.getEntry(j).getBookedVenue();
+                    }                            
+                }
+            }
+                      
+            String data[] = {Integer.toString(i), event.getSociety(),
                 event.getOrganizer(), event.getName(), event.getCategory(),
                 event.getDate().toString(), event.getStartTime().toString(),
                 event.getEndTime().toString(), Integer.toString(event.getNumOfParticipant()),
                 venue1, venue2, venue3};
            tblModel.addRow(data);
+            venue1 = "-";
+            venue2 = "-";
+            venue3 = "-";     
         }
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, "File is empty", "ERROR", JOptionPane.ERROR_MESSAGE);
