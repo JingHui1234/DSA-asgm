@@ -1,0 +1,6 @@
+Computer Science|Jing Hui|TPL|Competition|2021-02-20|09:00|18:00|150|DKA|DKH|DKG
+Computer Science|Jun Neng|IOT|Talk|2021-02-11|09:00|18:00|200|DKB| | 
+LDDS|Chia Ling|I Dare You|One-day Camp|2021-03-31|10:00|20:00|250|DKG| | 
+Japanese Language|Tan Ah Kau|Learn Japanese Language|Talk|2021-03-26|12:05|15:05|50|M101| | 
+Computer Science|Jing Hui|TPL|Competition|2021-02-20|12:00|14:30|30|A101| | 
+English Society|Jing Hui|TPL|Competition|2021-06-20|12:00|14:30|30|A101|A102|A103
