@@ -61,6 +61,11 @@ public class AddNewVenue extends javax.swing.JFrame {
         jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabelAddNewVenue.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelAddNewVenue.setText("Add New Venue");
@@ -219,6 +224,7 @@ public class AddNewVenue extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
@@ -345,6 +351,11 @@ public class AddNewVenue extends javax.swing.JFrame {
         // TODO add your handling code here:
         jLabelEmptyOther.setText("");
     }//GEN-LAST:event_jTextFieldOtherKeyReleased
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

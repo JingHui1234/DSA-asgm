@@ -51,6 +51,11 @@ public class VenueManagement extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabelVenue.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelVenue.setText("Venue Management");
@@ -164,6 +169,7 @@ public class VenueManagement extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAddVenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddVenueActionPerformed
@@ -278,6 +284,11 @@ public class VenueManagement extends javax.swing.JFrame {
            venueTable.addRow(data);
         }
     }//GEN-LAST:event_jButtonRefreshActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

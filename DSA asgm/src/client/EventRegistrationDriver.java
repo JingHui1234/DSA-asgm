@@ -94,7 +94,6 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jtfNoParticipant = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        jdcDate = new com.toedter.calendar.JDateChooser();
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Category");
@@ -306,9 +305,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfNoParticipant, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addComponent(jdcDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -542,7 +539,6 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
     private javax.swing.JButton jbtNext;
     private javax.swing.JComboBox<String> jcbCategory;
     private javax.swing.JComboBox<String> jcbSociety;
-    private com.toedter.calendar.JDateChooser jdcDate;
     private javax.swing.JSpinner jsFromTime;
     private javax.swing.JSpinner jsToTime;
     private javax.swing.JTextField jtfEventName;

@@ -195,6 +195,11 @@ public class VenueBooking extends javax.swing.JFrame {
         jLabelEmptyVenue = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jComboBoxVenue1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Please choose:" }));
         jComboBoxVenue1.addItemListener(new java.awt.event.ItemListener() {
@@ -343,6 +348,7 @@ public class VenueBooking extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmActionPerformed
@@ -488,6 +494,11 @@ public class VenueBooking extends javax.swing.JFrame {
         // enable the text field if venue 2 is chosen
         jComboBoxVenue3.setEnabled(true);
     }//GEN-LAST:event_jComboBoxVenue2ItemStateChanged
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

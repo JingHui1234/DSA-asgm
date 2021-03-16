@@ -29,8 +29,128 @@
     <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-6,0,0,2,43"/>
   </AuxValues>
 
-  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-    <Property name="useNullLayout" type="boolean" value="false"/>
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jlbTitle" min="-2" pref="555" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
+              <Component id="jLabel2" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
+              <Component id="jlbJan" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="96" pref="96" max="-2" attributes="0"/>
+              <Component id="jLabel17" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
+              <Component id="jlbJul" min="-2" pref="74" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
+              <Component id="jLabel4" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
+              <Component id="jlbFeb" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="96" pref="96" max="-2" attributes="0"/>
+              <Component id="jLabel20" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
+              <Component id="jlbAug" min="-2" pref="74" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
+              <Component id="jLabel6" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
+              <Component id="jlbMar" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="96" pref="96" max="-2" attributes="0"/>
+              <Component id="jLabel22" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
+              <Component id="jlbSep" min="-2" pref="74" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
+              <Component id="jLabel8" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
+              <Component id="jlbApr" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="96" pref="96" max="-2" attributes="0"/>
+              <Component id="jLabel24" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
+              <Component id="jlbOct" min="-2" pref="74" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
+              <Component id="jLabel10" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
+              <Component id="jlbMay" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="96" pref="96" max="-2" attributes="0"/>
+              <Component id="jLabel14" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
+              <Component id="jlbNov" min="-2" pref="74" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
+              <Component id="jLabel12" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
+              <Component id="jlbJun" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="96" pref="96" max="-2" attributes="0"/>
+              <Component id="jLabel16" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
+              <Component id="jlbDec" min="-2" pref="74" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="210" pref="210" max="-2" attributes="0"/>
+              <Component id="jbtClose" min="-2" pref="120" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+              <Component id="jlbTitle" min="-2" pref="60" max="-2" attributes="0"/>
+              <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel2" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jlbJan" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jLabel17" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jlbJul" min="-2" pref="32" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel4" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jlbFeb" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jLabel20" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jlbAug" min="-2" pref="32" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel6" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jlbMar" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jLabel22" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jlbSep" min="-2" pref="32" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel8" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jlbApr" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jLabel24" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jlbOct" min="-2" pref="32" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel10" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jlbMay" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jLabel14" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jlbNov" min="-2" pref="32" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel12" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jlbJun" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jLabel16" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jlbDec" min="-2" pref="32" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="48" pref="48" max="-2" attributes="0"/>
+              <Component id="jbtClose" min="-2" pref="39" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jlbTitle">
@@ -41,11 +161,6 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Summary"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="20" width="555" height="60"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
@@ -54,11 +169,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="May"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="60" y="310" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jlbMay">
       <Properties>
@@ -76,11 +186,6 @@
           </Border>
         </Property>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="150" y="310" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel12">
       <Properties>
@@ -89,11 +194,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="June"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="60" y="360" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jlbJun">
       <Properties>
@@ -111,11 +211,6 @@
           </Border>
         </Property>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="150" y="360" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel14">
       <Properties>
@@ -124,11 +219,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="November"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="320" y="310" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jlbNov">
       <Properties>
@@ -146,11 +236,6 @@
           </Border>
         </Property>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="420" y="310" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel16">
       <Properties>
@@ -159,11 +244,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="December"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="320" y="360" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel17">
       <Properties>
@@ -172,11 +252,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="July"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="320" y="110" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jlbDec">
       <Properties>
@@ -194,11 +269,6 @@
           </Border>
         </Property>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="420" y="360" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jlbJul">
       <Properties>
@@ -216,11 +286,6 @@
           </Border>
         </Property>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="420" y="110" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel20">
       <Properties>
@@ -229,11 +294,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="August"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="320" y="160" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jlbAug">
       <Properties>
@@ -251,11 +311,6 @@
           </Border>
         </Property>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="420" y="160" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel22">
       <Properties>
@@ -264,11 +319,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="September"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="320" y="210" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jlbSep">
       <Properties>
@@ -286,11 +336,6 @@
           </Border>
         </Property>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="420" y="210" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -299,11 +344,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="January"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="60" y="110" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel24">
       <Properties>
@@ -312,11 +352,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="October"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="320" y="260" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jlbJan">
       <Properties>
@@ -334,11 +369,6 @@
           </Border>
         </Property>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="150" y="110" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jlbOct">
       <Properties>
@@ -356,11 +386,6 @@
           </Border>
         </Property>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="420" y="260" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -369,11 +394,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="February"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="60" y="160" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="jbtClose">
       <Properties>
@@ -390,11 +410,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtCloseActionPerformed"/>
       </Events>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="210" y="440" width="120" height="39"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jlbFeb">
       <Properties>
@@ -412,11 +427,6 @@
           </Border>
         </Property>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="150" y="160" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -425,11 +435,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="March"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="60" y="210" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jlbMar">
       <Properties>
@@ -447,11 +452,6 @@
           </Border>
         </Property>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="150" y="210" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
@@ -460,11 +460,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="April"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="60" y="260" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jlbApr">
       <Properties>
@@ -482,11 +477,6 @@
           </Border>
         </Property>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="150" y="260" width="74" height="32"/>
-        </Constraint>
-      </Constraints>
     </Component>
   </SubComponents>
 </Form>
