@@ -94,6 +94,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jtfNoParticipant = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
+        jdcDate = new com.toedter.calendar.JDateChooser();
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Category");
@@ -238,6 +239,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
                                             .addComponent(jsToTime, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jdcDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jtfEventName, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jtfNoParticipant, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jcbCategory, javax.swing.GroupLayout.Alignment.LEADING, 0, 216, Short.MAX_VALUE))
@@ -304,7 +306,9 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfNoParticipant, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(jdcDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,8 +336,9 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -538,6 +543,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
     private javax.swing.JButton jbtNext;
     private javax.swing.JComboBox<String> jcbCategory;
     private javax.swing.JComboBox<String> jcbSociety;
+    private com.toedter.calendar.JDateChooser jdcDate;
     private javax.swing.JSpinner jsFromTime;
     private javax.swing.JSpinner jsToTime;
     private javax.swing.JTextField jtfEventName;
