@@ -411,8 +411,10 @@ public class EventDriver extends javax.swing.JFrame {
 
                 if (deletedEvent != null) {
                     for (int i = 1; i <= bookingList.length(); i++) {
+
                         if (deletedEvent.equals(bookingList.getEntry(i).getEvent())) {
                             bookingList.remove(i);
+
                         }            
                     }
                     

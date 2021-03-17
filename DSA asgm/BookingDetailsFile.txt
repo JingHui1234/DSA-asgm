@@ -6,3 +6,6 @@ Computer Science|Jing Hui|TPL|Competition|2021-02-20|12:00|14:30|30|A101
 English Society|Jing Hui|TPL|Competition|2021-06-20|12:00|14:30|30|A101
 Music|Tiong Wei Sheng|VOR 3.0|Competition|2021-03-20|10:00|18:00|500|DKG
 Music|Tiong Wei Sheng|VOR 3.0|Competition|2021-03-20|10:00|18:00|500|DKH
+LDDS|owen|i dare u|Meeting|2021-03-21|08:30|12:00|30|M102
+LDDS|owen|i dare u|Meeting|2021-03-21|08:30|12:00|30|DKC
+LDDS|owen|i dare u|Meeting|2021-03-21|08:30|12:00|30|A101
