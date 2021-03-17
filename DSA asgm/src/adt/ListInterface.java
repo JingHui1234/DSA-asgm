@@ -46,4 +46,8 @@ public interface ListInterface<T> {
 
     // move the entry to the specific position
     public boolean move(int position, T entry);
+    
+    // double up the array size
+    public void incSize();
+    
 }
