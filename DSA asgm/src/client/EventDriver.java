@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class EventDriver extends javax.swing.JFrame {
 
-    private DLListInterface<Event> eventList = new DLList<>();
+    private DLListInterface<Event> eventList = new DoublyLinkedList<>();
     private ListInterface<BookingDetails> bookingList = new ArrayList<>();
    
     private final EventFile eventFile = new EventFile();
@@ -449,14 +449,14 @@ public class EventDriver extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtDeleteActionPerformed
 
     private void jbtAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAddActionPerformed
-       eventFile.rewrite((DLList)eventList, "Event.dat");
+       eventFile.rewrite((DoublyLinkedList)eventList, "Event.dat");
        bdfile.rewrite((ArrayList)bookingList, "BookingDetailsFile.txt");
        new EventRegistrationDriver().setVisible(true);
        this.dispose(); // close current frame
     }//GEN-LAST:event_jbtAddActionPerformed
 
     private void jbtCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCloseActionPerformed
-        eventFile.rewrite((DLList)eventList, "Event.dat");
+        eventFile.rewrite((DoublyLinkedList)eventList, "Event.dat");
         bdfile.rewrite((ArrayList)bookingList, "BookingDetailsFile.txt");
         this.dispose();
     }//GEN-LAST:event_jbtCloseActionPerformed
@@ -482,7 +482,7 @@ public class EventDriver extends javax.swing.JFrame {
     }//GEN-LAST:event_jtbEventListMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       eventFile.rewrite((DLList)eventList, "Event.dat");
+       eventFile.rewrite((DoublyLinkedList)eventList, "Event.dat");
        bdfile.rewrite((ArrayList)bookingList, "BookingDetailsFile.txt");        
        this.dispose();
     }//GEN-LAST:event_formWindowClosing
@@ -542,7 +542,7 @@ public class EventDriver extends javax.swing.JFrame {
     }//GEN-LAST:event_jtbSearchNameActionPerformed
 
     private void jtbSummaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbSummaryActionPerformed
-         eventFile.rewrite((DLList)eventList, "Event.dat");
+         eventFile.rewrite((DoublyLinkedList)eventList, "Event.dat");
         new EventSummary().setVisible(true);
     }//GEN-LAST:event_jtbSummaryActionPerformed
 
