@@ -6,13 +6,13 @@ import java.io.Serializable;
  *
  * @author Jing Hui
  */
-public class DLList<T> implements DLListInterface<T>, Serializable {
+public class DoublyLinkedList<T> implements DLListInterface<T>, Serializable {
 
     private Node firstNode;
     private Node lastNode;
     private int numOfEntries;
 
-    public DLList() {    
+    public DoublyLinkedList() {    
     }
 
     private class Node implements Serializable {

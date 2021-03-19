@@ -15,7 +15,7 @@ import javax.swing.SpinnerDateModel;
  */
 public class EventRegistrationDriver extends javax.swing.JFrame {
 
-    private DLListInterface<Event> eventList = new DLList<>();
+    private DLListInterface<Event> eventList = new DoublyLinkedList<>();
     private final EventFile eventFile = new EventFile();
 
     /**
@@ -37,7 +37,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
         eventList = eventFile.reader("Event.dat");
 
         // read from society file and Inititalize society selection
-        DLListInterface<String> societyList = new DLList<>();
+        DLListInterface<String> societyList = new DoublyLinkedList<>();
         societyList.add("LDDS");
         societyList.add("Computer Science");
         societyList.add("Music");

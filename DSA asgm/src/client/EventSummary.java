@@ -1,6 +1,6 @@
 package client;
 
-import adt.DLList;
+import adt.DoublyLinkedList;
 import adt.DLListInterface;
 import entity.Event;
 import java.awt.Color;
@@ -13,7 +13,7 @@ import javax.swing.JLabel;
  */
 public class EventSummary extends javax.swing.JFrame {
 
-    private DLListInterface<Event> eventList = new DLList<>();
+    private DLListInterface<Event> eventList = new DoublyLinkedList<>();
          private EventFile eventFile = new EventFile();
          
     public EventSummary() {

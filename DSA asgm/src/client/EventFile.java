@@ -5,7 +5,7 @@
  */
 package client;
 
-import adt.DLList;
+import adt.DoublyLinkedList;
 import entity.Event;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -20,8 +20,8 @@ import java.time.LocalTime;
  */
 public class EventFile {
     
-    public DLList <Event> reader(String fileName) {
-        DLList <Event> eventList = new DLList<>();
+    public DoublyLinkedList <Event> reader(String fileName) {
+        DoublyLinkedList <Event> eventList = new DoublyLinkedList<>();
         BufferedReader reader = null;
         try {
             String currentLine;
@@ -79,7 +79,7 @@ public class EventFile {
     //            writer.write(event.getSociety() + "|" + event.getOrganizer() + "|"
 //                    + event.getName() + "|" + event.getCategory() + "|" + event.getDate() + "|"
 //                    + event.getStartTime() + "|" + event.getEndTime() + "|" + event.getNumOfParticipant());    
-        public void rewrite(DLList <Event> eventList, String filename) {
+        public void rewrite(DoublyLinkedList <Event> eventList, String filename) {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(filename));
