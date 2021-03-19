@@ -3,10 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
+
+            <file>file:/C:/Users/HP/Documents/GitHub/DSA-asgm/DSA%20asgm/src/client/SocietyMemberManagement.java</file>
+            <file>file:/C:/Users/HP/Documents/GitHub/DSA-asgm/DSA%20asgm/src/adt/SortedListInterface.java</file>
+            <file>file:/C:/Users/HP/Documents/GitHub/DSA-asgm/DSA%20asgm/src/client/MemberManagement.java</file>
+            <file>file:/C:/Users/HP/Documents/GitHub/DSA-asgm/DSA%20asgm/src/entity/SocietyMemberRegistration.java</file>
+            <file>file:/C:/Users/HP/Documents/GitHub/DSA-asgm/DSA%20asgm/src/client/MemberRegFile.java</file>
+            <file>file:/C:/Users/HP/Documents/GitHub/DSA-asgm/DSA%20asgm/src/adt/SortedLinkedList.java</file>
+
+
             <file>file:/C:/Users/jingh/OneDrive/Documents/GitHub/DSA-asgm/DSA%20asgm/src/adt/DLListInterface.java</file>
             <file>file:/C:/Users/jingh/OneDrive/Documents/GitHub/DSA-asgm/DSA%20asgm/src/entity/Event.java</file>
-=======
+
             <file>file:/C:/Users/HP/Documents/GitHub/DSA-asgm/DSA%20asgm/src/client/EventSummary.java</file>
             <file>file:/C:/Users/HP/Documents/GitHub/DSA-asgm/DSA%20asgm/src/entity/Event.java</file>
             <file>file:/C:/Users/HP/Documents/GitHub/DSA-asgm/DSA%20asgm/src/client/VenueFile.java</file>
@@ -22,7 +30,8 @@
             <file>file:/C:/Users/HP/Documents/GitHub/DSA-asgm/DSA%20asgm/src/entity/BookingDetails.java</file>
             <file>file:/C:/Users/HP/Documents/GitHub/DSA-asgm/DSA%20asgm/src/entity/Venue.java</file>
             <file>file:/C:/Users/HP/Documents/GitHub/DSA-asgm/DSA%20asgm/src/adt/ArrayList.java</file>
->>>>>>> 08d78144dcfddbdba30e208f27696c4fc7540be6
+
+
         </group>
     </open-files>
 </project-private>

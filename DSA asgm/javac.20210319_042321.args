@@ -1,0 +1,18 @@
+-d
+"C:\\Users\\HP\\Documents\\GitHub\\DSA-asgm\\DSA asgm\\build\\classes"
+-classpath
+"C:\\Users\\HP\\Documents\\GitHub\\DSA-asgm\\DSA asgm\\build\\classes"
+-sourcepath
+"C:\\Users\\HP\\Documents\\GitHub\\DSA-asgm\\DSA asgm\\src"
+-target
+14
+-encoding
+UTF-8
+-g
+-processorpath
+"C:\\Users\\HP\\Documents\\GitHub\\DSA-asgm\\DSA asgm\\build\\empty"
+-s
+"C:\\Users\\HP\\Documents\\GitHub\\DSA-asgm\\DSA asgm\\build\\generated-sources\\ap-source-output"
+-source
+14
+"C:\\Users\\HP\\Documents\\GitHub\\DSA-asgm\\DSA asgm\\src\\client\\SocietyMemberManagement.java"
