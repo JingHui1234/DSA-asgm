@@ -1,0 +1,8 @@
+Anna|20PMD36663|0147372627|RSD|Music Society|Member|2021-03-18
+Brandon|20PMD12333|0123374658|RSF|English Society|Secretary|2021-03-18
+James|20PMD03748|0124938271|RSD|Computer Science Society|Member|2021-03-19
+Jerry|19PMD08886|0164037656|RDS|Computer Science Society|Commitee Member|2021-03-17
+Joe|19PMD27373|03838338333|RDS|Music Society|Secretary|2021-03-19
+Julian|18PMD35263|0120987654|RSF|Music Society|Member|2021-03-19
+Susan|18PMD14434|0144678653|RDS|Computer Science Society|President|2021-03-18
+Tom|20PMD39201|0138028444|RIT|English Society|Commitee Member|2021-03-19
