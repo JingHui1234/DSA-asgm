@@ -8,21 +8,18 @@ package client;
 
 
 import adt.SortedLinkedList;
-import adt.SortedListInterface;
 import entity.Society;
-import entity.SocietyMemberRegistration;
+import entity.SocietyMember;
 import entity.Student;
 import java.awt.Font;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
+import adt.InfiniteSortedListInterface;
+import adt.SortedArrayList;
+import adt.SortedListInterface;
 
 /**
  *
@@ -30,11 +27,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MemberManagement extends javax.swing.JFrame {
 
-    private static SortedListInterface<SocietyMemberRegistration> memberRegistrationList = new SortedLinkedList<SocietyMemberRegistration>();
-    private static SortedListInterface<SocietyMemberRegistration> societyMemberList = new SortedLinkedList<SocietyMemberRegistration>();
+    private static InfiniteSortedListInterface<SocietyMember> memberRegistrationList = new SortedLinkedList<SocietyMember>();
+    private static InfiniteSortedListInterface<SocietyMember> societyMemberList = new SortedLinkedList<SocietyMember>();
     MemberRegFile memberRegistrationFile = new MemberRegFile();
     private String storeJoinedDate = "";
     private String storeStudentID = "";
+    private Society societyInfo = new Society();
+    private final SocietyFile societyFile = new SocietyFile();
+    
+    private SortedListInterface<Society> societyList = new SortedArrayList<>();
     
     /**
      * Creates new form MemberManagement
@@ -43,9 +44,12 @@ public class MemberManagement extends javax.swing.JFrame {
         initComponents();
     }
 
-    public MemberManagement(String societyName_key) {
+    public MemberManagement(Society society) {
         initComponents();
-        txtSocietyName.setText(societyName_key);
+        societyList = societyFile.reader("SocietyList.txt");
+         
+        societyInfo = society;
+        txtSocietyName.setText(societyInfo.getSocietyName());
         txtSocietyName.setEditable(false);
 
         // read file, store into memberRegistrationList
@@ -67,7 +71,7 @@ public class MemberManagement extends javax.swing.JFrame {
         String joinedDate = "";
 
         for (int i = 1; i <= memberRegistrationList.getLength(); i++) {
-            if (memberRegistrationList.getEntry(i).getSociety().getSocietyName().contains(societyName_key)) {
+            if (memberRegistrationList.getEntry(i).getSociety().getSocietyName().contains(societyInfo.getSocietyName())) {
                 name = memberRegistrationList.getEntry(i).getStudent().getName();
                 studentID = memberRegistrationList.getEntry(i).getStudent().getStudentID();
                 contactNo = memberRegistrationList.getEntry(i).getStudent().getContactNo();
@@ -114,6 +118,11 @@ public class MemberManagement extends javax.swing.JFrame {
         btnMemberList = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("MEMBER MANAGEMENT");
@@ -318,7 +327,6 @@ public class MemberManagement extends javax.swing.JFrame {
         String studentID = txtStudentID.getText();
         String contactNo = txtContactNo.getText();
         String programme = jComboBox_programme.getSelectedItem().toString();
-        String societyName = txtSocietyName.getText();
         String position = jComboBox_position.getSelectedItem().toString();
         //SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String joinedDate = LocalDate.now().toString();
@@ -340,7 +348,7 @@ public class MemberManagement extends javax.swing.JFrame {
             // check for duplicated members
             for (int i = 1; i <= memberRegistrationList.getLength(); i++) {
                 //System.out.println("TEST: " + memberRegistrationList.getEntry(i));
-                if (studentID.equals(memberRegistrationList.getEntry(i).getStudent().getStudentID()) && societyName.equals(memberRegistrationList.getEntry(i).getSociety().getSocietyName())) {
+                if (studentID.equals(memberRegistrationList.getEntry(i).getStudent().getStudentID()) && societyInfo.getSocietyName().equals(memberRegistrationList.getEntry(i).getSociety().getSocietyName())) {
                     JOptionPane.showMessageDialog(null, "This member already exist", "Registration Failed", JOptionPane.WARNING_MESSAGE);
                     memberValidity = false;
                     break;
@@ -353,19 +361,25 @@ public class MemberManagement extends javax.swing.JFrame {
                 try {
                     //add to list
                     Student student = new Student(name, studentID, contactNo, programme);
-                    Society society = new Society(societyName);
-                    SocietyMemberRegistration registration = new SocietyMemberRegistration(student, society, position, joinedDate);
+                    
+                    SocietyMember registration = new SocietyMember(student, societyInfo, position, joinedDate);
                     memberRegistrationList.add(registration);
 
-                    //System.out.println("Successfully added to list");
-                    //System.out.println("Display: " + memberRegistrationList);
+                    societyInfo.setCurrentMemNum(societyInfo.getCurrentMemNum()+1);
+                   // update society current member
+                    for (int i = 1; i < societyList.getLength(); i++) {
+                        if(societyInfo.equals(societyList.getEntry(i))){
+                            societyList.getEntry(i).setCurrentMemNum(societyList.getEntry(i).getCurrentMemNum()+1);
+                            societyFile.rewrite((SortedArrayList)societyList, "SocietyList.txt");                          
+                            break;
+                        }                          
+                    }
 
                     //insert into text file
                     memberRegistrationFile.writer(registration, "memberRegistration.txt");
-                    //System.out.println("Successfully added to text file");
-
+           
                     //add to table
-                    String data[] = {name, studentID, contactNo, programme, societyName, position, joinedDate};
+                    String data[] = {name, studentID, contactNo, programme, societyInfo.getSocietyName(), position, joinedDate};
                     DefaultTableModel memberTable = (DefaultTableModel) jTableMemberList.getModel();
                     memberTable.addRow(data);
 
@@ -416,8 +430,18 @@ public class MemberManagement extends javax.swing.JFrame {
 
                     //System.out.println("display after: " + memberRegistrationList);
                     //remove from text file
-                    memberRegistrationFile.rewrite((SortedLinkedList<SocietyMemberRegistration>) memberRegistrationList, "memberRegistration.txt");
+                    memberRegistrationFile.rewrite((SortedLinkedList<SocietyMember>) memberRegistrationList, "memberRegistration.txt");
 
+                     societyInfo.setCurrentMemNum(societyInfo.getCurrentMemNum()-1);
+                   // update society current member
+                    for (int j = 1; j < societyList.getLength(); j++) {
+                        if(societyInfo.equals(societyList.getEntry(j))){
+                            societyList.getEntry(j).setCurrentMemNum(societyList.getEntry(j).getCurrentMemNum()-1);
+                            societyFile.rewrite((SortedArrayList)societyList, "SocietyList.txt");                          
+                            break;
+                        }                          
+                    }
+                    
                     //remove from table
                     memberTable.removeRow(jTableMemberList.getSelectedRow());
                     removed = true;
@@ -481,7 +505,7 @@ public class MemberManagement extends javax.swing.JFrame {
                     //System.out.println(memberRegistrationList.getEntry(i));
                     memberRegistrationList.remove(memberRegistrationList.getEntry(i));
                     i--;
-                    memberRegistrationFile.rewrite((SortedLinkedList<SocietyMemberRegistration>) memberRegistrationList, "memberRegistration.txt");              
+                    memberRegistrationFile.rewrite((SortedLinkedList<SocietyMember>) memberRegistrationList, "memberRegistration.txt");              
                 }
             }
             //memberRegistrationFile.rewrite((SortedLinkedList<SocietyMemberRegistration>) memberRegistrationList, "memberRegistration.txt");
@@ -551,7 +575,7 @@ public class MemberManagement extends javax.swing.JFrame {
                         //remove from list
                         memberRegistrationList.remove(memberRegistrationList.getEntry(i));
                         //remove from text file
-                        memberRegistrationFile.rewrite((SortedLinkedList<SocietyMemberRegistration>) memberRegistrationList, "memberRegistration.txt");
+                        memberRegistrationFile.rewrite((SortedLinkedList<SocietyMember>) memberRegistrationList, "memberRegistration.txt");
                         //remove from table
                         memberTable.removeRow(jTableMemberList.getSelectedRow());
                         remove = true;
@@ -560,16 +584,15 @@ public class MemberManagement extends javax.swing.JFrame {
                     if(remove){
                         try {
                             //add to list
-                            Student student = new Student(name, studentID, contactNo, programme);
-                            Society society = new Society(societyName);
-                            SocietyMemberRegistration registration = new SocietyMemberRegistration(student, society, position, joinedDate);
+                            Student student = new Student(name, studentID, contactNo, programme);                          
+                            SocietyMember registration = new SocietyMember(student, societyInfo, position, joinedDate);
                             memberRegistrationList.add(registration);
 
                             //insert into text file
                             memberRegistrationFile.writer(registration, "memberRegistration.txt");
 
                             //add to table
-                            String data[] = {name, studentID, contactNo, programme, societyName, position, joinedDate};
+                            String data[] = {name, studentID, contactNo, programme, societyInfo.getSocietyName(), position, joinedDate};
                             memberTable.addRow(data);
 
                             JOptionPane.showMessageDialog(null, "Member details have been updated", "Update Successful", JOptionPane.INFORMATION_MESSAGE);
@@ -596,7 +619,7 @@ public class MemberManagement extends javax.swing.JFrame {
         JTextArea jtaMemberList = new JTextArea(100, 200);
         String str = String.format("%140s %s\n",societyName_key, "Member List\n");
         
-        str += String.format("%s\t\t %s\t\t %s\t\t %s\t\t %s\t\t %s\n",
+        str += String.format("%s\t\t %s\t\t %s\t\t %s\t\t %s\t\t\t %s\n",
                 "Name", "Student ID", "Contact No.", "Programme", "Society Name", "Position");
         
         str += String.format("%s\n", "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -618,7 +641,7 @@ public class MemberManagement extends javax.swing.JFrame {
             String position = societyMemberList.getEntry(i).getPosition();
             String joinedDate = societyMemberList.getEntry(i).getJoinedDate();
             
-            str += String.format("%s\t\t %s\t\t %s\t\t %s\t\t %s\t\t %s\n", name, studentID, contactNo, programme, societyName, position, joinedDate);
+            str += String.format("%s\t\t %s\t\t %s\t\t %s\t\t %s\t %s\n", name, studentID, contactNo, programme, societyName, position, joinedDate);
         }
         
         societyMemberList.clear();
@@ -633,6 +656,10 @@ public class MemberManagement extends javax.swing.JFrame {
         listFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         listFrame.setVisible(true);
     }//GEN-LAST:event_btnMemberListActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+       this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

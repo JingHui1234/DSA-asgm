@@ -62,7 +62,7 @@ public class Student implements Comparable<Student>, Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 5;
         return hash;
     }
 
@@ -78,11 +78,21 @@ public class Student implements Comparable<Student>, Serializable {
             return false;
         }
         final Student other = (Student) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
         if (!Objects.equals(this.studentID, other.studentID)) {
+            return false;
+        }
+        if (!Objects.equals(this.contactNo, other.contactNo)) {
+            return false;
+        }
+        if (!Objects.equals(this.programme, other.programme)) {
             return false;
         }
         return true;
     }
+
 
     @Override
     public String toString() {

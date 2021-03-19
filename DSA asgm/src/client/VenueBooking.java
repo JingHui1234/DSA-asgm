@@ -9,7 +9,9 @@ import adt.ArrayList;
 import adt.ListInterface;
 import entity.BookingDetails;
 import entity.Event;
+import entity.SocietyMember;
 import entity.Venue;
+import java.awt.HeadlessException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import javax.swing.JOptionPane;
@@ -66,7 +68,7 @@ public class VenueBooking extends javax.swing.JFrame {
         num = 0;
         for (int i = 1; i <= venueList.length(); i++) {
             for (int j = 1; j <= bookingList.length(); j++) {
-                if (venueList.getEntry(i).getVenueName().equals(bookingList.getEntry(j).getBookedVenue())) {
+                if (venueList.getEntry(i).getVenueName().equals(bookingList.getEntry(j).getBookedVenue().getVenueName())) {
                     if (v_event.getDate().isEqual(bookingList.getEntry(j).getEvent().getDate())) {
                         if (v_event.getStartTime().isAfter(bookingList.getEntry(j).getEvent().getEndTime()) || v_event.getEndTime().isBefore(bookingList.getEntry(j).getEvent().getStartTime())) {
                             available = true;
@@ -93,10 +95,13 @@ public class VenueBooking extends javax.swing.JFrame {
         }
 
         if (num == 0) {
-            JOptionPane.showMessageDialog(null, "No venue available, please make a new registration.");
-            new EventRegistrationDriver().setVisible(true);
-
-            this.dispose();
+//            JOptionPane.showMessageDialog(null, "No venue available, please make a new registration.");
+//      JOptionPane.showMessageDialog(null, "ssdfsdffddf");
+           
+            new EventDriver().setVisible(true);
+             this.dispose();
+           
+           
 
             // go back jing hui part
         }
@@ -109,55 +114,6 @@ public class VenueBooking extends javax.swing.JFrame {
 
     }
 
-//    public VenueBooking(Event event) {
-//        initComponents();
-//        jTextFieldEventName.setEditable(false);
-//        jTextFieldDate.setEditable(false);
-//        jTextFieldStartTime.setEditable(false);
-//        jTextFieldEndTime.setEditable(false);
-//        jTextFieldNum.setEditable(false);
-//
-//        jTextFieldEventName.setText(event.getName());
-//        jTextFieldDate.setText(event.getDate().toString());
-//        jTextFieldStartTime.setText(event.getStartTime().toString());
-//        jTextFieldEndTime.setText(event.getEndTime().toString());
-//        jTextFieldNum.setText(Integer.toString(event.getNumOfParticipant()));
-//
-//        venueList = venuefile.reader("VenueFile.txt");
-//        bookingList = bookingfile.reader("BookingDetailsFile.txt");
-//
-//        boolean available = true;
-//        num = 0;
-//        for (int i = 1; i <= venueList.length(); i++) {
-//            for (int j = 1; j <= bookingList.length(); j++) {
-//                if (venueList.getEntry(i).getVenueName().equals(bookingList.getEntry(j).getBookedVenue1()) || venueList.getEntry(i).getVenueName().equals(bookingList.getEntry(j).getBookedVenue2()) || venueList.getEntry(i).getVenueName().equals(bookingList.getEntry(j).getBookedVenue3())) {
-//                    if (event.getDate().isEqual(bookingList.getEntry(j).getEvent().getDate())) {
-//                        if (event.getStartTime().isAfter(bookingList.getEntry(j).getEvent().getEndTime()) || event.getEndTime().isBefore(bookingList.getEntry(j).getEvent().getStartTime())) {
-//                            available = true;
-//                        } else {
-//                            available = false;
-//                            break;
-//                        }
-//                    } else {
-//                        available = true;
-//                    }
-//                } else {
-//                    available = true;
-//                }
-//
-//            }
-//            if (available) {
-//                if (event.getNumOfParticipant() <= venueList.getEntry(i).getCapacity()) {
-//                    avaVenue[num] = venueList.getEntry(i).getVenueName();
-//                    num++;
-//                }
-//            }
-//        }
-//
-//        for (int k = 0; k < num; k++) {
-//            jComboBoxVenue1.addItem(avaVenue[k]);
-//        }
-//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -355,124 +311,84 @@ public class VenueBooking extends javax.swing.JFrame {
             if (jComboBoxVenue1.getSelectedIndex() == jComboBoxVenue2.getSelectedIndex() || jComboBoxVenue2.getSelectedIndex() == jComboBoxVenue3.getSelectedIndex() || jComboBoxVenue1.getSelectedIndex() == jComboBoxVenue3.getSelectedIndex()) {
                 jLabelEmptyVenue.setText("Duplicated venue found!");
             } else {
-                if (jComboBoxVenue1.getSelectedIndex() != 0) {
-                    String society = v_event.getSociety();
-                    String organizer = v_event.getOrganizer();
-                    String name = v_event.getName();
-                    String category = v_event.getCategory();
-                    LocalDate date = v_event.getDate();
-                    LocalTime startTime = v_event.getStartTime();
-                    LocalTime endTime = v_event.getEndTime();
-                    int numOfParticipants = v_event.getNumOfParticipant();
-                    String bookedVenue1 = (String) jComboBoxVenue1.getEditor().getItem();
-                    String bookedVenue2 = (String) jComboBoxVenue2.getEditor().getItem();
-                    String bookedVenue3 = (String) jComboBoxVenue3.getEditor().getItem();
-
-                    Event event = new Event(society, organizer, name, category, date, startTime, endTime, numOfParticipants);
-                    BookingDetails bookedDetails = new BookingDetails(event, bookedVenue1);
-
-                    bookingList.insert(bookedDetails);
-
-                    if (jComboBoxVenue2.getSelectedIndex() != 0) {
-                        bookedDetails = new BookingDetails(event, bookedVenue2);
-                        bookingList.insert(bookedDetails);
-
-                    }
-                    if (jComboBoxVenue3.getSelectedIndex() != 0) {
-                        bookedDetails = new BookingDetails(event, bookedVenue3);
-                        bookingList.insert(bookedDetails);
-
-                    }
-
-                    bookingfile.rewrite((ArrayList) bookingList, "BookingDetailsFile.txt");
-                    eventFile.writer(event, "Event.dat");
-                    JOptionPane.showMessageDialog(null, "Venue booked successfully!");
-                    this.dispose();
-                } else {
-                    jLabelEmptyVenue.setText("Venue 1 cannot be null!");
-                }
+                booking();
             }
 
         } else if (jComboBoxVenue1.getSelectedIndex() != 0 && jComboBoxVenue2.getSelectedIndex() != 0) {
             if (jComboBoxVenue1.getSelectedIndex() == jComboBoxVenue2.getSelectedIndex()) {
                 jLabelEmptyVenue.setText("Duplicated venue found!");
             } else {
-                if (jComboBoxVenue1.getSelectedIndex() != 0) {
-                    String society = v_event.getSociety();
-                    String organizer = v_event.getOrganizer();
-                    String name = v_event.getName();
-                    String category = v_event.getCategory();
-                    LocalDate date = v_event.getDate();
-                    LocalTime startTime = v_event.getStartTime();
-                    LocalTime endTime = v_event.getEndTime();
-                    int numOfParticipants = v_event.getNumOfParticipant();
-                    String bookedVenue1 = (String) jComboBoxVenue1.getEditor().getItem();
-                    String bookedVenue2 = (String) jComboBoxVenue2.getEditor().getItem();
-                    String bookedVenue3 = (String) jComboBoxVenue3.getEditor().getItem();
-
-                    Event event = new Event(society, organizer, name, category, date, startTime, endTime, numOfParticipants);
-                    BookingDetails bookedDetails = new BookingDetails(event, bookedVenue1);
-
-                    bookingList.insert(bookedDetails);
-
-                    if (jComboBoxVenue2.getSelectedIndex() != 0) {
-                        bookedDetails = new BookingDetails(event, bookedVenue2);
-                        bookingList.insert(bookedDetails);
-
-                    }
-                    if (jComboBoxVenue3.getSelectedIndex() != 0) {
-                        bookedDetails = new BookingDetails(event, bookedVenue3);
-                        bookingList.insert(bookedDetails);
-
-                    }
-
-                    bookingfile.rewrite((ArrayList) bookingList, "BookingDetailsFile.txt");
-                    eventFile.writer(event, "Event.dat");
-                    JOptionPane.showMessageDialog(null, "Venue booked successfully!");
-                    this.dispose();
-                } else {
-                    jLabelEmptyVenue.setText("Venue 1 cannot be null!");
-                }
+                booking();
             }
         } else if (jComboBoxVenue1.getSelectedIndex() != 0 && jComboBoxVenue2.getSelectedIndex() == 0 && jComboBoxVenue3.getSelectedIndex() == 0) {
-            if (jComboBoxVenue1.getSelectedIndex() != 0) {
-                String society = v_event.getSociety();
-                String organizer = v_event.getOrganizer();
-                String name = v_event.getName();
-                String category = v_event.getCategory();
-                LocalDate date = v_event.getDate();
-                LocalTime startTime = v_event.getStartTime();
-                LocalTime endTime = v_event.getEndTime();
-                int numOfParticipants = v_event.getNumOfParticipant();
-                String bookedVenue1 = (String) jComboBoxVenue1.getEditor().getItem();
-                String bookedVenue2 = (String) jComboBoxVenue2.getEditor().getItem();
-                String bookedVenue3 = (String) jComboBoxVenue3.getEditor().getItem();
-
-                Event event = new Event(society, organizer, name, category, date, startTime, endTime, numOfParticipants);
-                BookingDetails bookedDetails = new BookingDetails(event, bookedVenue1);
-
-                bookingList.insert(bookedDetails);
-
-                if (jComboBoxVenue2.getSelectedIndex() != 0) {
-                    bookedDetails = new BookingDetails(event, bookedVenue2);
-                    bookingList.insert(bookedDetails);
-
-                }
-                if (jComboBoxVenue3.getSelectedIndex() != 0) {
-                    bookedDetails = new BookingDetails(event, bookedVenue3);
-                    bookingList.insert(bookedDetails);
-
-                }
-
-                bookingfile.rewrite((ArrayList) bookingList, "BookingDetailsFile.txt");
-                eventFile.writer(event, "Event.dat");
-                JOptionPane.showMessageDialog(null, "Venue booked successfully!");
-                this.dispose();
-            } else {
-                jLabelEmptyVenue.setText("Venue 1 cannot be null!");
-            }
+            booking();
         }
     }//GEN-LAST:event_jButtonConfirmActionPerformed
+
+    public void booking() throws HeadlessException {
+        if (jComboBoxVenue1.getSelectedIndex() != 0) {
+            
+            SocietyMember organizer = v_event.getSocietyMem();
+            String name = v_event.getName();
+            String category = v_event.getCategory();
+            LocalDate date = v_event.getDate();
+            LocalTime startTime = v_event.getStartTime();
+            LocalTime endTime = v_event.getEndTime();
+            int numOfParticipants = v_event.getNumOfParticipant();
+            String bookedVenue1 = (String) jComboBoxVenue1.getEditor().getItem();
+            String bookedVenue2 = (String) jComboBoxVenue2.getEditor().getItem();
+            String bookedVenue3 = (String) jComboBoxVenue3.getEditor().getItem();
+            Venue venue = new Venue();
+      
+            
+            for (int i = 1; i <= venueList.length(); i++) {
+                if(bookedVenue1.equals(venueList.getEntry(i).getVenueName()))
+                {
+                    venue = venueList.getEntry(i);
+                    break;
+                }
+                
+            }
+            
+            Event event = new Event(organizer, name, category, date, startTime, endTime, numOfParticipants);
+            BookingDetails bookedDetails = new BookingDetails(event, venue);
+            
+            bookingList.insert(bookedDetails);
+
+            if (jComboBoxVenue2.getSelectedIndex() != 0) {
+                for (int i = 1; i <= venueList.length(); i++) {
+                    if (bookedVenue2.equals(venueList.getEntry(i).getVenueName())) {
+                        venue = venueList.getEntry(i);
+                        break;
+                    }
+
+                }
+                bookedDetails = new BookingDetails(event, venue);
+                bookingList.insert(bookedDetails);
+
+            }
+            if (jComboBoxVenue3.getSelectedIndex() != 0) {
+                for (int i = 1; i <= venueList.length(); i++) {
+                    if (bookedVenue3.equals(venueList.getEntry(i).getVenueName())) {
+                        venue = venueList.getEntry(i);
+                        break;
+                    }
+
+                }
+                bookedDetails = new BookingDetails(event, venue);
+                bookingList.insert(bookedDetails);
+
+            }
+
+            bookingfile.rewrite((ArrayList) bookingList, "BookingDetailsFile.txt");
+            eventFile.writer(event, "Event.txt");
+            JOptionPane.showMessageDialog(null, "Venue booked successfully!");
+            new EventDriver().setVisible(true);
+            this.dispose();
+        } else {
+            jLabelEmptyVenue.setText("Venue 1 cannot be null!");
+        }
+    }
 
     private void jComboBoxVenue1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxVenue1ItemStateChanged
         // TODO add your handling code here:
@@ -523,7 +439,7 @@ public class VenueBooking extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VenueBooking().setVisible(true);
+                new VenueBooking().setVisible(false);
             }
         });
     }

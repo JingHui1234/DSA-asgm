@@ -13,26 +13,30 @@ import javax.swing.table.DefaultTableModel;
  */
 public class EventDriver extends javax.swing.JFrame {
 
-    private DLListInterface<Event> eventList = new DoublyLinkedList<>();
+    private InfiniteListInterface<Event> eventList = new DoublyLinkedList<>();
     private ListInterface<BookingDetails> bookingList = new ArrayList<>();
-   
+    private InfiniteSortedListInterface<SocietyMember> memberList = new SortedLinkedList<>();
+
     private final EventFile eventFile = new EventFile();
     private final BookingDetailsFile bdfile = new BookingDetailsFile();
+    private final MemberRegFile memberRegFile = new MemberRegFile();
+    
 
     public EventDriver() {
         initComponents();
 
         jtbEventList.getTableHeader().setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
 
-        eventList = eventFile.reader("Event.dat");
+        eventList = eventFile.reader("Event.txt");
         bookingList = bdfile.reader("BookingDetailsFile.txt");
-       
+        memberList = memberRegFile.reader("memberRegistration.txt");
+      
         displayEventList();
-        
+
         jbtOK.setVisible(false);
         jbtCancel.setVisible(false);
         jcbCategory.setSelectedIndex(-1);
-        
+
     }
 
     /**
@@ -67,7 +71,7 @@ public class EventDriver extends javax.swing.JFrame {
         jtfEndTime = new javax.swing.JTextField();
         jtfpnum = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jbtClear = new javax.swing.JButton();
+        jbtUpdate = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jtbSearchName = new javax.swing.JButton();
         jtbSummary = new javax.swing.JButton();
@@ -136,7 +140,7 @@ public class EventDriver extends javax.swing.JFrame {
         });
 
         jbtClose.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jbtClose.setText("Close");
+        jbtClose.setText("Back to Menu");
         jbtClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtCloseActionPerformed(evt);
@@ -194,11 +198,11 @@ public class EventDriver extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Participant No.");
 
-        jbtClear.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jbtClear.setText("Update");
-        jbtClear.addActionListener(new java.awt.event.ActionListener() {
+        jbtUpdate.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jbtUpdate.setText("Update");
+        jbtUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtClearActionPerformed(evt);
+                jbtUpdateActionPerformed(evt);
             }
         });
 
@@ -259,53 +263,44 @@ public class EventDriver extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
+                        .addComponent(jtbSearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jtbSummary, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtbSearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jtbSummary, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(50, 50, 50)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtfName)
+                            .addComponent(jtfpnum)
+                            .addComponent(jcbCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jbtOK, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(46, 46, 46)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(50, 50, 50)))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfName)
-                                    .addComponent(jtfpnum)
-                                    .addComponent(jcbCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel12)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jtfStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jtfEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1)
-                                    .addComponent(jtfDate)
-                                    .addComponent(jtfOrganizer)
-                                    .addComponent(jtfSociety, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jtfNo, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addGap(53, 53, 53))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1005, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtfStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtfEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1)
+                            .addComponent(jtfDate)
+                            .addComponent(jtfOrganizer)
+                            .addComponent(jtfSociety, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtfNo, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addGap(53, 53, 53))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,28 +309,31 @@ public class EventDriver extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addComponent(jbtDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47)
-                        .addComponent(jbtClear, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addComponent(jbtClose, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(111, 111, 111))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1101, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jbtCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(145, 145, 145))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jbtOK, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(122, 122, 122))
+                            .addComponent(jbtCancel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(177, 177, 177))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(50, 50, 50)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtbSummary, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtbSearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jtbSummary, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(jtbSearchName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -378,15 +376,15 @@ public class EventDriver extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbtOK)
-                            .addComponent(jbtCancel))
-                        .addGap(34, 34, 34)))
+                            .addComponent(jbtCancel))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jbtDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jbtClear, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jbtClose, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jbtAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44))
@@ -397,11 +395,12 @@ public class EventDriver extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtDeleteActionPerformed
-        int deletePos=-1;
-        
-        if(!jtfNo.getText().isBlank())
+        int deletePos = -1;
+
+        if (!jtfNo.getText().isBlank()) {
             deletePos = Integer.parseInt(jtfNo.getText());
-         
+        }
+
         if (deletePos != -1) {
             // 0=yes, 1=no, 2=cancel
             int option = JOptionPane.showConfirmDialog(this, "Do you confirm to delete this event?");
@@ -415,11 +414,13 @@ public class EventDriver extends javax.swing.JFrame {
                         if (deletedEvent.equals(bookingList.getEntry(i).getEvent())) {
                             bookingList.remove(i);
 
-                        }            
+                        }
                     }
-                    
+
                     displayEventList();
-                    
+
+                    eventFile.rewrite((DoublyLinkedList) eventList, "Event.txt");
+                    bdfile.rewrite((ArrayList) bookingList, "BookingDetailsFile.txt");
                     // reset all the textfiled
                     jtfNo.setText("");
                     jtfSociety.setText("");
@@ -431,7 +432,7 @@ public class EventDriver extends javax.swing.JFrame {
                     jtfEndTime.setText("");
                     jtfpnum.setText("");
                     jtfVenue.setText("");
-                    
+
                     // prompt messages to notify succeed in deletion
                     Icon icon = new javax.swing.ImageIcon(getClass().getResource("/images/tick.png"));
                     JOptionPane.showMessageDialog(this, "Event has been deleted successfully!",
@@ -445,75 +446,57 @@ public class EventDriver extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please select the row of data that want to delete.",
                     "Alert", JOptionPane.WARNING_MESSAGE);
         }
-       
+
     }//GEN-LAST:event_jbtDeleteActionPerformed
 
     private void jbtAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAddActionPerformed
-       eventFile.rewrite((DoublyLinkedList)eventList, "Event.dat");
-       bdfile.rewrite((ArrayList)bookingList, "BookingDetailsFile.txt");
-       new EventRegistrationDriver().setVisible(true);
-       this.dispose(); // close current frame
+     
+        new EventRegistrationDriver().setVisible(true);
+        this.dispose(); // close current frame
     }//GEN-LAST:event_jbtAddActionPerformed
 
     private void jbtCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCloseActionPerformed
-        eventFile.rewrite((DoublyLinkedList)eventList, "Event.dat");
-        bdfile.rewrite((ArrayList)bookingList, "BookingDetailsFile.txt");
-        this.dispose();
+       new MainMenu().setVisible(true);
     }//GEN-LAST:event_jbtCloseActionPerformed
 
     private void jtbEventListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbEventListMouseClicked
 
-        DefaultTableModel model = (DefaultTableModel) jtbEventList.getModel();
-        int selectedRowIndex = jtbEventList.getSelectedRow();
-
-        jtfNo.setText(model.getValueAt(selectedRowIndex, 0).toString());
-        jtfSociety.setText(model.getValueAt(selectedRowIndex, 1).toString());
-        jtfOrganizer.setText(model.getValueAt(selectedRowIndex, 2).toString());
-        jtfName.setText(model.getValueAt(selectedRowIndex, 3).toString());
-        setCategory(model.getValueAt(selectedRowIndex, 4).toString());
-        jtfDate.setText(model.getValueAt(selectedRowIndex, 5).toString());
-        jtfStartTime.setText(model.getValueAt(selectedRowIndex, 6).toString());
-        jtfEndTime.setText(model.getValueAt(selectedRowIndex, 7).toString());
-        jtfpnum.setText(model.getValueAt(selectedRowIndex, 8).toString());
-        jtfVenue.setText("1. " + model.getValueAt(selectedRowIndex, 9).toString()+"\n"+
-                          "2. " +  model.getValueAt(selectedRowIndex, 10).toString()+"\n"+
-                          "3. " +  model.getValueAt(selectedRowIndex, 11).toString());
+        showInfo();
         
     }//GEN-LAST:event_jtbEventListMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       eventFile.rewrite((DoublyLinkedList)eventList, "Event.dat");
-       bdfile.rewrite((ArrayList)bookingList, "BookingDetailsFile.txt");        
+
        this.dispose();
     }//GEN-LAST:event_formWindowClosing
 
-    private void jbtClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtClearActionPerformed
+    private void jbtUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtUpdateActionPerformed
 
-    if (!jtfNo.getText().isBlank()) {
-        // enable those editable data
-        jtfOrganizer.setEnabled(true);
-        jtfName.setEnabled(true);
-        jcbCategory.setEnabled(true);
-        jtfpnum.setEnabled(true);
-        
-        jbtOK.setVisible(true);
-        jbtCancel.setVisible(true);
-        jbtOK.setEnabled(true);
-        jbtCancel.setEnabled(true);
-       } else {
+        if (!jtfNo.getText().isBlank()) {
+            // enable those editable data
+            jtfOrganizer.setEnabled(true);
+            jtfName.setEnabled(true);
+            jcbCategory.setEnabled(true);
+            jtfpnum.setEnabled(true);
+
+            jbtOK.setVisible(true);
+            jbtCancel.setVisible(true);
+            jbtOK.setEnabled(true);
+            jbtCancel.setEnabled(true);
+        } else {
             JOptionPane.showMessageDialog(this, "Please select the row of data that want to update.",
                     "Alert", JOptionPane.WARNING_MESSAGE);
         } 
  
-    }//GEN-LAST:event_jbtClearActionPerformed
+    }//GEN-LAST:event_jbtUpdateActionPerformed
 
     private void jtbSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbSearchNameActionPerformed
         jtbEventList.getSelectionModel().clearSelection(); // remove focus from jtable
         int found = -1;
         String name = JOptionPane.showInputDialog(this, "Enter the name of event to search: ");
-        
+
         try {
-            DefaultTableModel model = (DefaultTableModel) jtbEventList.getModel();                
+            DefaultTableModel model = (DefaultTableModel) jtbEventList.getModel();
 
             for (int i = 0; i < jtbEventList.getRowCount(); i++) {
                 String cmpName = model.getValueAt(i, 3).toString().toUpperCase().replaceAll("\\s", ""); //remove space
@@ -528,8 +511,11 @@ public class EventDriver extends javax.swing.JFrame {
                     jtfStartTime.setText(model.getValueAt(i, 6).toString());
                     jtfEndTime.setText(model.getValueAt(i, 7).toString());
                     jtfpnum.setText(model.getValueAt(i, 8).toString());
-                    
-                    jtbEventList.setRowSelectionInterval(i,i);
+                    jtfVenue.setText("1. " + model.getValueAt(i, 9).toString() + "\n"
+                + "2. " + model.getValueAt(i, 10).toString() + "\n"
+                + "3. " + model.getValueAt(i, 11).toString());
+
+                    jtbEventList.setRowSelectionInterval(i, i);
                     found++;
                     break;
                 }
@@ -537,68 +523,131 @@ public class EventDriver extends javax.swing.JFrame {
             if (found == -1) {
                 JOptionPane.showMessageDialog(this, "Record not found.", "Alert", JOptionPane.WARNING_MESSAGE);
             }
-        } catch(NullPointerException e){}
+        } catch (NullPointerException e) {
+        }
         
     }//GEN-LAST:event_jtbSearchNameActionPerformed
 
     private void jtbSummaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbSummaryActionPerformed
-         eventFile.rewrite((DoublyLinkedList)eventList, "Event.dat");
-        new EventSummary().setVisible(true);
+
+       new EventSummary().setVisible(true);
     }//GEN-LAST:event_jtbSummaryActionPerformed
 
     private void jbtCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCancelActionPerformed
-      quitUpdateMode();
+        showInfo();
+        
+        quitUpdateMode();
     }//GEN-LAST:event_jbtCancelActionPerformed
 
+   
+
     private void jbtOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtOKActionPerformed
-        String organizer = jtfOrganizer.getText();
-        String name = jtfName.getText();
-        String partiNo = jtfpnum.getText();
+  
         int updatePos;
+        SocietyMember sm = new SocietyMember();
+        boolean organizerComplete = false;
+        int participantNum;
+        Event updateEvent = new Event();
+        boolean pnumcomplete;
 
-        if (!organizer.equals("") && !name.equals("") && !partiNo.equals("")) {
-            DefaultTableModel model = (DefaultTableModel) jtbEventList.getModel();
-
+        if (!jtfOrganizer.getText().isBlank() && !jtfName.getText().isBlank() && !jtfpnum.getText().isBlank()) {
             updatePos = Integer.parseInt(jtfNo.getText());
 
-            // 0=yes, 1=no, 2=cancel
-            int option = JOptionPane.showConfirmDialog(this, "Do you confirm to update this event?");
+            String organizer = jtfOrganizer.getText().toUpperCase().replaceAll("\\s", "");
+            String name = jtfName.getText();
+            String partiNo = jtfpnum.getText();
+            DefaultTableModel model = (DefaultTableModel) jtbEventList.getModel();
 
-            if (option == 0) {
-                Event updateEvent = eventList.getEntry(updatePos);
+            for (int i = 1; i <= memberList.getLength(); i++) {
+                if (organizer.equals(memberList.getEntry(i).getStudent().getName().toUpperCase().replaceAll("\\s", ""))) {
+                    if (eventList.getEntry(updatePos).getSocietyMem().
+                            getSociety().equals(memberList.getEntry(i).getSociety())) {
+                        sm = memberList.getEntry(i);
+                        organizerComplete = true;
+                        break;
+                    }
 
-                updateEvent.setOrganizer(organizer);
-                updateEvent.setName(name);
-                updateEvent.setCategory(jcbCategory.getSelectedItem().toString());
-                updateEvent.setNumOfParticipant(Integer.parseInt(partiNo));
-
-                if (eventList.replace(updatePos, updateEvent)) {
-                    displayEventList();
-
-                    // reset all the textfiled                             
-                    jtfOrganizer.setText(updateEvent.getOrganizer());
-                    jtfName.setText(updateEvent.getName());
-                    setCategory(updateEvent.getCategory());
-                    jtfpnum.setText(Integer.toString(updateEvent.getNumOfParticipant()));
-
-                    // prompt messages to notify succeed in deletion
-                    Icon icon = new javax.swing.ImageIcon(getClass().getResource("/images/tick.png"));
-                    JOptionPane.showMessageDialog(this, "Event has been updated successfully!",
-                            "Notice", JOptionPane.INFORMATION_MESSAGE, icon);
-
-                    quitUpdateMode();
-
-                } else {
-                    JOptionPane.showMessageDialog(this, "Update failed.", "Alert", JOptionPane.WARNING_MESSAGE);
                 }
             }
 
+            if (!organizerComplete) {
+                JOptionPane.showMessageDialog(this, "Invalid Organizer",
+                        "Alert", JOptionPane.WARNING_MESSAGE);
+                jtfOrganizer.grabFocus();
+            }
+
+            try {
+                participantNum = Integer.parseInt(jtfpnum.getText());
+                if (updateEvent.validateParticipantNum(participantNum)) {
+                    pnumcomplete = true;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Number of participants cannot less than" + Event.getMinNumOfParticipant()
+                            + "and more than " + Event.getMaxNumOfParticipant(),
+                            "Alert", JOptionPane.WARNING_MESSAGE);
+                    jtfpnum.grabFocus();
+                    pnumcomplete = false;
+                }
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Only number is allowed in No. of participants column.",
+                        "Alert", JOptionPane.WARNING_MESSAGE);
+                jtfpnum.grabFocus();
+                pnumcomplete = false;
+            }
+
+            if (organizerComplete && pnumcomplete) {
+                // 0=yes, 1=no, 2=cancel
+                int option = JOptionPane.showConfirmDialog(this, "Do you confirm to update this event?");
+
+                if (option == 0) {
+                    updateEvent = eventList.getEntry(updatePos);
+
+                    updateEvent.setSocietyMem(sm);
+                    updateEvent.setName(name);
+                    updateEvent.setCategory(jcbCategory.getSelectedItem().toString());
+                    updateEvent.setNumOfParticipant(Integer.parseInt(partiNo));
+
+                    if (eventList.replace(updatePos, updateEvent)) {
+                        // update booking details
+                        if (updateEvent != null) {
+                            for (int i = 1; i <= bookingList.length(); i++) {
+
+                                if (updateEvent.equals(bookingList.getEntry(i).getEvent())) {
+                                    bookingList.remove(i);
+
+                                }
+                            }
+                        }
+
+                        eventFile.rewrite((DoublyLinkedList) eventList, "Event.txt");
+                        bdfile.rewrite((ArrayList) bookingList, "BookingDetailsFile.txt");
+                        displayEventList();
+
+                        // reset all the textfiled                             
+                        jtfOrganizer.setText(updateEvent.getSocietyMem().getStudent().getName());
+                        jtfName.setText(updateEvent.getName());
+                        setCategory(updateEvent.getCategory());
+                        jtfpnum.setText(Integer.toString(updateEvent.getNumOfParticipant()));
+
+                        // prompt messages to notify succeed in deletion
+                        Icon icon = new javax.swing.ImageIcon(getClass().getResource("/images/tick.png"));
+                        JOptionPane.showMessageDialog(this, "Event has been updated successfully!",
+                                "Notice", JOptionPane.INFORMATION_MESSAGE, icon);
+
+                        quitUpdateMode();
+
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Update failed.", "Alert", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Incomplete Information",
                     "Alert", JOptionPane.WARNING_MESSAGE);
         }
 
- 
+
     }//GEN-LAST:event_jbtOKActionPerformed
 
     /**
@@ -656,10 +705,10 @@ public class EventDriver extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton jbtAdd;
     private javax.swing.JButton jbtCancel;
-    private javax.swing.JButton jbtClear;
     private javax.swing.JButton jbtClose;
     private javax.swing.JButton jbtDelete;
     private javax.swing.JButton jbtOK;
+    private javax.swing.JButton jbtUpdate;
     private javax.swing.JComboBox<String> jcbCategory;
     private javax.swing.JTable jtbEventList;
     private javax.swing.JButton jtbSearchName;
@@ -675,50 +724,51 @@ public class EventDriver extends javax.swing.JFrame {
     private javax.swing.JTextField jtfpnum;
     // End of variables declaration//GEN-END:variables
 
-    private void displayEventList() {    
+    private void displayEventList() {
 
         DefaultTableModel tblModel = (DefaultTableModel) jtbEventList.getModel();
         Event event;
         String venue1 = "-";
         String venue2 = "-";
-        String venue3 = "-";     
-        
+        String venue3 = "-";
 
         tblModel.setNumRows(0);
-        try{
-             for (int i = 1; i <= eventList.size(); i++) {
-            event = eventList.getEntry(i);
-            
-            // booking details to find the corresponding venue
-            int venueCount = 0;
-            for (int j = 1; j <= bookingList.length(); j++) {
-                
-                if(event.equals(bookingList.getEntry(j).getEvent())){
-                    venueCount++;
-                    switch(venueCount){
-                        case 1 -> venue1 = bookingList.getEntry(j).getBookedVenue();
-                        case 2 -> venue2 = bookingList.getEntry(j).getBookedVenue();
-                        case 3 -> venue3 = bookingList.getEntry(j).getBookedVenue();
-                    }                            
+        try {
+            for (int i = 1; i <= eventList.size(); i++) {
+                event = eventList.getEntry(i);
+
+                // booking details to find the corresponding venue
+                int venueCount = 0;
+                for (int j = 1; j <= bookingList.length(); j++) {
+
+                    if (event.equals(bookingList.getEntry(j).getEvent())) {
+                        venueCount++;
+                        switch (venueCount) {
+                            case 1 -> venue1 = bookingList.getEntry(j).getBookedVenue().getVenueName();
+                            case 2 -> venue2 = bookingList.getEntry(j).getBookedVenue().getVenueName();
+                            case 3 -> venue3 = bookingList.getEntry(j).getBookedVenue().getVenueName();
+                        }
+                    }
+                   
                 }
+
+                String data[] = {Integer.toString(i), event.getSocietyMem().getSociety().getSocietyName(),
+                    event.getSocietyMem().getStudent().getName(), event.getName(), event.getCategory(),
+                    event.getDate().toString(), event.getStartTime().toString(),
+                    event.getEndTime().toString(), Integer.toString(event.getNumOfParticipant()),
+                    venue1, venue2, venue3};
+                tblModel.addRow(data);
+               
+                venue1 = "-";
+                venue2 = "-";
+                venue3 = "-";
             }
-                      
-            String data[] = {Integer.toString(i), event.getSociety(),
-                event.getOrganizer(), event.getName(), event.getCategory(),
-                event.getDate().toString(), event.getStartTime().toString(),
-                event.getEndTime().toString(), Integer.toString(event.getNumOfParticipant()),
-                venue1, venue2, venue3};
-           tblModel.addRow(data);
-            venue1 = "-";
-            venue2 = "-";
-            venue3 = "-";     
-        }
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "File is empty", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-       
+
     }
-    
+
     public void setCategory(String category) {
         for (int i = 0; i < jcbCategory.getItemCount(); i++) {
 
@@ -734,11 +784,28 @@ public class EventDriver extends javax.swing.JFrame {
         jbtCancel.setVisible(false);
         jbtOK.setEnabled(false);
         jbtCancel.setEnabled(false);
-        
+
         jtfOrganizer.setEnabled(false);
         jtfName.setEnabled(false);
         jcbCategory.setEnabled(false);
         jtfpnum.setEnabled(false);
     }
 
+    public void showInfo() {
+        DefaultTableModel model = (DefaultTableModel) jtbEventList.getModel();
+        int selectedRowIndex = jtbEventList.getSelectedRow();
+
+        jtfNo.setText(model.getValueAt(selectedRowIndex, 0).toString());
+        jtfSociety.setText(model.getValueAt(selectedRowIndex, 1).toString());
+        jtfOrganizer.setText(model.getValueAt(selectedRowIndex, 2).toString());
+        jtfName.setText(model.getValueAt(selectedRowIndex, 3).toString());
+        setCategory(model.getValueAt(selectedRowIndex, 4).toString());
+        jtfDate.setText(model.getValueAt(selectedRowIndex, 5).toString());
+        jtfStartTime.setText(model.getValueAt(selectedRowIndex, 6).toString());
+        jtfEndTime.setText(model.getValueAt(selectedRowIndex, 7).toString());
+        jtfpnum.setText(model.getValueAt(selectedRowIndex, 8).toString());
+        jtfVenue.setText("1. " + model.getValueAt(selectedRowIndex, 9).toString() + "\n"
+                + "2. " + model.getValueAt(selectedRowIndex, 10).toString() + "\n"
+                + "3. " + model.getValueAt(selectedRowIndex, 11).toString());
+    }
 }

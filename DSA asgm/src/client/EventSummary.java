@@ -1,11 +1,11 @@
 package client;
 
 import adt.DoublyLinkedList;
-import adt.DLListInterface;
 import entity.Event;
 import java.awt.Color;
 import java.util.Calendar;
 import javax.swing.JLabel;
+import adt.InfiniteListInterface;
 
 /**
  *
@@ -13,12 +13,12 @@ import javax.swing.JLabel;
  */
 public class EventSummary extends javax.swing.JFrame {
 
-    private DLListInterface<Event> eventList = new DoublyLinkedList<>();
+    private InfiniteListInterface<Event> eventList = new DoublyLinkedList<>();
          private EventFile eventFile = new EventFile();
          
     public EventSummary() {
         initComponents();
-        eventList = eventFile.reader("Event.dat");
+        eventList = eventFile.reader("Event.txt");
         this.getContentPane().setBackground(Color.WHITE);
         displaySummary();     
     }

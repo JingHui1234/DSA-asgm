@@ -9,7 +9,7 @@ package client;
 
 import adt.SortedLinkedList;
 import entity.Society;
-import entity.SocietyMemberRegistration;
+import entity.SocietyMember;
 import entity.Student;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,8 +23,8 @@ import java.time.LocalDate;
  */
 public class MemberRegFile {
     
-    public SortedLinkedList<SocietyMemberRegistration> reader (String fileName){
-        SortedLinkedList <SocietyMemberRegistration> memberRegistrationList = new SortedLinkedList<>();
+    public SortedLinkedList<SocietyMember> reader (String fileName){
+        SortedLinkedList <SocietyMember> memberRegistrationList = new SortedLinkedList<>();
         BufferedReader reader = null;
         
         try {
@@ -34,17 +34,28 @@ public class MemberRegFile {
             while ((currentLine = reader.readLine()) != null){
                 String[] memberRegDetails = currentLine.split("\\|");
                 
+                //student
                 String name = memberRegDetails[0];
                 String studentID = memberRegDetails[1];
                 String contactNo = memberRegDetails[2];
                 String programme = memberRegDetails[3];
-                String societyName = memberRegDetails[4];
-                String position = memberRegDetails[5];
-                String joinedDate = memberRegDetails[6];
+                
+                // society         
+                int societyID = Integer.parseInt(memberRegDetails[4]);
+                String societyName = memberRegDetails[5];
+                String dateReg = memberRegDetails[6];
+                double feesPerPerson = Double.parseDouble(memberRegDetails[7]);
+                int targetMemNum = Integer.parseInt(memberRegDetails[8]);
+                int currentMemNum = Integer.parseInt(memberRegDetails[9]);
+                
+                
+                // reg
+                String position = memberRegDetails[10];
+                String joinedDate = memberRegDetails[11];
                 
                 Student student = new Student(name, studentID, contactNo, programme);
-                Society society = new Society(societyName);
-                SocietyMemberRegistration registration = new SocietyMemberRegistration(student, society, position, joinedDate);
+                Society society = new Society(societyID, societyName, dateReg,feesPerPerson,targetMemNum,currentMemNum);
+                SocietyMember registration = new SocietyMember(student, society, position, joinedDate);
                 memberRegistrationList.add(registration);
             }
         } catch (Exception e) {
@@ -53,7 +64,7 @@ public class MemberRegFile {
         return memberRegistrationList;
     }
     
-    public void writer(SocietyMemberRegistration registration, String fileName){
+    public void writer(SocietyMember registration, String fileName){
         BufferedWriter writer = null;
         try{
             writer = new BufferedWriter(new FileWriter(fileName, true));
@@ -68,13 +79,13 @@ public class MemberRegFile {
         }
     }
     
-    public void rewrite(SortedLinkedList<SocietyMemberRegistration> memberRegistrationList, String fileName){
+    public void rewrite(SortedLinkedList<SocietyMember> memberRegistrationList, String fileName){
         BufferedWriter writer = null;
         try{
             writer = new BufferedWriter(new FileWriter(fileName));
             
             for (int i = 0; i < memberRegistrationList.getLength(); i++){
-                SocietyMemberRegistration registration = memberRegistrationList.getEntry(i+1);
+                SocietyMember registration = memberRegistrationList.getEntry(i+1);
                 
                 writer.write(registration.toString());
                 writer.newLine();

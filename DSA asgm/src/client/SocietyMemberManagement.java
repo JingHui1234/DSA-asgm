@@ -8,8 +8,11 @@ package client;
 
 
 import adt.SortedLinkedList;
-import adt.SortedListInterface;
 import javax.swing.JOptionPane;
+import adt.InfiniteSortedListInterface;
+import adt.SortedArrayList;
+import adt.SortedListInterface;
+import entity.Society;
 
 /**
  *
@@ -17,26 +20,19 @@ import javax.swing.JOptionPane;
  */
 public class SocietyMemberManagement extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SocietyMemberManagement
-     */
+    private final SocietyFile societyFile = new SocietyFile();
+    
+    private SortedListInterface<Society> societyList = new SortedArrayList<>();
+     
     public SocietyMemberManagement() {
         initComponents();
         
-        SortedListInterface<String> societyList = new SortedLinkedList<>();
-        societyList.add("Computer Science Society");
-        societyList.add("Music Society");
-        societyList.add("English Society");
-        societyList.add("LDDS");
+        societyList = societyFile.reader("SocietyList.txt");
         
-        //System.out.println("length: " + societyList.getLength());
-        //System.out.println("display: " + societyList);
-        for(int i = 0; i <= societyList.getLength(); i++){
-            if (societyList.getEntry(i) == null){
-                i++;
-            }
-            //System.out.println("done: " + societyList.getEntry(i));
-            jComboBox_SocietyName.addItem(societyList.getEntry(i));
+  
+        for(int i = 1; i <= societyList.getLength(); i++){
+            
+            jComboBox_SocietyName.addItem((String)societyList.getEntry(i).getSocietyName());
         }
     }
 
@@ -53,8 +49,14 @@ public class SocietyMemberManagement extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jComboBox_SocietyName = new javax.swing.JComboBox<>();
         btnManageMember = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("SOCIETY MEMBER MANAGEMENT");
@@ -76,35 +78,45 @@ public class SocietyMemberManagement extends javax.swing.JFrame {
             }
         });
 
+        btnBack.setText("Back to Menu");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(168, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(328, 328, 328))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox_SocietyName, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(btnManageMember)
-                        .addGap(101, 101, 101))))
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox_SocietyName, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(btnManageMember)
+                .addGap(101, 101, 101))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(btnBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(328, 328, 328))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnBack))
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jComboBox_SocietyName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnManageMember))
-                .addContainerGap(297, Short.MAX_VALUE))
+                .addContainerGap(296, Short.MAX_VALUE))
         );
 
         pack();
@@ -123,11 +135,20 @@ public class SocietyMemberManagement extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please select a society to manage", "Invalid Selection", JOptionPane.INFORMATION_MESSAGE);
         }
         else{
-            String societyName_key = jComboBox_SocietyName.getSelectedItem().toString();
-            new MemberManagement(societyName_key).setVisible(true);
+            Society society = societyList.getEntry(jComboBox_SocietyName.getSelectedIndex()+1);
+            new MemberManagement(society).setVisible(true);
             dispose();
         }
     }//GEN-LAST:event_btnManageMemberActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        new MainMenu().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -165,6 +186,7 @@ public class SocietyMemberManagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnManageMember;
     private javax.swing.JComboBox<String> jComboBox_SocietyName;
     private javax.swing.JLabel jLabel1;

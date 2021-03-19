@@ -1,8 +1,6 @@
 package entity;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
@@ -13,8 +11,7 @@ import java.util.*;
  */
 public class Event implements Serializable{
     
-    private String society;
-    private String organizer;
+    private SocietyMember societyMem;
     private String category;
     private String name;
     private LocalDate date;
@@ -30,9 +27,8 @@ public class Event implements Serializable{
     public Event() {
     }
 
-    public Event(String society, String organizer, String name, String category, LocalDate date, LocalTime startTime, LocalTime endTime, int numOfParticipant) {
-        this.society = society;
-        this.organizer = organizer;
+    public Event(SocietyMember societyMem, String name, String category, LocalDate date, LocalTime startTime, LocalTime endTime, int numOfParticipant) {
+        this.societyMem = societyMem;
         this.name = name;
         this.category = category; 
         this.date = date;
@@ -83,14 +79,9 @@ public class Event implements Serializable{
         return endTime;
     }
 
-    public String getSociety() {
-        return society;
+    public SocietyMember getSocietyMem() {
+        return societyMem;
     }
-
-    public String getOrganizer() {
-        return organizer;
-    }
-
     
     public void setCategory(String category) {
         this.category = category;
@@ -116,15 +107,9 @@ public class Event implements Serializable{
         this.endTime = endTime;
     }
 
-    public void setSociety(String society) {
-        this.society = society;
+    public void setSocietyMem(SocietyMember societyMem) {
+        this.societyMem = societyMem;
     }
-
-    public void setOrganizer(String organizer) {
-        this.organizer = organizer;
-    }
-
-    
 
     public boolean validateParticipantNum(int numOfParticipant){
         if(numOfParticipant >= minNumOfParticipant && numOfParticipant <= maxNumOfParticipant){
@@ -147,7 +132,7 @@ public class Event implements Serializable{
         return true;
     }
 
-
+   
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -163,16 +148,13 @@ public class Event implements Serializable{
         if (this.numOfParticipant != other.numOfParticipant) {
             return false;
         }
-        if (!Objects.equals(this.society, other.society)) {
-            return false;
-        }
-        if (!Objects.equals(this.organizer, other.organizer)) {
-            return false;
-        }
         if (!Objects.equals(this.category, other.category)) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.societyMem, other.societyMem)) {
             return false;
         }
         if (!Objects.equals(this.date, other.date)) {
@@ -181,23 +163,19 @@ public class Event implements Serializable{
         if (!Objects.equals(this.startTime, other.startTime)) {
             return false;
         }
-        if (!Objects.equals(this.endTime, other.endTime)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.endTime, other.endTime);
     }
 
-   
-    
-    
+  
+
     
     
     @Override
     public String toString() {
         
-        return society + "|" + organizer + "|" + name + "|" +
-                category + "|" + date + "|" + startTime + "|"+ 
-                endTime + "|" + Integer.toString(numOfParticipant);
+        return societyMem + "|" + name + "|" +
+                category + "|" + date.toString() + "|" + startTime.toString() + "|"+ 
+                endTime.toString() + "|" + Integer.toString(numOfParticipant);
     }
     
     

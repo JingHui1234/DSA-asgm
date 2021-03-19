@@ -13,7 +13,7 @@ import java.io.Serializable;
  *
  * @author Quah Tze Wei
  */
-public class SortedLinkedList<T extends Comparable<T>> implements SortedListInterface<T>, Serializable {
+public class SortedLinkedList<T extends Comparable<T>> implements InfiniteSortedListInterface<T>, Serializable {
     
     private Node firstNode;
     private int length;

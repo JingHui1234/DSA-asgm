@@ -82,6 +82,11 @@ public class VenueManagement extends javax.swing.JFrame {
         });
 
         jButtonGoBack.setText("Back to Main Menu");
+        jButtonGoBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGoBackActionPerformed(evt);
+            }
+        });
 
         jButtonViewAllVenues.setText("View All Venues");
         jButtonViewAllVenues.addActionListener(new java.awt.event.ActionListener() {
@@ -289,6 +294,11 @@ public class VenueManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_formWindowClosing
+
+    private void jButtonGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGoBackActionPerformed
+       new MainMenu().setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_jButtonGoBackActionPerformed
 
     /**
      * @param args the command line arguments

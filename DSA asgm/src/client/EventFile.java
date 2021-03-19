@@ -6,7 +6,7 @@
 package client;
 
 import adt.DoublyLinkedList;
-import entity.Event;
+import entity.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -31,28 +31,37 @@ public class EventFile {
                 //read from file and write to eventList
                 String[] eventDetails = currentLine.split("\\|"); // separate the string by (|)
                 
-                //society
-//                Society society = new Society(Integer.parseInt(eventDetails[0]), eventDetails[1], 
-//                eventDetails[2], eventDetails[3], Double.parseDouble(eventDetails[4]))
-//                int societyID;
-//                String societyName;
-//                String dateReg;
-//                String societyCategory;
-//                double feesPerPerson;
-//                int minMembers;
                 // organizer
+                String name = eventDetails[0];
+                String studentID = eventDetails[1];
+                String contactNo = eventDetails[2];
+                String programme = eventDetails[3];              
                 
+               
+                 // society         
+                int societyID = Integer.parseInt(eventDetails[4]);
+                String societyName = eventDetails[5];
+                String dateReg = eventDetails[6];
+                double feesPerPerson = Double.parseDouble(eventDetails[7]);
+                int targetMemNum = Integer.parseInt(eventDetails[8]);
+                int currentMemNum = Integer.parseInt(eventDetails[9]);
+                
+                String position = eventDetails[10];
+                String joinedDate = eventDetails[11];
+
                 // event
-                String society = eventDetails[0];
-                String organizer = eventDetails[1];
-                String name = eventDetails[2];
-                String category = eventDetails[3];
-                LocalDate date = LocalDate.parse(eventDetails[4]);
-                LocalTime startTime = LocalTime.parse(eventDetails[5]);
-                LocalTime endTime = LocalTime.parse(eventDetails[6]);
-                int partiNo = Integer.parseInt(eventDetails[7]);
+              
+                String eventName = eventDetails[12];
+                String category = eventDetails[13];
+                LocalDate date = LocalDate.parse(eventDetails[14]);
+                LocalTime startTime = LocalTime.parse(eventDetails[15]);
+                LocalTime endTime = LocalTime.parse(eventDetails[16]);
+                int partiNo = Integer.parseInt(eventDetails[17]);
                 
-                Event event = new Event(society, organizer, name, category, date, startTime, endTime,partiNo);
+                Student student = new Student(name, studentID, contactNo, programme);
+                Society society = new Society(societyID, societyName, dateReg,feesPerPerson,targetMemNum,currentMemNum);
+                SocietyMember registration = new SocietyMember(student, society, position, joinedDate);
+                Event event = new Event(registration, eventName, category, date, startTime, endTime, partiNo);
                 eventList.add(event);
             }
 
@@ -76,9 +85,7 @@ public class EventFile {
             System.out.println("" + e);
         }
     }
-    //            writer.write(event.getSociety() + "|" + event.getOrganizer() + "|"
-//                    + event.getName() + "|" + event.getCategory() + "|" + event.getDate() + "|"
-//                    + event.getStartTime() + "|" + event.getEndTime() + "|" + event.getNumOfParticipant());    
+  
         public void rewrite(DoublyLinkedList <Event> eventList, String filename) {
         BufferedWriter writer = null;
         try {
@@ -87,9 +94,7 @@ public class EventFile {
             for (int i = 0; i < eventList.size(); i++) {
                 Event event = eventList.getEntry(i+1);
                 
-                writer.write(event.getSociety() + "|" + event.getOrganizer() + "|"
-                    + event.getName() + "|" + event.getCategory() + "|" + event.getDate() + "|"
-                    + event.getStartTime() + "|" + event.getEndTime() + "|" + event.getNumOfParticipant());
+                writer.write(event.toString());
                 writer.newLine();
             }
            

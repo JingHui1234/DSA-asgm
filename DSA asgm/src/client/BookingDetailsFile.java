@@ -34,23 +34,48 @@ public class BookingDetailsFile {
             while ((currentLine = reader.readLine()) != null) {
                 String[] bookingDetails = currentLine.split("\\|");
 
-                String society = bookingDetails[0];
-                String organizer = bookingDetails[1];
-                String name = bookingDetails[2];
-                String category = bookingDetails[3];
-                LocalDate date = LocalDate.parse(bookingDetails[4]);
-                LocalTime startTime = LocalTime.parse(bookingDetails[5]);
-                LocalTime endTime = LocalTime.parse(bookingDetails[6]);
-                int numOfParticipants = Integer.parseInt(bookingDetails[7]);
-                String bookedVenue = bookingDetails[8];
+                 // organizer
+                String name = bookingDetails[0];
+                String studentID = bookingDetails[1];
+                String contactNo = bookingDetails[2];
+                String programme = bookingDetails[3];              
+                
                
+                 // society         
+                int societyID = Integer.parseInt(bookingDetails[4]);
+                String societyName = bookingDetails[5];
+                String dateReg = bookingDetails[6];
+                double feesPerPerson = Double.parseDouble(bookingDetails[7]);
+                int targetMemNum = Integer.parseInt(bookingDetails[8]);
+                int currentMemNum = Integer.parseInt(bookingDetails[9]);
+                
+                String position = bookingDetails[10];
+                String joinedDate = bookingDetails[11];
 
-                BookingDetails bookingdetails = new BookingDetails(new Event(society, organizer, name, category, date, startTime, endTime, numOfParticipants), bookedVenue);
+                // event            
+                String eventName = bookingDetails[12];
+                String category = bookingDetails[13];
+                LocalDate date = LocalDate.parse(bookingDetails[14]);
+                LocalTime startTime = LocalTime.parse(bookingDetails[15]);
+                LocalTime endTime = LocalTime.parse(bookingDetails[16]);
+                int partiNo = Integer.parseInt(bookingDetails[17]);
+                
+                String venueName = bookingDetails[18];
+                String type = bookingDetails[19];
+                int capacity = Integer.parseInt(bookingDetails[20]);
+                
+                Student student = new Student(name, studentID, contactNo, programme);
+                Society society = new Society(societyID, societyName, dateReg,feesPerPerson,targetMemNum,currentMemNum);
+                SocietyMember registration = new SocietyMember(student, society, position, joinedDate);
+                Event event = new Event(registration, eventName, category, date, startTime, endTime, partiNo);
+                Venue venue = new Venue(venueName, type, capacity);
+      
+                BookingDetails bookingdetails = new BookingDetails(event, venue);
                 bookingList.insert(bookingdetails);
             }
 
         } catch (Exception e) {
-            bookingList = null;
+            System.out.println("" + e);
         }
         return bookingList;
     }
@@ -60,11 +85,7 @@ public class BookingDetailsFile {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(fileName, true));
-            writer.write(bookingDetails.getEvent().getSociety() + "|" + bookingDetails.getEvent().getOrganizer() + "|" + 
-                    bookingDetails.getEvent().getName() + "|" + bookingDetails.getEvent().getCategory() + "|" + 
-                    bookingDetails.getEvent().getDate() + "|" + bookingDetails.getEvent().getStartTime() + "|" + 
-                    bookingDetails.getEvent().getEndTime() + "|" + bookingDetails.getEvent().getNumOfParticipant() 
-                    + "|" + bookingDetails.getBookedVenue());
+            writer.write(bookingDetails.toString());
             writer.newLine();
 
             writer.close();
@@ -81,11 +102,7 @@ public class BookingDetailsFile {
 
             for (int i = 1; i <= bookingList.length(); i++) {
                 BookingDetails bookingDetails = bookingList.getEntry(i);
-                writer.write(bookingDetails.getEvent().getSociety() + "|" + bookingDetails.getEvent().getOrganizer() 
-                        + "|" + bookingDetails.getEvent().getName() + "|" + bookingDetails.getEvent().getCategory() + "|" 
-                        + bookingDetails.getEvent().getDate() + "|" + bookingDetails.getEvent().getStartTime() + "|" + 
-                        bookingDetails.getEvent().getEndTime() + "|" + bookingDetails.getEvent().getNumOfParticipant() + "|" +
-                        bookingDetails.getBookedVenue());
+                writer.write(bookingDetails.toString());
                 writer.newLine();
             }
             writer.close();

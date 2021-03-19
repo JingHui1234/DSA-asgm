@@ -1,12 +1,5 @@
 package entity;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -15,37 +8,34 @@ import java.util.Objects;
  * @author Ang Chia Ling
  */
 public class BookingDetails implements Serializable {
+
     private Event event;
-    private String bookedVenue;
+    private Venue bookedVenue;
 
     public BookingDetails() {
     }
 
-    public BookingDetails(Event event, String bookedVenue) {
+    public BookingDetails(Event event, Venue bookedVenue) {
         this.event = event;
-        this.bookedVenue = bookedVenue;     
+        this.bookedVenue = bookedVenue;
     }
-    
+
     public void setEvent(Event event) {
         this.event = event;
     }
 
-    
+    public void setBookedVenue(Venue bookedVenue) {
+        this.bookedVenue = bookedVenue;
+    }
 
     public Event getEvent() {
         return event;
     }
 
-    public String getBookedVenue() {
+    public Venue getBookedVenue() {
         return bookedVenue;
     }
-  
 
-    public void setBookedVenue(String bookedVenue) {
-        this.bookedVenue = bookedVenue;
-    }
-
-   
     @Override
     public int hashCode() {
         int hash = 3;
@@ -66,14 +56,20 @@ public class BookingDetails implements Serializable {
             return false;
         }
         final BookingDetails other = (BookingDetails) obj;
-        if (!Objects.equals(this.bookedVenue, other.bookedVenue)) {
-            return false;
-        }    
         if (!Objects.equals(this.event, other.event)) {
+            return false;
+        }
+        if (!Objects.equals(this.bookedVenue, other.bookedVenue)) {
             return false;
         }
         return true;
     }
 
+   
+
+    @Override
+    public String toString() {
+        return event + "|" + bookedVenue;
+    }
 
 }

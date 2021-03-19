@@ -15,8 +15,13 @@ import javax.swing.SpinnerDateModel;
  */
 public class EventRegistrationDriver extends javax.swing.JFrame {
 
-    private DLListInterface<Event> eventList = new DoublyLinkedList<>();
+    private InfiniteListInterface<Event> eventList = new DoublyLinkedList<>();
+    private SortedListInterface<Society> societyList = new SortedArrayList<>();
+    private InfiniteSortedListInterface<SocietyMember> memberList = new SortedLinkedList<>();
+
     private final EventFile eventFile = new EventFile();
+    private final SocietyFile societyFile = new SocietyFile();
+    private final MemberRegFile memberRegFile = new MemberRegFile();
 
     /**
      * Creates new form EventRegistration
@@ -26,25 +31,21 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
 
         // sets current date as minimum selectable date
         jdcDate.setMinSelectableDate(new Date());
-        
+
         // sets max selectable date
-        Calendar cal = Calendar.getInstance();    
+        Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, 1); // to get next year + 1
         Date nextYear = cal.getTime();
         jdcDate.setMaxSelectableDate(nextYear);
-        
+
         //read existing data from file
-        eventList = eventFile.reader("Event.dat");
-
-        // read from society file and Inititalize society selection
-        DLListInterface<String> societyList = new DoublyLinkedList<>();
-        societyList.add("LDDS");
-        societyList.add("Computer Science");
-        societyList.add("Music");
-        societyList.add("Japanese Language");
-
-        for (int i = 0; i < societyList.size(); i++) {
-            jcbSociety.addItem((String)societyList.getEntry(i + 1));
+//        eventList = eventFile.reader("Event.txt");
+        societyList = societyFile.reader("SocietyList.txt");
+        memberList = memberRegFile.reader("memberRegistration.txt");
+             
+       // read from society file and Inititalize society selection      
+        for (int i = 0; i < societyList.getLength(); i++) {
+            jcbSociety.addItem((String) societyList.getEntry(i + 1).getSocietyName());
         }
     }
 
@@ -95,6 +96,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
         jtfNoParticipant = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jdcDate = new com.toedter.calendar.JDateChooser();
+        jbtNext1 = new javax.swing.JButton();
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Category");
@@ -120,20 +122,8 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Society");
 
-        jcbSociety.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbSocietyActionPerformed(evt);
-            }
-        });
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Organizer Name");
-
-        jtfOrgName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfOrgNameActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(107, 107, 107));
@@ -146,18 +136,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Name");
 
-        jtfEventName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfEventNameActionPerformed(evt);
-            }
-        });
-
         jcbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Meeting", "Workshop", "Fund Raising", "Talk", "Annual General Meeting", "One-day Camp", "Competition", "Seminar", "Sports Carnival" }));
-        jcbCategory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbCategoryActionPerformed(evt);
-            }
-        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Category");
@@ -196,14 +175,16 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("No. of Participants");
 
-        jtfNoParticipant.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfNoParticipantActionPerformed(evt);
-            }
-        });
-
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel18.setText("Time");
+
+        jbtNext1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jbtNext1.setText("Back");
+        jbtNext1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtNext1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -215,6 +196,15 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
                         .addGap(106, 106, 106)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(133, 133, 133)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcbSociety, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfOrgName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
@@ -222,48 +212,40 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
                                     .addComponent(jLabel11)
                                     .addComponent(jLabel13)
                                     .addComponent(jLabel18))
-                                .addGap(112, 112, 112)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jdcDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jtfEventName, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jtfNoParticipant, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jcbCategory, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel15)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jsFromTime, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel17))
-                                            .addComponent(jbtNext, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel15)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jbtCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jsToTime, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jdcDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jtfEventName, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jtfNoParticipant, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jcbCategory, javax.swing.GroupLayout.Alignment.LEADING, 0, 216, Short.MAX_VALUE))
-                                        .addGap(15, 15, 15))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addGap(133, 133, 133)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jcbSociety, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtfOrgName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jsFromTime, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel17)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jsToTime, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(186, 186, 186))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jSeparator3))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jbtNext1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbtNext, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbtCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jSeparator3))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(136, 136, 136)))
                 .addComponent(jSeparator1))
         );
@@ -294,35 +276,39 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfEventName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfNoParticipant, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addComponent(jdcDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jtfEventName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jcbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtfNoParticipant, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jdcDate, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jsFromTime, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jsToTime, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(64, 64, 64)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jsFromTime, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jsToTime, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtNext, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48))
+                    .addComponent(jbtCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtNext1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40))
         );
+
+        jbtNext1.getAccessibleContext().setAccessibleParent(null);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -336,7 +322,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -352,11 +338,31 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
         boolean timecomplete;
         boolean pnumcomplete;
         int participantNum = 0;
+        boolean organizerComplete = false;
+        SocietyMember sm = new SocietyMember();
 
         if (!jtfEventName.getText().isBlank() && !jtfOrgName.getText().isBlank()) {
-            
-            String society = (String) jcbSociety.getSelectedItem();
-            String organizer = jtfOrgName.getText();
+
+            Society society = societyList.getEntry(jcbSociety.getSelectedIndex() + 1);
+           
+            String organizer = jtfOrgName.getText().toUpperCase().replaceAll("\\s", "");
+
+            for (int i = 1; i <= memberList.getLength(); i++) {
+                if (organizer.equals(memberList.getEntry(i).getStudent().getName().toUpperCase().replaceAll("\\s", ""))) {
+                    if (society.equals(memberList.getEntry(i).getSociety())) {
+                        sm = memberList.getEntry(i);
+                        organizerComplete = true;
+                        break;
+                    }
+
+                }
+            }
+
+            if (!organizerComplete) {
+                JOptionPane.showMessageDialog(this, "Invalid organizer", "ERROR", JOptionPane.ERROR_MESSAGE);
+                jtfOrgName.grabFocus();
+            }
+
             String name = jtfEventName.getText();
             String category = (String) jcbCategory.getSelectedItem();
             try {
@@ -364,8 +370,8 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
                 if (event.validateParticipantNum(participantNum)) {
                     pnumcomplete = true;
                 } else {
-                    JOptionPane.showMessageDialog(this, "Number of participants cannot less than" + Event.getMinNumOfParticipant() +
-                            "and more than " + Event.getMaxNumOfParticipant(),
+                    JOptionPane.showMessageDialog(this, "Number of participants cannot less than" + Event.getMinNumOfParticipant()
+                            + "and more than " + Event.getMaxNumOfParticipant(),
                             "Alert", JOptionPane.WARNING_MESSAGE);
                     jtfNoParticipant.grabFocus();
                     pnumcomplete = false;
@@ -391,7 +397,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
 
                 // get date
                 eventDate = LocalDate.of(cal.get(Calendar.YEAR),
-                        cal.get(Calendar.MONTH)+1, cal.get(Calendar.DAY_OF_MONTH));
+                        cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
             }
 
             // get start time           
@@ -420,9 +426,9 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
                 timecomplete = true;
             }
 
-            if (pnumcomplete == true && datecomplete == true && timecomplete == true) {
-                event.setSociety(society);
-                event.setOrganizer(organizer);
+            if (pnumcomplete && datecomplete && timecomplete && organizerComplete) {
+
+                event.setSocietyMem(sm);
                 event.setCategory(category);
                 event.setName(name);
                 event.setDate(eventDate);
@@ -430,15 +436,13 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
                 event.setStartTime(startTime);
                 event.setEndTime(endTime);
 
+               
+                             
                 // if the list is 
                 try {
                     if (eventList.isEmpty() || !eventList.contains(event)) {
-//                        eventList.add(event);
-//                        // save to file
-//                        eventFile.writer(event, "Event.dat");
-//                        JOptionPane.showMessageDialog(this, "OK", "ERROR", JOptionPane.ERROR_MESSAGE);
-                            new VenueBooking(event).setVisible(true);
-                            this.dispose();
+                        new VenueBooking(event).setVisible(true);                        
+                        this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "This event already created before", "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
@@ -449,39 +453,23 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(this, "Incomplete Information", "ERROR", JOptionPane.ERROR_MESSAGE);
-    }
+        }
 
 
     }//GEN-LAST:event_jbtNextActionPerformed
 
-    private void jcbCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCategoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbCategoryActionPerformed
-
-    private void jtfEventNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEventNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfEventNameActionPerformed
-
-    private void jtfOrgNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfOrgNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfOrgNameActionPerformed
-
-    private void jcbSocietyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSocietyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbSocietyActionPerformed
-
     private void jbtCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCancelActionPerformed
         this.dispose();
-
     }//GEN-LAST:event_jbtCancelActionPerformed
-
-    private void jtfNoParticipantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNoParticipantActionPerformed
-
-    }//GEN-LAST:event_jtfNoParticipantActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         this.dispose();
     }//GEN-LAST:event_formWindowClosing
+
+    private void jbtNext1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtNext1ActionPerformed
+       new MainMenu().setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_jbtNext1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -541,6 +529,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JButton jbtCancel;
     private javax.swing.JButton jbtNext;
+    private javax.swing.JButton jbtNext1;
     private javax.swing.JComboBox<String> jcbCategory;
     private javax.swing.JComboBox<String> jcbSociety;
     private com.toedter.calendar.JDateChooser jdcDate;

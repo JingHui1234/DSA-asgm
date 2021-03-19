@@ -6,7 +6,7 @@ import java.io.Serializable;
  *
  * @author Jing Hui
  */
-public class DoublyLinkedList<T> implements DLListInterface<T>, Serializable {
+public class DoublyLinkedList<T> implements InfiniteListInterface<T>, Serializable {
 
     private Node firstNode;
     private Node lastNode;
