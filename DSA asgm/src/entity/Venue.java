@@ -19,6 +19,8 @@ public class Venue implements Serializable{
     private String venueName;
     private String type;
     private int capacity;
+    private static int minCapacity = 5;
+    private static int maxCapacity = 500;
 
     public Venue() {
     }
@@ -57,6 +59,13 @@ public class Venue implements Serializable{
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
+    
+    public boolean validateCapacity(int capacity){
+        if(capacity >= minCapacity && capacity <= maxCapacity){
+            return true;
+        }       
+        return false;
+    }
 
     @Override
     public int hashCode() {
@@ -86,5 +95,10 @@ public class Venue implements Serializable{
             return false;
         }
         return true;
+    }
+    
+    @Override
+     public String toString(){
+        return venueName + "|" + type + "|" + Integer.toString(capacity);
     }
 }
