@@ -1,0 +1,21 @@
+<<<<<<< HEAD
+Computer Science|Jing Hui|TPL|Competition|2021-03-17|09:00|18:00|150|DKA
+Computer Science|Jing Hui|TPL|Competition|2021-03-17|09:00|18:00|150|A101
+Computer Science|Jun Neng|IOT|Talk|2021-02-11|09:00|18:00|200|DKB
+LDDS|Chia Ling|I Dare You|One-day Camp|2021-03-31|10:00|20:00|250|DKG
+LDDS|Mei Siew|Happy Go Lucky|One-day Camp|2021-03-23|09:00|20:00|100|DKB
+LDDS|Mei Siew|Happy Go Lucky|One-day Camp|2021-03-23|09:00|20:00|100|DKH
+LDDS|Mei Siew|Happy Go Lucky|One-day Camp|2021-03-23|09:00|20:00|100|DKA
+=======
+Computer Science|Jing Hui|TPL|Competition|2021-02-20|09:00|18:00|150|DKA
+Computer Science|Jun Neng|IOT|Talk|2021-02-11|09:00|18:00|200|DKB
+LDDS|Chia Ling|I Dare You|One-day Camp|2021-03-31|10:00|20:00|250|DKG
+Japanese Language|Tan Ah Kau|Learn Japanese Language|Talk|2021-03-26|12:05|15:05|50|M101
+Computer Science|Jing Hui|TPL|Competition|2021-02-20|12:00|14:30|30|A101
+English Society|Jing Hui|TPL|Competition|2021-06-20|12:00|14:30|30|A101
+Music|Tiong Wei Sheng|VOR 3.0|Competition|2021-03-20|10:00|18:00|500|DKG
+Music|Tiong Wei Sheng|VOR 3.0|Competition|2021-03-20|10:00|18:00|500|DKH
+LDDS|owen|i dare u|Meeting|2021-03-21|08:30|12:00|30|M102
+LDDS|owen|i dare u|Meeting|2021-03-21|08:30|12:00|30|DKC
+LDDS|owen|i dare u|Meeting|2021-03-21|08:30|12:00|30|A101
+>>>>>>> 08d78144dcfddbdba30e208f27696c4fc7540be6
