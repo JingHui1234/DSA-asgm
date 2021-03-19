@@ -1,7 +1,5 @@
 package adt;
 
-
-
 /**
  *
  * @author Ang Chia Ling
@@ -37,6 +35,9 @@ public interface ListInterface<T> {
 
     // check whether the arraylist is full or not
     public boolean isFull();
+    
+    // double up the array size
+    public void incSize();
 
     // move the entry provided to the beginning of the arraylist
     public boolean moveToStart(T entry);

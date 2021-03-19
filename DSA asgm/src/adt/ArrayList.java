@@ -1,7 +1,5 @@
 package adt;
 
-
-
 import java.io.Serializable;
 
 /**
@@ -42,7 +40,6 @@ public class ArrayList<T> implements ListInterface<T>, Serializable {
         return true;
     }
 
-    // if the arraylist is full then double up the array
     public void incSize() {
         T[] oldArr = array;
         array = (T[]) new Object[2 * oldArr.length];
@@ -101,7 +98,7 @@ public class ArrayList<T> implements ListInterface<T>, Serializable {
         return successful;
     }
 
-    // remove the gap of the arraylist after removing an element from the arraylist
+    // remove the gap of the arraylist after removing an element from the list
     private void removeGap(int position) {
         int removedIndex = position - 1;
         int lastIndex = length - 1;
@@ -136,7 +133,6 @@ public class ArrayList<T> implements ListInterface<T>, Serializable {
         return successful;
     }
 
-    // retrive the size of the arraylist
     @Override
     public int length() {
         return length;

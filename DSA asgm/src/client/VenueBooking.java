@@ -5,8 +5,6 @@ package client;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import adt.ArrayList;
 import adt.ListInterface;
 import entity.BookingDetails;
@@ -37,11 +35,10 @@ public class VenueBooking extends javax.swing.JFrame {
     /**
      * Creates new form venueBooking
      */
-    
-    public VenueBooking(){
-        
+    public VenueBooking() {
+
     }
-   
+
     public VenueBooking(Event v_event) {
         initComponents();
         this.v_event = v_event;
@@ -83,7 +80,6 @@ public class VenueBooking extends javax.swing.JFrame {
                 } else {
                     available = true;
                 }
-
             }
 
             // loop those available venue into the drop down list
@@ -92,19 +88,18 @@ public class VenueBooking extends javax.swing.JFrame {
                     avaVenue[num] = venueList.getEntry(i).getVenueName();
                     num++;
                 }
-
                 // if no venue available, prompt a message              
             }
         }
-        
+
         if (num == 0) {
-                    JOptionPane.showMessageDialog(null, "No venue available, please make a new registration.");      
-                    new EventRegistrationDriver().setVisible(true);
-                        
-                    this.dispose();
-                   
-                    // go back jing hui part
-                }
+            JOptionPane.showMessageDialog(null, "No venue available, please make a new registration.");
+            new EventRegistrationDriver().setVisible(true);
+
+            this.dispose();
+
+            // go back jing hui part
+        }
 
         for (int k = 0; k < num; k++) {
             jComboBoxVenue1.addItem(avaVenue[k]);
@@ -373,25 +368,24 @@ public class VenueBooking extends javax.swing.JFrame {
                     String bookedVenue2 = (String) jComboBoxVenue2.getEditor().getItem();
                     String bookedVenue3 = (String) jComboBoxVenue3.getEditor().getItem();
 
-                   Event event = new Event(society, organizer, name, category, date, startTime, endTime, numOfParticipants);
-                BookingDetails bookedDetails = new BookingDetails(event, bookedVenue1);
+                    Event event = new Event(society, organizer, name, category, date, startTime, endTime, numOfParticipants);
+                    BookingDetails bookedDetails = new BookingDetails(event, bookedVenue1);
 
-                bookingList.insert(bookedDetails);
-                
-                
-                if (jComboBoxVenue2.getSelectedIndex() != 0) {
-                    bookedDetails = new BookingDetails(event, bookedVenue2);
                     bookingList.insert(bookedDetails);
-                    
-                }
-                if (jComboBoxVenue3.getSelectedIndex() != 0) {
-                    bookedDetails = new BookingDetails(event, bookedVenue3);
-                    bookingList.insert(bookedDetails);
-                    
-                }
-              
-                bookingfile.rewrite((ArrayList)bookingList, "BookingDetailsFile.txt");
-                eventFile.writer(event, "Event.dat");
+
+                    if (jComboBoxVenue2.getSelectedIndex() != 0) {
+                        bookedDetails = new BookingDetails(event, bookedVenue2);
+                        bookingList.insert(bookedDetails);
+
+                    }
+                    if (jComboBoxVenue3.getSelectedIndex() != 0) {
+                        bookedDetails = new BookingDetails(event, bookedVenue3);
+                        bookingList.insert(bookedDetails);
+
+                    }
+
+                    bookingfile.rewrite((ArrayList) bookingList, "BookingDetailsFile.txt");
+                    eventFile.writer(event, "Event.dat");
                     JOptionPane.showMessageDialog(null, "Venue booked successfully!");
                     this.dispose();
                 } else {
@@ -416,25 +410,24 @@ public class VenueBooking extends javax.swing.JFrame {
                     String bookedVenue2 = (String) jComboBoxVenue2.getEditor().getItem();
                     String bookedVenue3 = (String) jComboBoxVenue3.getEditor().getItem();
 
-                   Event event = new Event(society, organizer, name, category, date, startTime, endTime, numOfParticipants);
-                BookingDetails bookedDetails = new BookingDetails(event, bookedVenue1);
+                    Event event = new Event(society, organizer, name, category, date, startTime, endTime, numOfParticipants);
+                    BookingDetails bookedDetails = new BookingDetails(event, bookedVenue1);
 
-                bookingList.insert(bookedDetails);
-                
-                
-                if (jComboBoxVenue2.getSelectedIndex() != 0) {
-                    bookedDetails = new BookingDetails(event, bookedVenue2);
                     bookingList.insert(bookedDetails);
-                    
-                }
-                if (jComboBoxVenue3.getSelectedIndex() != 0) {
-                    bookedDetails = new BookingDetails(event, bookedVenue3);
-                    bookingList.insert(bookedDetails);
-                    
-                }
-              
-                bookingfile.rewrite((ArrayList)bookingList, "BookingDetailsFile.txt");
-                eventFile.writer(event, "Event.dat");
+
+                    if (jComboBoxVenue2.getSelectedIndex() != 0) {
+                        bookedDetails = new BookingDetails(event, bookedVenue2);
+                        bookingList.insert(bookedDetails);
+
+                    }
+                    if (jComboBoxVenue3.getSelectedIndex() != 0) {
+                        bookedDetails = new BookingDetails(event, bookedVenue3);
+                        bookingList.insert(bookedDetails);
+
+                    }
+
+                    bookingfile.rewrite((ArrayList) bookingList, "BookingDetailsFile.txt");
+                    eventFile.writer(event, "Event.dat");
                     JOptionPane.showMessageDialog(null, "Venue booked successfully!");
                     this.dispose();
                 } else {
@@ -459,20 +452,19 @@ public class VenueBooking extends javax.swing.JFrame {
                 BookingDetails bookedDetails = new BookingDetails(event, bookedVenue1);
 
                 bookingList.insert(bookedDetails);
-                
-                
+
                 if (jComboBoxVenue2.getSelectedIndex() != 0) {
                     bookedDetails = new BookingDetails(event, bookedVenue2);
                     bookingList.insert(bookedDetails);
-                    
+
                 }
                 if (jComboBoxVenue3.getSelectedIndex() != 0) {
                     bookedDetails = new BookingDetails(event, bookedVenue3);
                     bookingList.insert(bookedDetails);
-                    
+
                 }
-              
-                bookingfile.rewrite((ArrayList)bookingList, "BookingDetailsFile.txt");
+
+                bookingfile.rewrite((ArrayList) bookingList, "BookingDetailsFile.txt");
                 eventFile.writer(event, "Event.dat");
                 JOptionPane.showMessageDialog(null, "Venue booked successfully!");
                 this.dispose();
