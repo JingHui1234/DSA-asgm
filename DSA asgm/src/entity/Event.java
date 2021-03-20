@@ -9,8 +9,8 @@ import java.util.*;
  *
  * @author jingh
  */
-public class Event implements Serializable{
-    
+public class Event implements Serializable {
+
     private MemberRegistration societyMem;
     private String category;
     private String name;
@@ -20,9 +20,8 @@ public class Event implements Serializable{
     private LocalTime endTime;
     private static int minNumOfParticipant = 5;
     private static int maxNumOfParticipant = 500;
-    private static LocalTime startTimeLimit = LocalTime.of(8,0);
-    private static LocalTime endTimeLimit = LocalTime.of(23,0);
-    
+    private static LocalTime startTimeLimit = LocalTime.of(8, 0);
+    private static LocalTime endTimeLimit = LocalTime.of(23, 0);
 
     public Event() {
     }
@@ -30,13 +29,12 @@ public class Event implements Serializable{
     public Event(MemberRegistration societyMem, String name, String category, LocalDate date, LocalTime startTime, LocalTime endTime, int numOfParticipant) {
         this.societyMem = societyMem;
         this.name = name;
-        this.category = category; 
+        this.category = category;
         this.date = date;
         this.numOfParticipant = numOfParticipant;
         this.startTime = startTime;
         this.endTime = endTime;
     }
-
 
     public String getCategory() {
         return category;
@@ -69,8 +67,7 @@ public class Event implements Serializable{
     public static LocalTime getEndTimeLimit() {
         return endTimeLimit;
     }
-   
-    
+
     public LocalTime getStartTime() {
         return startTime;
     }
@@ -82,7 +79,7 @@ public class Event implements Serializable{
     public MemberRegistration getSocietyMem() {
         return societyMem;
     }
-    
+
     public void setCategory(String category) {
         this.category = category;
     }
@@ -111,28 +108,24 @@ public class Event implements Serializable{
         this.societyMem = societyMem;
     }
 
-    public boolean validateParticipantNum(int numOfParticipant){
-        if(numOfParticipant >= minNumOfParticipant && numOfParticipant <= maxNumOfParticipant){
-            return true;
-        }       
-        return false;
-    }
-    
-    public boolean validateStartTime(LocalTime startTime){
-        if(startTime.isBefore(startTimeLimit))
-            return false;
-        
-        return true;
-    }
-    
-    public boolean validateEndTime(LocalTime endTime){
-        if(endTime.isAfter(endTimeLimit))
-            return false;
-        
-        return true;
+    public boolean validateParticipantNum(int numOfParticipant) {
+        return numOfParticipant >= minNumOfParticipant
+                && numOfParticipant <= maxNumOfParticipant;
     }
 
-   
+    public boolean validateEventTime(LocalTime startTime, LocalTime endTime) {
+        return !(startTime.isBefore(startTimeLimit)
+                || endTime.isAfter(endTimeLimit)
+                || endTime.isBefore(startTime)
+                || endTime.equals(startTime));
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -166,17 +159,12 @@ public class Event implements Serializable{
         return Objects.equals(this.endTime, other.endTime);
     }
 
-  
-
-    
-    
     @Override
     public String toString() {
-        
-        return societyMem + "|" + name + "|" +
-                category + "|" + date.toString() + "|" + startTime.toString() + "|"+ 
-                endTime.toString() + "|" + Integer.toString(numOfParticipant);
+
+        return societyMem + "|" + name + "|"
+                + category + "|" + date.toString() + "|" + startTime.toString() + "|"
+                + endTime.toString() + "|" + Integer.toString(numOfParticipant);
     }
-    
-    
+
 }

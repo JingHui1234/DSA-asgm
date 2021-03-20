@@ -410,7 +410,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Event end time cannot equal or before start time",
                         "ERROR", JOptionPane.ERROR_MESSAGE);
                 timecomplete = false;
-            } else if (!event.validateEndTime(endTime) || !event.validateStartTime(startTime)) {
+            } else if (!event.validateEventTime(startTime, endTime)) {
                 JOptionPane.showMessageDialog(this, "Event time is only allowed from " + Event.getStartTimeLimit()
                         + " to " + Event.getEndTimeLimit(),
                         "ERROR", JOptionPane.ERROR_MESSAGE);
