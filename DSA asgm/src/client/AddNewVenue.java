@@ -228,7 +228,7 @@ public class AddNewVenue extends javax.swing.JFrame {
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
-        // go to venue management if user entered cancel
+        // go back to venue management if user entered cancel
         new VenueManagement().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
@@ -246,7 +246,7 @@ public class AddNewVenue extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAddNewTypeActionPerformed
 
     private void jButtonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmActionPerformed
-      // read file and store into arraylist(venueList)
+        // read file and store into arraylist(venueList)
         venueList = venuefile.reader("VenueFile.txt");
         boolean successful = false;
 
@@ -266,60 +266,60 @@ public class AddNewVenue extends javax.swing.JFrame {
             try {
                 Venue newVenue = new Venue();
                 boolean validate;
-                int capacity=0;
+                int capacity = 0;
                 String name = jTextFieldNewVenueName.getText();
                 String type = (String) jComboBoxNewVenueType.getEditor().getItem();
 
                 try {
+                    // validation capacity: 5 <  capacity < 500
                     capacity = Integer.parseInt(jTextFieldAddNewCapacity.getText());
                     if (newVenue.validateCapacity(capacity)) {
                         validate = true;
                     } else {
-                        JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity() 
-                                                        + "and must more than " + Venue.getMaxCapacity());
+                        JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity()
+                                + "and must more than " + Venue.getMaxCapacity());
                         jTextFieldAddNewCapacity.setText("");
                         validate = false;
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null,"Only number is allowed!");
+                    JOptionPane.showMessageDialog(null, "Only number is allowed!");
                     jTextFieldAddNewCapacity.setText("");
                     validate = false;
                 }
-                                                            
-                
-                
+
                 name = name.toUpperCase();
                 type = type.toUpperCase();
                 newVenue = new Venue(name, type, capacity);
 
                 // check whether the inserting of new venue is valid or not
                 for (int i = 1; i <= venueList.length(); i++) {
-                    // check whether the new venue entry is matched with any element in the arraylist or not
+                    // check whether the new venue entry is matched with any element in the arraylist or not, if yes,cannot continue
                     if (name.equals(venueList.getEntry(i).getVenueName())) {
                         JOptionPane.showMessageDialog(null, "Duplicated venue name found!");
                         successful = false;
                         break;
                     } else {
                         try {
-                        capacity = Integer.parseInt(jTextFieldAddNewCapacity.getText());
-                        if (newVenue.validateCapacity(capacity)) {
-                            validate = true;
-                            successful = true;
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity()
-                                    + "and must more than " + Venue.getMaxCapacity());
-                            jTextFieldAddNewCapacity.setText("");
-                            validate = false;
+                            // validation capacity: 5 <  capacity < 500 , succesful return true for no duplicated venue!
+                            capacity = Integer.parseInt(jTextFieldAddNewCapacity.getText());
+                            if (newVenue.validateCapacity(capacity)) {
+                                validate = true;
+                                successful = true;
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity()
+                                        + "and must more than " + Venue.getMaxCapacity());
+                                jTextFieldAddNewCapacity.setText("");
+                                validate = false;
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("" + e);
+                            successful = false;
+                            jLabelEmptyCapacity.setText("Invalid integer detected!");
                         }
-                    } catch (NumberFormatException e) {
-                        System.out.println("" + e);
-                        successful = false;
-                        jLabelEmptyCapacity.setText("Invalid integer detected!");
-                    }
                     }
                 }
 
-                // if successful then insert new venue entry into arraylist
+                // if successful and validation is true, then insert new venue entry into venue list
                 if (successful && validate) {
                     venueList.insert(newVenue);
                     venuefile.writer(newVenue, "VenueFile.txt");
@@ -328,7 +328,7 @@ public class AddNewVenue extends javax.swing.JFrame {
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Failed to add new venue!");
-                
+
                 }
             } catch (HeadlessException | NumberFormatException e) {
                 System.out.println("" + e);
@@ -340,13 +340,13 @@ public class AddNewVenue extends javax.swing.JFrame {
 
     private void jTextFieldNewVenueNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNewVenueNameKeyReleased
         // TODO add your handling code here:
-        // disable validate text 
+        // make validate text to be invisible
         jLabelEmptyVenue.setText("");
     }//GEN-LAST:event_jTextFieldNewVenueNameKeyReleased
 
     private void jTextFieldAddNewCapacityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldAddNewCapacityKeyReleased
         // TODO add your handling code here:
-        // disable validate text 
+        // make validate text to be invisible
         jLabelEmptyCapacity.setText("");
     }//GEN-LAST:event_jTextFieldAddNewCapacityKeyReleased
 
@@ -388,7 +388,7 @@ public class AddNewVenue extends javax.swing.JFrame {
 
     private void jTextFieldOtherKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldOtherKeyReleased
         // TODO add your handling code here:
-        // disable validate text 
+        // make validate text to be invisible 
         jLabelEmptyOther.setText("");
     }//GEN-LAST:event_jTextFieldOtherKeyReleased
 

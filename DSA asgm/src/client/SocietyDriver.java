@@ -76,7 +76,15 @@ public class SocietyDriver extends javax.swing.JFrame {
             new String [] {
                 "ID", "Name", "Date Reg", "Fees", "Members"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabelDateReg.setText("Date Register");

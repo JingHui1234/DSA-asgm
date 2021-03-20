@@ -5,8 +5,6 @@ package client;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import adt.ArrayList;
 import adt.ListInterface;
 import entity.Venue;
@@ -180,7 +178,7 @@ public class VenueManagement extends javax.swing.JFrame {
 
     private void jButtonAddVenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddVenueActionPerformed
         // TODO add your handling code here:
-        // go to another interface if user choose to add venue
+        // go to add venue interface if user choose to add venue
         new AddNewVenue().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonAddVenueActionPerformed
@@ -194,9 +192,10 @@ public class VenueManagement extends javax.swing.JFrame {
 
         // enter venue name that wished to edit
         try {
-            name = JOptionPane.showInputDialog(null,"Please enter the VENUE NAME that you want to edit : ");
+            name = JOptionPane.showInputDialog(null, "Please enter the VENUE NAME that you want to edit : ");
             name = name.toUpperCase();
             for (int i = 1; i <= venueList.length(); i++) {
+                // check any matched venue entry with the venue list
                 if (name.equals(venueList.getEntry(i).getVenueName())) {
                     found = true;
                     break;
@@ -207,34 +206,35 @@ public class VenueManagement extends javax.swing.JFrame {
             if (!found) {
                 JOptionPane.showMessageDialog(null, "Venue not found!!!");
             } else {
+                // bring user to edit interface if matched venue found
                 new EditVenue(name).setVisible(true);
                 this.dispose();
             }
         } catch (Exception e) {
             System.out.println("" + e);
         }
-        
+
     }//GEN-LAST:event_jButtonEditVenueActionPerformed
 
     private void jButtonViewAllVenuesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewAllVenuesActionPerformed
-        DefaultTableModel venueTable = (DefaultTableModel)jTableVenueList.getModel();
+        DefaultTableModel venueTable = (DefaultTableModel) jTableVenueList.getModel();
         // refresh the table before read and display
-        while(venueTable.getRowCount() > 0){
+        while (venueTable.getRowCount() > 0) {
             venueTable.removeRow(0);
         }
-        
+
         // read file and store into arraylist(venueList)
         venueList = venuefile.reader("VenueFile.txt");
         String name = "";
         String type = "";
         String capacity = "";
-       
+
         for (int i = 1; i <= venueList.length(); i++) {
-           name = venueList.getEntry(i).getVenueName();
-           type = venueList.getEntry(i).getType();
-           capacity = Integer.toString(venueList.getEntry(i).getCapacity());
-           String[] data = {name,type,capacity};
-           venueTable.addRow(data);
+            name = venueList.getEntry(i).getVenueName();
+            type = venueList.getEntry(i).getType();
+            capacity = Integer.toString(venueList.getEntry(i).getCapacity());
+            String[] data = {name, type, capacity};
+            venueTable.addRow(data);
         }
     }//GEN-LAST:event_jButtonViewAllVenuesActionPerformed
 
@@ -244,12 +244,13 @@ public class VenueManagement extends javax.swing.JFrame {
         String name;
         boolean successful = false;
         venueList = venuefile.reader("VenueFile.txt");
-        name = JOptionPane.showInputDialog(null,"Please enter the VENUE NAME that you want to remove : ");
+        name = JOptionPane.showInputDialog(null, "Please enter the VENUE NAME that you want to remove : ");
         name = name.toUpperCase();
 
         // enter venue name that wished to remove
         try {
             for (int i = 1; i <= venueList.length(); i++) {
+                // check any matched venue entry with the venue list, remove the record, if found
                 if (name.equals(venueList.getEntry(i).getVenueName())) {
                     venueList.remove(i);
                     successful = true;
@@ -274,22 +275,22 @@ public class VenueManagement extends javax.swing.JFrame {
     private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
         // TODO add your handling code here:
         // same concept with view all
-        DefaultTableModel venueTable = (DefaultTableModel)jTableVenueList.getModel();
-        while(venueTable.getRowCount() > 0){
+        DefaultTableModel venueTable = (DefaultTableModel) jTableVenueList.getModel();
+        while (venueTable.getRowCount() > 0) {
             venueTable.removeRow(0);
         }
-        
+
         venueList = venuefile.reader("VenueFile.txt");
         String name = "";
         String type = "";
         String capacity = "";
-       
+
         for (int i = 1; i <= venueList.length(); i++) {
-           name = venueList.getEntry(i).getVenueName();
-           type = venueList.getEntry(i).getType();
-           capacity = Integer.toString(venueList.getEntry(i).getCapacity());
-           String[] data = {name,type,capacity};
-           venueTable.addRow(data);
+            name = venueList.getEntry(i).getVenueName();
+            type = venueList.getEntry(i).getType();
+            capacity = Integer.toString(venueList.getEntry(i).getCapacity());
+            String[] data = {name, type, capacity};
+            venueTable.addRow(data);
         }
     }//GEN-LAST:event_jButtonRefreshActionPerformed
 
@@ -299,14 +300,13 @@ public class VenueManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jButtonGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGoBackActionPerformed
-       new MainMenu().setVisible(true);
-       this.dispose();
+        new MainMenu().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonGoBackActionPerformed
 
     /**
      * @param args the command line arguments
      */
- 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -337,7 +337,6 @@ public class VenueManagement extends javax.swing.JFrame {
                 new VenueManagement().setVisible(true);
             }
         });
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

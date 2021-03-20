@@ -28,8 +28,6 @@ public class VenueBooking extends javax.swing.JFrame {
     private static String avaVenue[] = new String[99];
     private static int num;
     private Event v_event;
-    // dummy data 
-//    Event v_event = new Event("English Society", "Jing Hui", "TPL", "Competition", LocalDate.of(2021, 06, 20), LocalTime.of(12, 00), LocalTime.of(14, 30), 30);
     BookingDetailsFile bookingfile = new BookingDetailsFile();
     VenueFile venuefile = new VenueFile();
     private final EventFile eventFile = new EventFile();
@@ -44,7 +42,7 @@ public class VenueBooking extends javax.swing.JFrame {
     public VenueBooking(Event v_event) {
         initComponents();
         this.v_event = v_event;
-        // disable the text field, let the data auto entry itself
+        // disable the text field, let the data auto entry itself, disable confirm button to prevent venue full problem occurs
         jTextFieldEventName.setEditable(false);
         jTextFieldDate.setEditable(false);
         jTextFieldStartTime.setEditable(false);
@@ -54,7 +52,7 @@ public class VenueBooking extends javax.swing.JFrame {
         jComboBoxVenue2.setEnabled(false);
         jComboBoxVenue3.setEnabled(false);
         jButtonConfirm.setEnabled(false);
-        
+
         jTextFieldEventName.setText(v_event.getName());
         jTextFieldDate.setText(v_event.getDate().toString());
         jTextFieldStartTime.setText(v_event.getStartTime().toString());
@@ -277,7 +275,7 @@ public class VenueBooking extends javax.swing.JFrame {
 
     private void jButtonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmActionPerformed
         // TODO add your handling code here:
-        // validation of empty field and any duplicated fields
+        // validation of empty field and any duplicated venue selected
         if (jComboBoxVenue1.getSelectedIndex() == 0) {
             jLabelEmptyVenue.setText("Venue 1 cannot be null!");
         } else if (jComboBoxVenue1.getSelectedIndex() != 0 && jComboBoxVenue2.getSelectedIndex() != 0 && jComboBoxVenue3.getSelectedIndex() != 0) {
@@ -299,8 +297,8 @@ public class VenueBooking extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonConfirmActionPerformed
 
     public void booking() throws HeadlessException {
+        // if no duplicated venue
         if (jComboBoxVenue1.getSelectedIndex() != 0) {
-
             MemberRegistration organizer = v_event.getSocietyMem();
             String name = v_event.getName();
             String category = v_event.getCategory();
@@ -318,9 +316,9 @@ public class VenueBooking extends javax.swing.JFrame {
                     venue = venueList.getEntry(i);
                     break;
                 }
-
             }
 
+            // write into file for each selected venue
             Event event = new Event(organizer, name, category, date, startTime, endTime, numOfParticipants);
             BookingDetails bookedDetails = new BookingDetails(event, venue);
 
@@ -332,23 +330,20 @@ public class VenueBooking extends javax.swing.JFrame {
                         venue = venueList.getEntry(i);
                         break;
                     }
-
                 }
                 bookedDetails = new BookingDetails(event, venue);
                 bookingList.insert(bookedDetails);
-
             }
+
             if (jComboBoxVenue3.getSelectedIndex() != 0) {
                 for (int i = 1; i <= venueList.length(); i++) {
                     if (bookedVenue3.equals(venueList.getEntry(i).getVenueName())) {
                         venue = venueList.getEntry(i);
                         break;
                     }
-
                 }
                 bookedDetails = new BookingDetails(event, venue);
                 bookingList.insert(bookedDetails);
-
             }
 
             bookingfile.rewrite((ArrayList) bookingList, "BookingDetailsFile.txt");
@@ -385,7 +380,7 @@ public class VenueBooking extends javax.swing.JFrame {
         venueList = venuefile.reader("VenueFile.txt");
         bookingList = bookingfile.reader("BookingDetailsFile.txt");
 
-        // check which venue available for listing for user to choose, matched date, matched time, available time
+        // check which venue available for listing for user to choose , check --> matched date, matched time, available time
         boolean available = true;
         num = 0;
         for (int i = 1; i <= venueList.length(); i++) {
@@ -406,26 +401,25 @@ public class VenueBooking extends javax.swing.JFrame {
                 }
             }
 
-            // loop those available venue into the drop down list
+            // loop those available venue into String array(avaVenue)
             if (available) {
                 if (v_event.getNumOfParticipant() <= venueList.getEntry(i).getCapacity()) {
                     avaVenue[num] = venueList.getEntry(i).getVenueName();
                     jComboBoxVenue1.setEnabled(true);
                     jButtonConfirm.setEnabled(true);
                     jButtonClickToCont.setEnabled(false);
-//                    jButtonClickToCont.setVisible(false);
                     num++;
                 }
-                
             }
         }
-        // if no venue available, prompt a message  
+        // if no venue available, prompt a message
         if (num == 0) {
             JOptionPane.showMessageDialog(null, "No venue available, please make a new registration.");
             new EventRegistrationDriver().setVisible(true);
             this.dispose();
         }
 
+        // loop avaVenue(String array) into combo list
         for (int k = 0; k < num; k++) {
             jComboBoxVenue1.addItem(avaVenue[k]);
             jComboBoxVenue2.addItem(avaVenue[k]);

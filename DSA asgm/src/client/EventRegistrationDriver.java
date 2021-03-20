@@ -430,8 +430,8 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
                 event.setStartTime(startTime);
                 event.setEndTime(endTime);
 
-                // if the list is 
                 try {
+                    // if the list is empty or event not duplicated
                     if (eventList.isEmpty() || !eventList.contains(event)) {
                         new VenueBooking(event).setVisible(true);
                         this.dispose();

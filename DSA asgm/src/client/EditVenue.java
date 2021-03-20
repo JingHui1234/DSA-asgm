@@ -5,8 +5,6 @@ package client;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import adt.ArrayList;
 import adt.ListInterface;
 import entity.Venue;
@@ -27,6 +25,7 @@ public class EditVenue extends javax.swing.JFrame {
      */
     public EditVenue() {
         initComponents();
+        // venue name cannot be modified
         jTextFieldVenueName.setEditable(false);
         jTextFieldCapacity.setEditable(false);
     }
@@ -34,6 +33,7 @@ public class EditVenue extends javax.swing.JFrame {
     // pass in the venueName as parameter to modify
     public EditVenue(String venueName) {
         initComponents();
+        // venue name cannot be modified
         jTextFieldVenueName.setEditable(false);
         jTextFieldVenueName.setText(venueName);
         jTextFieldCapacity.setEditable(false);
@@ -228,9 +228,11 @@ public class EditVenue extends javax.swing.JFrame {
 
     private void jButtonAddNewTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNewTypeActionPerformed
         // TODO add your handling code here:
+        // check whether new type of venue is empty or not (" " or <enter>)
         if (jTextFieldOther.getText().trim().isEmpty()) {
             jLabelEmptyOther.setText("Please enter valid venue type!");
         } else {
+            // add new type into combo box selection
             String newType = jTextFieldOther.getText().toUpperCase();
             jComboBoxVenueType.addItem(newType);
         }
@@ -254,83 +256,78 @@ public class EditVenue extends javax.swing.JFrame {
             // proceed if no empty field
             Venue editedVenue = new Venue();
             int capacity = 0;
-            
-//            try {
-                boolean validate;
-                String name = jTextFieldVenueName.getText();
-                String type = (String) jComboBoxVenueType.getEditor().getItem();
+            boolean validate;
+            String name = jTextFieldVenueName.getText();
+            String type = (String) jComboBoxVenueType.getEditor().getItem();
 
+            try {
+                // validation capacity: 5 <  capacity < 500
+                capacity = Integer.parseInt(jTextFieldCapacity.getText());
+                if (editedVenue.validateCapacity(capacity)) {
+                    validate = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Capacity cannot less than " + Venue.getMinCapacity()
+                            + "and must more than " + Venue.getMaxCapacity());
+                    jTextFieldCapacity.setText("");
+                    validate = false;
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Invalid integer detected!");
+                jTextFieldCapacity.setText("");
+                validate = false;
+            }
+
+            name = name.toUpperCase();
+            type = type.toUpperCase();
+            editedVenue = new Venue(name, type, capacity);
+
+            // check whether the entry is matched with any element in the array list, if successful, then just edit the element
+            for (int i = 1; i <= venueList.length(); i++) {
+                if (name.equals(venueList.getEntry(i).getVenueName())) {
+                    successful = venueList.replace(i, editedVenue);
+                    break;
+                }
+            }
+
+            // if can  be found and edited successfully, prompt message; otherwise prompt another message
+            if (successful && validate) {
+                venuefile.rewrite((ArrayList<Venue>) venueList, "VenueFile.txt");
+                JOptionPane.showMessageDialog(null, "Venue edited successfully!");
+                new VenueManagement().setVisible(true);
+                this.dispose();
+            } else {
                 try {
+                    // validation capacity: 5 <  capacity < 500
                     capacity = Integer.parseInt(jTextFieldCapacity.getText());
                     if (editedVenue.validateCapacity(capacity)) {
                         validate = true;
+                        successful = true;
                     } else {
-                        JOptionPane.showMessageDialog(null, "Capacity cannot less than " + Venue.getMinCapacity()
+                        JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity()
                                 + "and must more than " + Venue.getMaxCapacity());
                         jTextFieldCapacity.setText("");
                         validate = false;
                     }
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Invalid integer detected!");
-                    jTextFieldCapacity.setText("");
-                    validate = false;
+                } catch (NumberFormatException e) {
+                    System.out.println("" + e);
+                    successful = false;
+                    jLabelEmptyCapacity.setText("Invalid integer detected!");
                 }
-                
-                name = name.toUpperCase();
-                type = type.toUpperCase();
-                editedVenue = new Venue(name, type, capacity);
-
-                // check whether the entry is matched with any element in the array list, if successful, then just edit the element
-                for (int i = 1; i <= venueList.length(); i++) {
-                    if (name.equals(venueList.getEntry(i).getVenueName())) {
-                        successful = venueList.replace(i, editedVenue);
-                        break;
-                    }
-                }
-
-                // if can  be found and edited successfully, prompt message; otherwise prompt another message
-                if (successful && validate) {
-                    venuefile.rewrite((ArrayList<Venue>) venueList, "VenueFile.txt");
-                    JOptionPane.showMessageDialog(null, "Venue edited successfully!");
-//                    this.dispose();
-                    new VenueManagement().setVisible(true);
-                    this.dispose();
-                } else {
-                    try {
-                        capacity = Integer.parseInt(jTextFieldCapacity.getText());
-                        if (editedVenue.validateCapacity(capacity)) {
-                            validate = true;
-                            successful = true;
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity()
-                                    + "and must more than " + Venue.getMaxCapacity());
-                            jTextFieldCapacity.setText("");
-                            validate = false;
-                        }
-                    } catch (NumberFormatException e) {
-                        System.out.println("" + e);
-                        successful = false;
-                        jLabelEmptyCapacity.setText("Invalid integer detected!");
-                    }
-                    
-                    JOptionPane.showMessageDialog(null, "Failed to edit existing venue!");
-                }
-//            } catch (Exception e) {
-//                System.out.println("" + e);
-//            }
+                JOptionPane.showMessageDialog(null, "Failed to edit existing venue!");
+            }
         }
-//        new VenueManagement().setVisible(true);
-//        this.dispose();
     }//GEN-LAST:event_jButtonEditVenueActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
+        // go back to venue management if user entered cancel
         new VenueManagement().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jTextFieldVenueNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldVenueNameMouseClicked
         // TODO add your handling code here:
+        // disable user from editing venue name
         jLabelEmptyVenue.setText("Venue name cannot be modified!");
     }//GEN-LAST:event_jTextFieldVenueNameMouseClicked
 
@@ -362,6 +359,7 @@ public class EditVenue extends javax.swing.JFrame {
                 jTextFieldCapacity.setText("500");
                 break;
             default:
+                // enable the capacity text field if new venue type is entered
                 jTextFieldCapacity.setEditable(true);
                 jTextFieldCapacity.setText("");
                 break;
@@ -370,6 +368,7 @@ public class EditVenue extends javax.swing.JFrame {
 
     private void jTextFieldCapacityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCapacityKeyReleased
         // TODO add your handling code here:
+        // make validate text to be invisible 
         jLabelEmptyCapacity.setText("");
     }//GEN-LAST:event_jTextFieldCapacityKeyReleased
 
@@ -377,11 +376,12 @@ public class EditVenue extends javax.swing.JFrame {
         // TODO add your handling code here:
         new VenueManagement().setVisible(true);
         this.dispose();
-        
+
     }//GEN-LAST:event_formWindowClosing
 
     private void jTextFieldOtherKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldOtherKeyReleased
         // TODO add your handling code here:
+        // make validate text to be invisible 
         jLabelEmptyOther.setText("");
     }//GEN-LAST:event_jTextFieldOtherKeyReleased
 
