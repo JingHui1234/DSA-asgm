@@ -5,7 +5,7 @@ import entity.Event;
 import java.awt.Color;
 import java.util.Calendar;
 import javax.swing.JLabel;
-import adt.InfiniteListInterface;
+import adt.UnsortedListInterface;
 
 /**
  *
@@ -13,7 +13,7 @@ import adt.InfiniteListInterface;
  */
 public class EventSummary extends javax.swing.JFrame {
 
-    private InfiniteListInterface<Event> eventList = new DoublyLinkedList<>();
+    private UnsortedListInterface<Event> eventList = new DoublyLinkedList<>();
          private EventFile eventFile = new EventFile();
          
     public EventSummary() {

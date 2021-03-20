@@ -9,10 +9,10 @@ package client;
 
 import adt.SortedLinkedList;
 import javax.swing.JOptionPane;
-import adt.InfiniteSortedListInterface;
 import adt.SortedArrayList;
 import adt.SortedListInterface;
 import entity.Society;
+import adt.OrderedListInterface;
 
 /**
  *

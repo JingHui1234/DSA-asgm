@@ -15,9 +15,9 @@ import javax.swing.SpinnerDateModel;
  */
 public class EventRegistrationDriver extends javax.swing.JFrame {
 
-    private InfiniteListInterface<Event> eventList = new DoublyLinkedList<>();
+    private UnsortedListInterface<Event> eventList = new DoublyLinkedList<>();
     private SortedListInterface<Society> societyList = new SortedArrayList<>();
-    private InfiniteSortedListInterface<MemberRegistration> memberList = new SortedLinkedList<>();
+    private OrderedListInterface<MemberRegistration> memberList = new SortedLinkedList<>();
 
     private final EventFile eventFile = new EventFile();
     private final SocietyFile societyFile = new SocietyFile();

@@ -17,9 +17,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
-import adt.InfiniteSortedListInterface;
 import adt.SortedArrayList;
 import adt.SortedListInterface;
+import adt.OrderedListInterface;
 
 /**
  *
@@ -27,8 +27,8 @@ import adt.SortedListInterface;
  */
 public class MemberManagement extends javax.swing.JFrame {
 
-    private static InfiniteSortedListInterface<MemberRegistration> memberRegistrationList = new SortedLinkedList<MemberRegistration>();
-    private static InfiniteSortedListInterface<MemberRegistration> societyMemberList = new SortedLinkedList<MemberRegistration>();
+    private static OrderedListInterface<MemberRegistration> memberRegistrationList = new SortedLinkedList<MemberRegistration>();
+    private static OrderedListInterface<MemberRegistration> societyMemberList = new SortedLinkedList<MemberRegistration>();
     MemberRegFile memberRegistrationFile = new MemberRegFile();
     private String storeJoinedDate = "";
     private String storeStudentID = "";
@@ -85,7 +85,7 @@ public class MemberManagement extends javax.swing.JFrame {
             }
         }
         
-        InfiniteSortedListInterface<String> programmeList = new SortedLinkedList<>();
+        OrderedListInterface<String> programmeList = new SortedLinkedList<>();
         programmeList.add("Diploma in Computer Science");
         programmeList.add("Diploma in Information Technology");
         programmeList.add("Diploma in Information Systems");

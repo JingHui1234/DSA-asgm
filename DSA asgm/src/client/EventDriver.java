@@ -13,9 +13,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class EventDriver extends javax.swing.JFrame {
 
-    private InfiniteListInterface<Event> eventList = new DoublyLinkedList<>();
+    private UnsortedListInterface<Event> eventList = new DoublyLinkedList<>();
     private ListInterface<BookingDetails> bookingList = new ArrayList<>();
-    private InfiniteSortedListInterface<MemberRegistration> memberList = new SortedLinkedList<>();
+    private OrderedListInterface<MemberRegistration> memberList = new SortedLinkedList<>();
 
     private final EventFile eventFile = new EventFile();
     private final BookingDetailsFile bdfile = new BookingDetailsFile();
