@@ -364,17 +364,7 @@ public class MemberManagement extends javax.swing.JFrame {
                     
                     SocietyMember registration = new SocietyMember(student, societyInfo, position, joinedDate);
                     memberRegistrationList.add(registration);
-
-                    societyInfo.setCurrentMemNum(societyInfo.getCurrentMemNum()+1);
-                   // update society current member
-                    for (int i = 1; i < societyList.getLength(); i++) {
-                        if(societyInfo.equals(societyList.getEntry(i))){
-                            societyList.getEntry(i).setCurrentMemNum(societyList.getEntry(i).getCurrentMemNum()+1);
-                            societyFile.rewrite((SortedArrayList)societyList, "SocietyList.txt");                          
-                            break;
-                        }                          
-                    }
-
+               
                     //insert into text file
                     memberRegistrationFile.writer(registration, "memberRegistration.txt");
            
@@ -431,17 +421,7 @@ public class MemberManagement extends javax.swing.JFrame {
                     //System.out.println("display after: " + memberRegistrationList);
                     //remove from text file
                     memberRegistrationFile.rewrite((SortedLinkedList<SocietyMember>) memberRegistrationList, "memberRegistration.txt");
-
-                     societyInfo.setCurrentMemNum(societyInfo.getCurrentMemNum()-1);
-                   // update society current member
-                    for (int j = 1; j < societyList.getLength(); j++) {
-                        if(societyInfo.equals(societyList.getEntry(j))){
-                            societyList.getEntry(j).setCurrentMemNum(societyList.getEntry(j).getCurrentMemNum()-1);
-                            societyFile.rewrite((SortedArrayList)societyList, "SocietyList.txt");                          
-                            break;
-                        }                          
-                    }
-                    
+                  
                     //remove from table
                     memberTable.removeRow(jTableMemberList.getSelectedRow());
                     removed = true;

@@ -11,7 +11,7 @@ public class Society implements Serializable, Comparable<Society>{
     private String dateReg;
     private double feesPerPerson;
     private int targetMemNum;
-    private int currentMemNum;
+
     
     
 
@@ -29,7 +29,7 @@ public class Society implements Serializable, Comparable<Society>{
         this.dateReg = dateReg;
         this.feesPerPerson = feesPerPerson;
         this.targetMemNum = targetMemNum;
-        this.currentMemNum = currentMemNum;
+        
     }
    
     public Society() {
@@ -54,11 +54,7 @@ public class Society implements Serializable, Comparable<Society>{
     public int getTargetMemNum() {
         return targetMemNum;
     }
-
-    public int getCurrentMemNum() {
-        return currentMemNum;
-    }
-
+ 
     public void setSocietyID(int societyID) {
         this.societyID = societyID;
     }
@@ -79,10 +75,7 @@ public class Society implements Serializable, Comparable<Society>{
         this.targetMemNum = targetMemNum;
     }
 
-    public void setCurrentMemNum(int currentMemNum) {
-        this.currentMemNum = currentMemNum;
-    }
-
+   
     @Override
     public int hashCode() {
         int hash = 7;
@@ -109,10 +102,7 @@ public class Society implements Serializable, Comparable<Society>{
         }
         if (this.targetMemNum != other.targetMemNum) {
             return false;
-        }
-        if (this.currentMemNum != other.currentMemNum) {
-            return false;
-        }
+        }       
         if (!Objects.equals(this.societyName, other.societyName)) {
             return false;
         }
@@ -127,7 +117,7 @@ public class Society implements Serializable, Comparable<Society>{
     @Override
     public String toString() {
         return Integer.toString(societyID) + "|" + societyName + "|" +  dateReg + "|" + 
-                 Double.toString(feesPerPerson) + "|" +  Integer.toString(targetMemNum)+ "|" +  Integer.toString(currentMemNum);
+                 Double.toString(feesPerPerson) + "|" +  Integer.toString(targetMemNum);
     }
 
     @Override

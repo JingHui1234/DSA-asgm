@@ -263,12 +263,33 @@ public class AddNewVenue extends javax.swing.JFrame {
         } else {
             // proceed if no empty field
             try {
+                Venue newVenue = new Venue();
+                boolean validate;
+                int capacity=0;
                 String name = jTextFieldNewVenueName.getText();
                 String type = (String) jComboBoxNewVenueType.getEditor().getItem();
-                int capacity = Integer.parseInt(jTextFieldAddNewCapacity.getText());
+
+                try {
+                    capacity = Integer.parseInt(jTextFieldAddNewCapacity.getText());
+                    if (newVenue.validateCapacity(capacity)) {
+                        validate = true;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity() 
+                                                        + "and must more than " + Venue.getMaxCapacity());
+                        jTextFieldAddNewCapacity.setText("");
+                        validate = false;
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null,"Only number is allowed!");
+                    jTextFieldAddNewCapacity.setText("");
+                    validate = false;
+                }
+                                                            
+                
+                
                 name = name.toUpperCase();
                 type = type.toUpperCase();
-                Venue newVenue = new Venue(name, type, capacity);
+                newVenue = new Venue(name, type, capacity);
 
                 // check whether the inserting of new venue is valid or not
                 for (int i = 1; i <= venueList.length(); i++) {

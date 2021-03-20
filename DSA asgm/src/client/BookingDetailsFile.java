@@ -47,25 +47,25 @@ public class BookingDetailsFile {
                 String dateReg = bookingDetails[6];
                 double feesPerPerson = Double.parseDouble(bookingDetails[7]);
                 int targetMemNum = Integer.parseInt(bookingDetails[8]);
-                int currentMemNum = Integer.parseInt(bookingDetails[9]);
                 
-                String position = bookingDetails[10];
-                String joinedDate = bookingDetails[11];
+                
+                String position = bookingDetails[9];
+                String joinedDate = bookingDetails[10];
 
                 // event            
-                String eventName = bookingDetails[12];
-                String category = bookingDetails[13];
-                LocalDate date = LocalDate.parse(bookingDetails[14]);
-                LocalTime startTime = LocalTime.parse(bookingDetails[15]);
-                LocalTime endTime = LocalTime.parse(bookingDetails[16]);
-                int partiNo = Integer.parseInt(bookingDetails[17]);
+                String eventName = bookingDetails[11];
+                String category = bookingDetails[12];
+                LocalDate date = LocalDate.parse(bookingDetails[13]);
+                LocalTime startTime = LocalTime.parse(bookingDetails[14]);
+                LocalTime endTime = LocalTime.parse(bookingDetails[15]);
+                int partiNo = Integer.parseInt(bookingDetails[16]);
                 
-                String venueName = bookingDetails[18];
-                String type = bookingDetails[19];
-                int capacity = Integer.parseInt(bookingDetails[20]);
+                String venueName = bookingDetails[17];
+                String type = bookingDetails[18];
+                int capacity = Integer.parseInt(bookingDetails[19]);
                 
                 Student student = new Student(name, studentID, contactNo, programme);
-                Society society = new Society(societyID, societyName, dateReg,feesPerPerson,targetMemNum,currentMemNum);
+                Society society = new Society(societyID, societyName, dateReg,feesPerPerson,targetMemNum);
                 SocietyMember registration = new SocietyMember(student, society, position, joinedDate);
                 Event event = new Event(registration, eventName, category, date, startTime, endTime, partiNo);
                 Venue venue = new Venue(venueName, type, capacity);

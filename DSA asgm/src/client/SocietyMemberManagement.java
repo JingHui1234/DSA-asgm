@@ -135,7 +135,7 @@ public class SocietyMemberManagement extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please select a society to manage", "Invalid Selection", JOptionPane.INFORMATION_MESSAGE);
         }
         else{
-            Society society = societyList.getEntry(jComboBox_SocietyName.getSelectedIndex()+1);
+            Society society = societyList.getEntry(jComboBox_SocietyName.getSelectedIndex());
             new MemberManagement(society).setVisible(true);
             dispose();
         }

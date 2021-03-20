@@ -43,23 +43,22 @@ public class EventFile {
                 String societyName = eventDetails[5];
                 String dateReg = eventDetails[6];
                 double feesPerPerson = Double.parseDouble(eventDetails[7]);
-                int targetMemNum = Integer.parseInt(eventDetails[8]);
-                int currentMemNum = Integer.parseInt(eventDetails[9]);
+                int targetMemNum = Integer.parseInt(eventDetails[8]);  
                 
-                String position = eventDetails[10];
-                String joinedDate = eventDetails[11];
+                String position = eventDetails[9];
+                String joinedDate = eventDetails[10];
 
                 // event
               
-                String eventName = eventDetails[12];
-                String category = eventDetails[13];
-                LocalDate date = LocalDate.parse(eventDetails[14]);
-                LocalTime startTime = LocalTime.parse(eventDetails[15]);
-                LocalTime endTime = LocalTime.parse(eventDetails[16]);
-                int partiNo = Integer.parseInt(eventDetails[17]);
+                String eventName = eventDetails[11];
+                String category = eventDetails[12];
+                LocalDate date = LocalDate.parse(eventDetails[13]);
+                LocalTime startTime = LocalTime.parse(eventDetails[14]);
+                LocalTime endTime = LocalTime.parse(eventDetails[15]);
+                int partiNo = Integer.parseInt(eventDetails[16]);
                 
                 Student student = new Student(name, studentID, contactNo, programme);
-                Society society = new Society(societyID, societyName, dateReg,feesPerPerson,targetMemNum,currentMemNum);
+                Society society = new Society(societyID, societyName, dateReg,feesPerPerson,targetMemNum);
                 SocietyMember registration = new SocietyMember(student, society, position, joinedDate);
                 Event event = new Event(registration, eventName, category, date, startTime, endTime, partiNo);
                 eventList.add(event);

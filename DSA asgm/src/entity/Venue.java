@@ -48,6 +48,15 @@ public class Venue implements Serializable{
         return capacity;
     }
 
+    public static int getMinCapacity() {
+        return minCapacity;
+    }
+
+    public static int getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    
     public void setVenueName(String venueName) {
         this.venueName = venueName;
     }

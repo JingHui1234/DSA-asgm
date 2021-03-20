@@ -28,10 +28,9 @@ public class SocietyFile {
                 String societyName = societyDetails[1];
                 String dateReg = societyDetails[2];
                 double feesPerPerson = Double.parseDouble(societyDetails[3]);
-                int targetMemNum = Integer.parseInt(societyDetails[4]);
-                int currentMemNum = Integer.parseInt(societyDetails[5]);
+                int targetMemNum = Integer.parseInt(societyDetails[4]);        
 
-                Society society = new Society(societyID, societyName, dateReg, feesPerPerson, targetMemNum, currentMemNum);
+                Society society = new Society(societyID, societyName, dateReg, feesPerPerson, targetMemNum);
                 societyList.add(society);
             }
 

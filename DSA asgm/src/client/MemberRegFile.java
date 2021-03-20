@@ -46,15 +46,14 @@ public class MemberRegFile {
                 String dateReg = memberRegDetails[6];
                 double feesPerPerson = Double.parseDouble(memberRegDetails[7]);
                 int targetMemNum = Integer.parseInt(memberRegDetails[8]);
-                int currentMemNum = Integer.parseInt(memberRegDetails[9]);
                 
                 
                 // reg
-                String position = memberRegDetails[10];
-                String joinedDate = memberRegDetails[11];
+                String position = memberRegDetails[9];
+                String joinedDate = memberRegDetails[10];
                 
                 Student student = new Student(name, studentID, contactNo, programme);
-                Society society = new Society(societyID, societyName, dateReg,feesPerPerson,targetMemNum,currentMemNum);
+                Society society = new Society(societyID, societyName, dateReg,feesPerPerson,targetMemNum);
                 SocietyMember registration = new SocietyMember(student, society, position, joinedDate);
                 memberRegistrationList.add(registration);
             }

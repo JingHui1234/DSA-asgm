@@ -60,7 +60,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jTextFieldStartTime" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabelEndTime" min="-2" pref="54" max="-2" attributes="0"/>
+                              <Component id="jLabelEndTime" min="-2" pref="65" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jTextFieldEndTime" min="-2" pref="100" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
@@ -68,14 +68,9 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabelNum" min="-2" pref="130" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jTextFieldNum" min="-2" pref="71" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jLabelVenue3" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabelNum" min="-2" pref="130" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jTextFieldNum" min="-2" pref="71" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -86,7 +81,10 @@
                               <Component id="jComboBoxVenue1" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabelVenue2" min="-2" pref="130" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabelVenue2" pref="130" max="32767" attributes="0"/>
+                                  <Component id="jLabelVenue3" max="32767" attributes="0"/>
+                              </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jComboBoxVenue3" pref="258" max="32767" attributes="0"/>

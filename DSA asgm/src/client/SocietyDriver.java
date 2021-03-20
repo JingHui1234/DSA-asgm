@@ -354,9 +354,8 @@ public class SocietyDriver extends javax.swing.JFrame {
             dateReg = societyList.getEntry(i).getDateReg();
             fees = Double.toString(societyList.getEntry(i).getFeesPerPerson());
             targetMemNum = Integer.toString(societyList.getEntry(i).getTargetMemNum());
-            currentMemNum = Integer.toString(societyList.getEntry(i).getCurrentMemNum());
-
-            String[] data = {id, name, dateReg, fees, targetMemNum, currentMemNum};
+          
+            String[] data = {id, name, dateReg, fees, targetMemNum};
             societyTable.addRow(data);
         }
     }

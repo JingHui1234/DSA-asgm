@@ -344,7 +344,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
         if (!jtfEventName.getText().isBlank() && !jtfOrgName.getText().isBlank()) {
 
             Society society = societyList.getEntry(jcbSociety.getSelectedIndex() + 1);
-           
+
             String organizer = jtfOrgName.getText().toUpperCase().replaceAll("\\s", "");
 
             for (int i = 1; i <= memberList.getLength(); i++) {
@@ -359,7 +359,8 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
             }
 
             if (!organizerComplete) {
-                JOptionPane.showMessageDialog(this, "Invalid organizer", "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, jcbSociety.getSelectedItem().toString()
+                        + " do not consist this member", "ERROR", JOptionPane.ERROR_MESSAGE);
                 jtfOrgName.grabFocus();
             }
 
@@ -436,12 +437,10 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
                 event.setStartTime(startTime);
                 event.setEndTime(endTime);
 
-               
-                             
                 // if the list is 
                 try {
                     if (eventList.isEmpty() || !eventList.contains(event)) {
-                        new VenueBooking(event).setVisible(true);                        
+                        new VenueBooking(event).setVisible(true);
                         this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "This event already created before", "ERROR", JOptionPane.ERROR_MESSAGE);
