@@ -106,6 +106,12 @@ public class EditVenue extends javax.swing.JFrame {
 
         jLabelOther.setText("Other: ");
 
+        jTextFieldOther.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldOtherKeyReleased(evt);
+            }
+        });
+
         jButtonAddNewType.setText("Add");
         jButtonAddNewType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,9 +215,9 @@ public class EditVenue extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelEmptyCapacity)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonEditVenue)
-                    .addComponent(jButtonCancel))
+                    .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -248,7 +254,7 @@ public class EditVenue extends javax.swing.JFrame {
             Venue editedVenue = new Venue();
             int capacity = 0;
             
-            try {
+//            try {
                 boolean validate;
                 String name = jTextFieldVenueName.getText();
                 String type = (String) jComboBoxVenueType.getEditor().getItem();
@@ -258,18 +264,16 @@ public class EditVenue extends javax.swing.JFrame {
                     if (editedVenue.validateCapacity(capacity)) {
                         validate = true;
                     } else {
-                        JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity()
+                        JOptionPane.showMessageDialog(null, "Capacity cannot less than " + Venue.getMinCapacity()
                                 + "and must more than " + Venue.getMaxCapacity());
                         jTextFieldCapacity.setText("");
                         validate = false;
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Only number is allowed!");
+                    JOptionPane.showMessageDialog(null, "Invalid integer detected!");
                     jTextFieldCapacity.setText("");
                     validate = false;
                 }
-                
-                            
                 
                 name = name.toUpperCase();
                 type = type.toUpperCase();
@@ -284,17 +288,38 @@ public class EditVenue extends javax.swing.JFrame {
                 }
 
                 // if can  be found and edited successfully, prompt message; otherwise prompt another message
-                if (successful) {
+                if (successful && validate) {
                     venuefile.rewrite((ArrayList<Venue>) venueList, "VenueFile.txt");
                     JOptionPane.showMessageDialog(null, "Venue edited successfully!");
+//                    this.dispose();
+                    new VenueManagement().setVisible(true);
                     this.dispose();
                 } else {
+                    try {
+                        capacity = Integer.parseInt(jTextFieldCapacity.getText());
+                        if (editedVenue.validateCapacity(capacity)) {
+                            validate = true;
+                            successful = true;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity()
+                                    + "and must more than " + Venue.getMaxCapacity());
+                            jTextFieldCapacity.setText("");
+                            validate = false;
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("" + e);
+                        successful = false;
+                        jLabelEmptyCapacity.setText("Invalid integer detected!");
+                    }
+                    
                     JOptionPane.showMessageDialog(null, "Failed to edit existing venue!");
                 }
-            } catch (Exception e) {
-                System.out.println("" + e);
-            }
+//            } catch (Exception e) {
+//                System.out.println("" + e);
+//            }
         }
+//        new VenueManagement().setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_jButtonEditVenueActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
@@ -318,6 +343,7 @@ public class EditVenue extends javax.swing.JFrame {
         switch (jComboBoxVenueType.getSelectedIndex()) {
             case 0:
                 jLabelEmptyType.setText("Please choose a valid type!");
+                jTextFieldCapacity.setText("");
                 break;
             case 1:
                 jTextFieldCapacity.setText("30");
@@ -348,8 +374,15 @@ public class EditVenue extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
+        new VenueManagement().setVisible(true);
         this.dispose();
+        
     }//GEN-LAST:event_formWindowClosing
+
+    private void jTextFieldOtherKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldOtherKeyReleased
+        // TODO add your handling code here:
+        jLabelEmptyOther.setText("");
+    }//GEN-LAST:event_jTextFieldOtherKeyReleased
 
     /**
      * @param args the command line arguments

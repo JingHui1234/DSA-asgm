@@ -234,11 +234,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldNum">
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
-      </AccessibilityProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelVenue2">
       <Properties>
@@ -300,11 +295,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Click To Choose Venue"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
-      </AccessibilityProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonClickToContActionPerformed"/>
       </Events>

@@ -47,7 +47,6 @@ public class SocietyFile {
             writer = new BufferedWriter(new FileWriter(fileName, true));
             writer.write(society.toString());
             writer.newLine();
-
             writer.close();
         } catch (Exception e) {
             System.out.println("" + e);
@@ -62,7 +61,6 @@ public class SocietyFile {
 
             for (int i = 1; i <= societyList.getLength(); i++) {
                 Society society = societyList.getEntry(i);
-
                 writer.write(society.toString());
                 writer.newLine();
             }

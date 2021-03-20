@@ -5,8 +5,6 @@ package client;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import adt.ArrayList;
 import adt.ListInterface;
 import entity.Venue;
@@ -229,6 +227,7 @@ public class AddNewVenue extends javax.swing.JFrame {
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
+        // go to venue management if user entered cancel
         new VenueManagement().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
@@ -239,6 +238,7 @@ public class AddNewVenue extends javax.swing.JFrame {
         if (jTextFieldOther.getText().trim().isEmpty()) {
             jLabelEmptyOther.setText("Please enter valid venue type!");
         } else {
+            // add new type into combo box selection
             String newType = jTextFieldOther.getText().toUpperCase();
             jComboBoxNewVenueType.addItem(newType);
         }
@@ -262,10 +262,9 @@ public class AddNewVenue extends javax.swing.JFrame {
             jLabelEmptyCapacity.setText("Venue capacity cannot be empty!");
         } else {
             // proceed if no empty field
-            try {
                 Venue newVenue = new Venue();
                 boolean validate;
-                int capacity=0;
+                int capacity = 0;
                 String name = jTextFieldNewVenueName.getText();
                 String type = (String) jComboBoxNewVenueType.getEditor().getItem();
 
@@ -274,19 +273,17 @@ public class AddNewVenue extends javax.swing.JFrame {
                     if (newVenue.validateCapacity(capacity)) {
                         validate = true;
                     } else {
-                        JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity() 
-                                                        + "and must more than " + Venue.getMaxCapacity());
+                        JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity()
+                                + "and must more than " + Venue.getMaxCapacity());
                         jTextFieldAddNewCapacity.setText("");
                         validate = false;
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null,"Only number is allowed!");
+                    JOptionPane.showMessageDialog(null, "Only number is allowed!");
                     jTextFieldAddNewCapacity.setText("");
                     validate = false;
                 }
-                                                            
-                
-                
+
                 name = name.toUpperCase();
                 type = type.toUpperCase();
                 newVenue = new Venue(name, type, capacity);
@@ -299,12 +296,27 @@ public class AddNewVenue extends javax.swing.JFrame {
                         successful = false;
                         break;
                     } else {
-                        successful = true;
+                        try {
+                            capacity = Integer.parseInt(jTextFieldAddNewCapacity.getText());
+                            if (newVenue.validateCapacity(capacity)) {
+                                validate = true;
+                                successful = true;
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity()
+                                        + "and must more than " + Venue.getMaxCapacity());
+                                jTextFieldAddNewCapacity.setText("");
+                                validate = false;
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("" + e);
+                            successful = false;
+                            jLabelEmptyCapacity.setText("Invalid integer detected!");
+                        }
                     }
                 }
 
                 // if successful then insert new venue entry into arraylist
-                if (successful) {
+                if (successful && validate) {
                     venueList.insert(newVenue);
                     venuefile.writer(newVenue, "VenueFile.txt");
                     JOptionPane.showMessageDialog(null, "Venue added successfully!");
@@ -312,24 +324,20 @@ public class AddNewVenue extends javax.swing.JFrame {
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Failed to add new venue!");
-                    new VenueManagement().setVisible(true);
-                    this.dispose();
+
                 }
-            } catch (HeadlessException | NumberFormatException e) {
-                System.out.println("" + e);
-                jLabelEmptyCapacity.setText("Please enter valid integer!");
-                jTextFieldAddNewCapacity.setText("");
-            }
         }
     }//GEN-LAST:event_jButtonConfirmActionPerformed
 
     private void jTextFieldNewVenueNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNewVenueNameKeyReleased
         // TODO add your handling code here:
+        // disable validate text 
         jLabelEmptyVenue.setText("");
     }//GEN-LAST:event_jTextFieldNewVenueNameKeyReleased
 
     private void jTextFieldAddNewCapacityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldAddNewCapacityKeyReleased
         // TODO add your handling code here:
+        // disable validate text 
         jLabelEmptyCapacity.setText("");
     }//GEN-LAST:event_jTextFieldAddNewCapacityKeyReleased
 
@@ -343,6 +351,7 @@ public class AddNewVenue extends javax.swing.JFrame {
         switch (jComboBoxNewVenueType.getSelectedIndex()) {
             case 0:
                 jLabelEmptyType.setText("Please choose a valid type!");
+                jTextFieldAddNewCapacity.setText("");
                 break;
             case 1:
                 jTextFieldAddNewCapacity.setText("30");
@@ -370,11 +379,13 @@ public class AddNewVenue extends javax.swing.JFrame {
 
     private void jTextFieldOtherKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldOtherKeyReleased
         // TODO add your handling code here:
+        // disable validate text 
         jLabelEmptyOther.setText("");
     }//GEN-LAST:event_jTextFieldOtherKeyReleased
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
+        new VenueManagement().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_formWindowClosing
 

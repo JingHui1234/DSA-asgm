@@ -19,7 +19,6 @@ public class VenueFile {
     public ArrayList<Venue> reader(String fileName) {
         ArrayList<Venue> venueList = new ArrayList<>();
         BufferedReader reader = null;
-
         try {
             String currentLine;
             reader = new BufferedReader(new FileReader(fileName));
@@ -36,7 +35,7 @@ public class VenueFile {
             }
 
         } catch (Exception e) {
-            venueList = null;
+            System.out.println("" + e);
         }
         return venueList;
     }
@@ -48,7 +47,6 @@ public class VenueFile {
             writer = new BufferedWriter(new FileWriter(fileName, true));
             writer.write(venue.getVenueName() + "|" + venue.getType() + "|" + venue.getCapacity());
             writer.newLine();
-
             writer.close();
         } catch (Exception e) {
             System.out.println("" + e);
@@ -63,7 +61,6 @@ public class VenueFile {
 
             for (int i = 1; i <= venueList.length(); i++) {
                 Venue venue = venueList.getEntry(i);
-
                 writer.write(venue.getVenueName() + "|" + venue.getType() + "|" + venue.getCapacity());
                 writer.newLine();
             }

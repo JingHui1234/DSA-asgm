@@ -207,10 +207,12 @@ public class VenueManagement extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Venue not found!!!");
             } else {
                 new EditVenue(name).setVisible(true);
+                this.dispose();
             }
         } catch (Exception e) {
             System.out.println("" + e);
         }
+        
     }//GEN-LAST:event_jButtonEditVenueActionPerformed
 
     private void jButtonViewAllVenuesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewAllVenuesActionPerformed
@@ -224,7 +226,7 @@ public class VenueManagement extends javax.swing.JFrame {
         venueList = venuefile.reader("VenueFile.txt");
         String name = "";
         String type = "";
-        String capacity = ""; 
+        String capacity = "";
        
         for (int i = 1; i <= venueList.length(); i++) {
            name = venueList.getEntry(i).getVenueName();
@@ -280,7 +282,7 @@ public class VenueManagement extends javax.swing.JFrame {
         String name = "";
         String type = "";
         String capacity = "";
-        
+       
         for (int i = 1; i <= venueList.length(); i++) {
            name = venueList.getEntry(i).getVenueName();
            type = venueList.getEntry(i).getType();

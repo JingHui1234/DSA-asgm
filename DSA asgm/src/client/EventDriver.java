@@ -20,7 +20,6 @@ public class EventDriver extends javax.swing.JFrame {
     private final EventFile eventFile = new EventFile();
     private final BookingDetailsFile bdfile = new BookingDetailsFile();
     private final MemberRegFile memberRegFile = new MemberRegFile();
-    
 
     public EventDriver() {
         initComponents();
@@ -30,13 +29,12 @@ public class EventDriver extends javax.swing.JFrame {
         eventList = eventFile.reader("Event.txt");
         bookingList = bdfile.reader("BookingDetailsFile.txt");
         memberList = memberRegFile.reader("memberRegistration.txt");
-      
+
         displayEventList();
 
         jbtOK.setVisible(false);
         jbtCancel.setVisible(false);
         jcbCategory.setSelectedIndex(-1);
-       
 
     }
 
@@ -452,20 +450,20 @@ public class EventDriver extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtDeleteActionPerformed
 
     private void jbtAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAddActionPerformed
-     
+
         new EventRegistrationDriver().setVisible(true);
         this.dispose(); // close current frame
     }//GEN-LAST:event_jbtAddActionPerformed
 
     private void jbtCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCloseActionPerformed
-       new MainMenu().setVisible(true);
-       this.dispose();
+        new MainMenu().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jbtCloseActionPerformed
 
     private void jtbEventListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbEventListMouseClicked
 
         showInfo();
-        
+
     }//GEN-LAST:event_jtbEventListMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -487,8 +485,8 @@ public class EventDriver extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Please select the row of data that want to update.",
                     "Alert", JOptionPane.WARNING_MESSAGE);
-        } 
- 
+        }
+
     }//GEN-LAST:event_jbtUpdateActionPerformed
 
     private void jtbSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbSearchNameActionPerformed
@@ -513,8 +511,8 @@ public class EventDriver extends javax.swing.JFrame {
                     jtfEndTime.setText(model.getValueAt(i, 7).toString());
                     jtfpnum.setText(model.getValueAt(i, 8).toString());
                     jtfVenue.setText("1. " + model.getValueAt(i, 9).toString() + "\n"
-                + "2. " + model.getValueAt(i, 10).toString() + "\n"
-                + "3. " + model.getValueAt(i, 11).toString());
+                            + "2. " + model.getValueAt(i, 10).toString() + "\n"
+                            + "3. " + model.getValueAt(i, 11).toString());
 
                     jtbEventList.setRowSelectionInterval(i, i);
                     found++;
@@ -526,24 +524,23 @@ public class EventDriver extends javax.swing.JFrame {
             }
         } catch (NullPointerException e) {
         }
-        
+
     }//GEN-LAST:event_jtbSearchNameActionPerformed
 
     private void jtbSummaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbSummaryActionPerformed
 
-       new EventSummary().setVisible(true);
+        new EventSummary().setVisible(true);
     }//GEN-LAST:event_jtbSummaryActionPerformed
 
     private void jbtCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCancelActionPerformed
         showInfo();
-        
+
         quitUpdateMode();
     }//GEN-LAST:event_jbtCancelActionPerformed
 
-   
 
     private void jbtOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtOKActionPerformed
-  
+
         int updatePos;
         MemberRegistration sm = new MemberRegistration();
         boolean organizerComplete = false;
@@ -575,19 +572,20 @@ public class EventDriver extends javax.swing.JFrame {
                 jtfOrganizer.grabFocus();
             }
 
-
             if (organizerComplete) {
                 // 0=yes, 1=no, 2=cancel
                 int option = JOptionPane.showConfirmDialog(this, "Do you confirm to update this event?");
 
                 if (option == 0) {
-                    Event oldEvent = eventList.getEntry(updatePos);
                     updateEvent = eventList.getEntry(updatePos);
+
+                    Event oldEvent = new Event(updateEvent.getSocietyMem(), updateEvent.getName(), updateEvent.getCategory(),
+                            updateEvent.getDate(), updateEvent.getStartTime(), updateEvent.getEndTime(),
+                            updateEvent.getNumOfParticipant());
 
                     updateEvent.setSocietyMem(sm);
                     updateEvent.setName(name);
                     updateEvent.setCategory(jcbCategory.getSelectedItem().toString());
-                    updateEvent.setNumOfParticipant(Integer.parseInt(partiNo));
 
                     if (eventList.replace(updatePos, updateEvent)) {
                         // update booking details                      
@@ -724,12 +722,15 @@ public class EventDriver extends javax.swing.JFrame {
                     if (event.equals(bookingList.getEntry(j).getEvent())) {
                         venueCount++;
                         switch (venueCount) {
-                            case 1 -> venue1 = bookingList.getEntry(j).getBookedVenue().getVenueName();
-                            case 2 -> venue2 = bookingList.getEntry(j).getBookedVenue().getVenueName();
-                            case 3 -> venue3 = bookingList.getEntry(j).getBookedVenue().getVenueName();
+                            case 1 ->
+                                venue1 = bookingList.getEntry(j).getBookedVenue().getVenueName();
+                            case 2 ->
+                                venue2 = bookingList.getEntry(j).getBookedVenue().getVenueName();
+                            case 3 ->
+                                venue3 = bookingList.getEntry(j).getBookedVenue().getVenueName();
                         }
                     }
-                   
+
                 }
 
                 String data[] = {Integer.toString(i), event.getSocietyMem().getSociety().getSocietyName(),
@@ -738,7 +739,7 @@ public class EventDriver extends javax.swing.JFrame {
                     event.getEndTime().toString(), Integer.toString(event.getNumOfParticipant()),
                     venue1, venue2, venue3};
                 tblModel.addRow(data);
-               
+
                 venue1 = "-";
                 venue2 = "-";
                 venue3 = "-";

@@ -413,9 +413,9 @@ public class VenueBooking extends javax.swing.JFrame {
                 if (v_event.getNumOfParticipant() <= venueList.getEntry(i).getCapacity()) {
                     avaVenue[num] = venueList.getEntry(i).getVenueName();
                     jComboBoxVenue1.setEnabled(true);
-                    jButtonConfirm.setEnabled(false);
+                    jButtonConfirm.setEnabled(true);
                     jButtonClickToCont.setEnabled(false);
-                    jButtonClickToCont.setVisible(false);
+//                    jButtonClickToCont.setVisible(false);
                     num++;
                 }
                 

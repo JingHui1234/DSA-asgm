@@ -91,7 +91,12 @@ public class SocietyDriver extends javax.swing.JFrame {
             }
         });
 
-        jButtonCancel.setText("Cancel");
+        jButtonCancel.setText("Clear");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Back to Menu");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -108,16 +113,14 @@ public class SocietyDriver extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButtonCancel)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabelID, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabelDateReg, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                                    .addComponent(jLabelName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addComponent(jLabelFeesPerMember, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabelMembers))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelID, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabelDateReg, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                                .addComponent(jLabelName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabelFeesPerMember, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelMembers)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(175, 175, 175)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,7 +131,10 @@ public class SocietyDriver extends javax.swing.JFrame {
                                         .addComponent(jTextFieldNewID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(48, 48, 48)
                                         .addComponent(jLabelEmptyID, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButtonAdd)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButtonAdd)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonCancel))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jTextFieldFees, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -181,9 +187,9 @@ public class SocietyDriver extends javax.swing.JFrame {
                     .addComponent(jTextFieldMembers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelEmptyMembers))
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonAdd, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonCancel, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAdd)
+                    .addComponent(jButtonCancel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -196,26 +202,21 @@ public class SocietyDriver extends javax.swing.JFrame {
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         // TODO add your handling code here:
         societyList = societyFile.reader("SocietyList.txt");
-        boolean nameSuccessful = false;
-        boolean idSuccessful = false;
+        //boolean nameAvlb = false;
+        //boolean idAvlb = false;
+        boolean societyAvlb = true; 
+        double minFees = 5.00;
 
-        if (jTextFieldNewName.getText().trim().isEmpty()
-                && jTextFieldDateReg.getText().trim().isEmpty()
-                && jTextFieldFees.getText().trim().isEmpty()
-                && jTextFieldMembers.getText().trim().isEmpty()) {
-            jLabelEmptyID.setText("Name is empty");
-            jLabelEmptyDateReg.setText("Date register is empty");
-            jLabelEmptyFees.setText("Fees is empty");
-            jLabelEmptyMembers.setText("Members is empty");
-
+        if (jTextFieldNewID.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "ID cannot be empty");
         } else if (jTextFieldNewName.getText().trim().isEmpty()) {
-            jLabelEmptyID.setText("Name is empty");
+            JOptionPane.showMessageDialog(null, "Name cannot be empty");
         } else if (jTextFieldDateReg.getText().trim().isEmpty()) {
-            jLabelEmptyDateReg.setText("Date register is empty!");
+            JOptionPane.showMessageDialog(null, "Date register cannot be empty");
         } else if (jTextFieldFees.getText().trim().isEmpty()) {
-            jLabelEmptyFees.setText("Fees is empty!");
+            JOptionPane.showMessageDialog(null, "Fees cannot be empty");
         } else if (jTextFieldMembers.getText().trim().isEmpty()) {
-            jLabelEmptyMembers.setText("Members is empty!");
+            JOptionPane.showMessageDialog(null, "Members cannot be empty");
         } else {
 
             try {
@@ -225,37 +226,34 @@ public class SocietyDriver extends javax.swing.JFrame {
                 double fees = Double.parseDouble(jTextFieldFees.getText());
                 int targetMemNum = Integer.parseInt(jTextFieldMembers.getText());
                 name = name.toUpperCase();
-                Society newSociety = new Society(id, name, dateReg, fees, targetMemNum, 0);
+
+                Society newSociety = new Society(id, name, dateReg, fees, targetMemNum);
 
                 for (int j = 1; j <= societyList.getLength(); j++) {
-                    if (jTextFieldNewID.equals(societyList.getEntry(j).getSocietyID())) {
-                        JOptionPane.showMessageDialog(null, "Society already existed");
-                        idSuccessful = false;
-                    } else {
-                        idSuccessful = true;
-                    }
+                    if (id == (societyList.getEntry(j).getSocietyID()) || 
+                            name.equals(societyList.getEntry(j).getSocietyName())) {
+                        JOptionPane.showMessageDialog(null, "This society already existed");
+                        societyAvlb = false;
+                    } 
                 }
 
-                for (int i = 1; i <= societyList.getLength(); i++) {
-                    if (name.equals(societyList.getEntry(i).getSocietyName())) {
-                        JOptionPane.showMessageDialog(null, "Society already exists!");
-                        nameSuccessful = false;
-                        break;
+                
+                if (fees >= minFees) {
+                    if (societyAvlb) {
+                        societyList.add(newSociety);
+                        societyFile.writer(newSociety, "SocietyList.txt");
+                        JOptionPane.showMessageDialog(null, "Society has been added successfully!");
+                        clearForm();
+
                     } else {
-                        nameSuccessful = true;
+                        JOptionPane.showMessageDialog(null, "Unable to add new society");
+                        clearForm();
                     }
                 }
-
-                if (nameSuccessful && idSuccessful) {
-                    societyList.add(newSociety);
-                    societyFile.writer(newSociety, "SocietyList.txt");
-                    JOptionPane.showMessageDialog(null, "Added successfully!");
-                    clearForm();
-                    
-                } else {
-                    JOptionPane.showMessageDialog(null, "Unable to add new society");
-                    this.dispose();
+                else {
+                    JOptionPane.showMessageDialog(null, "Minimum fees per person must at least RM 5");
                 }
+
             } catch (HeadlessException | NumberFormatException e) {
                 System.out.println("" + e);
 
@@ -271,6 +269,15 @@ public class SocietyDriver extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         this.dispose();
     }//GEN-LAST:event_formWindowClosing
+
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        // TODO add your handling code here:
+        jTextFieldNewID.setText("");
+        jTextFieldNewName.setText("");
+        jTextFieldDateReg.setText("");
+        jTextFieldFees.setText("");
+        jTextFieldMembers.setText("");
+    }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**
      * @param args the command line arguments
