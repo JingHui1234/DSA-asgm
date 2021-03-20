@@ -120,9 +120,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabelEmptyCapacity" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jButtonEditVenue" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonCancel" min="-2" pref="21" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jButtonCancel" max="32767" attributes="0"/>
+                  <Component id="jButtonEditVenue" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>

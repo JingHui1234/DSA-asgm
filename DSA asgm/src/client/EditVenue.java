@@ -216,9 +216,9 @@ public class EditVenue extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelEmptyCapacity)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonEditVenue)
-                    .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonEditVenue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -342,25 +342,38 @@ public class EditVenue extends javax.swing.JFrame {
             case 0:
                 jLabelEmptyType.setText("Please choose a valid type!");
                 jTextFieldCapacity.setText("");
+                jTextFieldCapacity.setEditable(false);
+                jTextFieldCapacity.setEnabled(false);
                 break;
             case 1:
                 jTextFieldCapacity.setText("30");
+                jTextFieldCapacity.setEditable(false);
+                jTextFieldCapacity.setEnabled(false);
                 break;
             case 2:
                 jTextFieldCapacity.setText("50");
+                jTextFieldCapacity.setEditable(false);
+                jTextFieldCapacity.setEnabled(false);
                 break;
             case 3:
                 jTextFieldCapacity.setText("100");
+                jTextFieldCapacity.setEditable(false);
+                jTextFieldCapacity.setEnabled(false);
                 break;
             case 4:
                 jTextFieldCapacity.setText("300");
+                jTextFieldCapacity.setEditable(false);
+                jTextFieldCapacity.setEnabled(false);
                 break;
             case 5:
                 jTextFieldCapacity.setText("500");
+                jTextFieldCapacity.setEditable(false);
+                jTextFieldCapacity.setEnabled(false);
                 break;
             default:
                 // enable the capacity text field if new venue type is entered
                 jTextFieldCapacity.setEditable(true);
+                jTextFieldCapacity.setEnabled(true);
                 jTextFieldCapacity.setText("");
                 break;
         }

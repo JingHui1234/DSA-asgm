@@ -361,21 +361,33 @@ public class AddNewVenue extends javax.swing.JFrame {
             case 0:
                 jLabelEmptyType.setText("Please choose a valid type!");
                 jTextFieldAddNewCapacity.setText("");
+                jTextFieldAddNewCapacity.setEnabled(false);
+                jTextFieldAddNewCapacity.setEditable(false);
                 break;
             case 1:
                 jTextFieldAddNewCapacity.setText("30");
+                jTextFieldAddNewCapacity.setEnabled(false);
+                jTextFieldAddNewCapacity.setEditable(false);
                 break;
             case 2:
                 jTextFieldAddNewCapacity.setText("50");
+                jTextFieldAddNewCapacity.setEnabled(false);
+                jTextFieldAddNewCapacity.setEditable(false);
                 break;
             case 3:
                 jTextFieldAddNewCapacity.setText("100");
+                jTextFieldAddNewCapacity.setEnabled(false);
+                jTextFieldAddNewCapacity.setEditable(false);
                 break;
             case 4:
                 jTextFieldAddNewCapacity.setText("300");
+                jTextFieldAddNewCapacity.setEnabled(false);
+                jTextFieldAddNewCapacity.setEditable(false);
                 break;
             case 5:
                 jTextFieldAddNewCapacity.setText("500");
+                jTextFieldAddNewCapacity.setEnabled(false);
+                jTextFieldAddNewCapacity.setEditable(false);
                 break;
             default:
                 // enable the capacity text field if new venue type is entered
