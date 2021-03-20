@@ -479,7 +479,6 @@ public class EventDriver extends javax.swing.JFrame {
             jtfOrganizer.setEnabled(true);
             jtfName.setEnabled(true);
             jcbCategory.setEnabled(true);
-            jtfpnum.setEnabled(true);
 
             jbtOK.setVisible(true);
             jbtCancel.setVisible(true);
@@ -548,9 +547,7 @@ public class EventDriver extends javax.swing.JFrame {
         int updatePos;
         MemberRegistration sm = new MemberRegistration();
         boolean organizerComplete = false;
-        int participantNum;
         Event updateEvent = new Event();
-        boolean pnumcomplete;
 
         if (!jtfOrganizer.getText().isBlank() && !jtfName.getText().isBlank() && !jtfpnum.getText().isBlank()) {
             updatePos = Integer.parseInt(jtfNo.getText());
@@ -578,26 +575,8 @@ public class EventDriver extends javax.swing.JFrame {
                 jtfOrganizer.grabFocus();
             }
 
-            try {
-                participantNum = Integer.parseInt(jtfpnum.getText());
-                if (updateEvent.validateParticipantNum(participantNum)) {
-                    pnumcomplete = true;
-                } else {
-                    JOptionPane.showMessageDialog(this, "Number of participants cannot less than" + Event.getMinNumOfParticipant()
-                            + "and more than " + Event.getMaxNumOfParticipant(),
-                            "Alert", JOptionPane.WARNING_MESSAGE);
-                    jtfpnum.grabFocus();
-                    pnumcomplete = false;
-                }
 
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Only number is allowed in No. of participants column.",
-                        "Alert", JOptionPane.WARNING_MESSAGE);
-                jtfpnum.grabFocus();
-                pnumcomplete = false;
-            }
-
-            if (organizerComplete && pnumcomplete) {
+            if (organizerComplete) {
                 // 0=yes, 1=no, 2=cancel
                 int option = JOptionPane.showConfirmDialog(this, "Do you confirm to update this event?");
 
@@ -789,7 +768,6 @@ public class EventDriver extends javax.swing.JFrame {
         jtfOrganizer.setEnabled(false);
         jtfName.setEnabled(false);
         jcbCategory.setEnabled(false);
-        jtfpnum.setEnabled(false);
     }
 
     public void showInfo() {
