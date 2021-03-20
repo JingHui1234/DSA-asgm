@@ -401,14 +401,17 @@ public class EventDriver extends javax.swing.JFrame {
             deletePos = Integer.parseInt(jtfNo.getText());
         }
 
+        // if any row is selected
         if (deletePos != -1) {
-            // 0=yes, 1=no, 2=cancel
-            int option = JOptionPane.showConfirmDialog(this, "Do you confirm to delete this event?");
 
+            int option = JOptionPane.showConfirmDialog(this, "Do you confirm to delete this event?");
+            // 0=yes, 1=no, 2=cancel
             if (option == 0) {
+                // delete event from the list
                 Event deletedEvent = eventList.remove(deletePos);
 
                 if (deletedEvent != null) {
+                    // delete booking details as well
                     for (int i = 1; i <= bookingList.length(); i++) {
 
                         if (deletedEvent.equals(bookingList.getEntry(i).getEvent())) {
@@ -417,11 +420,14 @@ public class EventDriver extends javax.swing.JFrame {
                         }
                     }
 
+                    // refresh the table
                     displayEventList();
 
+                    // rewrite the text file
                     eventFile.rewrite((DoublyLinkedList) eventList, "Event.txt");
                     bdfile.rewrite((ArrayList) bookingList, "BookingDetailsFile.txt");
-                    // reset all the textfiled
+
+                    // clear all the textfiled
                     jtfNo.setText("");
                     jtfSociety.setText("");
                     jtfOrganizer.setText("");
@@ -528,13 +534,11 @@ public class EventDriver extends javax.swing.JFrame {
     }//GEN-LAST:event_jtbSearchNameActionPerformed
 
     private void jtbSummaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbSummaryActionPerformed
-
         new EventSummary().setVisible(true);
     }//GEN-LAST:event_jtbSummaryActionPerformed
 
     private void jbtCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCancelActionPerformed
         showInfo();
-
         quitUpdateMode();
     }//GEN-LAST:event_jbtCancelActionPerformed
 
@@ -542,10 +546,11 @@ public class EventDriver extends javax.swing.JFrame {
     private void jbtOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtOKActionPerformed
 
         int updatePos;
-        MemberRegistration sm = new MemberRegistration();
+        MemberRegistration memberReg = new MemberRegistration();
         boolean organizerComplete = false;
         Event updateEvent = new Event();
 
+        // if all info not empty
         if (!jtfOrganizer.getText().isBlank() && !jtfName.getText().isBlank() && !jtfpnum.getText().isBlank()) {
             updatePos = Integer.parseInt(jtfNo.getText());
 
@@ -554,11 +559,12 @@ public class EventDriver extends javax.swing.JFrame {
             String partiNo = jtfpnum.getText();
             DefaultTableModel model = (DefaultTableModel) jtbEventList.getModel();
 
+            // validate organizer
             for (int i = 1; i <= memberList.getLength(); i++) {
                 if (organizer.equals(memberList.getEntry(i).getStudent().getName().toUpperCase().replaceAll("\\s", ""))) {
                     if (eventList.getEntry(updatePos).getSocietyMem().
                             getSociety().equals(memberList.getEntry(i).getSociety())) {
-                        sm = memberList.getEntry(i);
+                        memberReg = memberList.getEntry(i);
                         organizerComplete = true;
                         break;
                     }
@@ -570,20 +576,21 @@ public class EventDriver extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, jtfSociety.getText()
                         + " do not consist this member", "ERROR", JOptionPane.ERROR_MESSAGE);
                 jtfOrganizer.grabFocus();
-            }
-
-            if (organizerComplete) {
+            } else {
                 // 0=yes, 1=no, 2=cancel
                 int option = JOptionPane.showConfirmDialog(this, "Do you confirm to update this event?");
 
                 if (option == 0) {
+                    // get the event that want to update
                     updateEvent = eventList.getEntry(updatePos);
 
+                    // get the original event
                     Event oldEvent = new Event(updateEvent.getSocietyMem(), updateEvent.getName(), updateEvent.getCategory(),
                             updateEvent.getDate(), updateEvent.getStartTime(), updateEvent.getEndTime(),
                             updateEvent.getNumOfParticipant());
 
-                    updateEvent.setSocietyMem(sm);
+                    // update the event
+                    updateEvent.setSocietyMem(memberReg);
                     updateEvent.setName(name);
                     updateEvent.setCategory(jcbCategory.getSelectedItem().toString());
 
@@ -597,11 +604,14 @@ public class EventDriver extends javax.swing.JFrame {
                             }
                         }
 
+                        // rewrite the file
                         eventFile.rewrite((DoublyLinkedList) eventList, "Event.txt");
                         bdfile.rewrite((ArrayList) bookingList, "BookingDetailsFile.txt");
+
+                        // refresh the table
                         displayEventList();
 
-                        // reset all the textfiled                             
+                        // reset the updated textfiled                             
                         jtfOrganizer.setText(updateEvent.getSocietyMem().getStudent().getName());
                         jtfName.setText(updateEvent.getName());
                         setCategory(updateEvent.getCategory());
@@ -719,6 +729,7 @@ public class EventDriver extends javax.swing.JFrame {
                 int venueCount = 0;
                 for (int j = 1; j <= bookingList.length(); j++) {
 
+                    // get the respective venue
                     if (event.equals(bookingList.getEntry(j).getEvent())) {
                         venueCount++;
                         switch (venueCount) {
@@ -733,6 +744,7 @@ public class EventDriver extends javax.swing.JFrame {
 
                 }
 
+                // set the value in table
                 String data[] = {Integer.toString(i), event.getSocietyMem().getSociety().getSocietyName(),
                     event.getSocietyMem().getStudent().getName(), event.getName(), event.getCategory(),
                     event.getDate().toString(), event.getStartTime().toString(),

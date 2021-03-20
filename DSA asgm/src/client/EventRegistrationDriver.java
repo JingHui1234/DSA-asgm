@@ -11,7 +11,7 @@ import javax.swing.SpinnerDateModel;
 
 /**
  *
- * @author jingh
+ * @author Jing Hui
  */
 public class EventRegistrationDriver extends javax.swing.JFrame {
 
@@ -39,11 +39,11 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
         jdcDate.setMaxSelectableDate(nextYear);
 
         //read existing data from file
-//        eventList = eventFile.reader("Event.txt");
+        eventList = eventFile.reader("Event.txt");
         societyList = societyFile.reader("SocietyList.txt");
         memberList = memberRegFile.reader("memberRegistration.txt");
-             
-       // read from society file and Inititalize society selection      
+
+        // read from society file and Inititalize society selection      
         for (int i = 0; i < societyList.getLength(); i++) {
             jcbSociety.addItem((String) societyList.getEntry(i + 1).getSocietyName());
         }
@@ -327,18 +327,20 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
         boolean pnumcomplete;
         int participantNum = 0;
         boolean organizerComplete = false;
-        MemberRegistration sm = new MemberRegistration();
+        MemberRegistration memberReg = new MemberRegistration();
 
+        // chk if any info is empty
         if (!jtfEventName.getText().isBlank() && !jtfOrgName.getText().isBlank()) {
 
             Society society = societyList.getEntry(jcbSociety.getSelectedIndex() + 1);
 
             String organizer = jtfOrgName.getText().toUpperCase().replaceAll("\\s", "");
 
+            //verify organizer name with existing member
             for (int i = 1; i <= memberList.getLength(); i++) {
                 if (organizer.equals(memberList.getEntry(i).getStudent().getName().toUpperCase().replaceAll("\\s", ""))) {
                     if (society.equals(memberList.getEntry(i).getSociety())) {
-                        sm = memberList.getEntry(i);
+                        memberReg = memberList.getEntry(i);
                         organizerComplete = true;
                         break;
                     }
@@ -346,6 +348,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
                 }
             }
 
+            // if organizer is not valid
             if (!organizerComplete) {
                 JOptionPane.showMessageDialog(this, jcbSociety.getSelectedItem().toString()
                         + " do not consist this member", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -354,7 +357,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
 
             String name = jtfEventName.getText();
             String category = (String) jcbCategory.getSelectedItem();
-            try {
+            try {   //validate participant num
                 participantNum = Integer.parseInt(jtfNoParticipant.getText());
                 if (event.validateParticipantNum(participantNum)) {
                     pnumcomplete = true;
@@ -376,6 +379,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
             Calendar cal = Calendar.getInstance();
             LocalDate eventDate = null;
 
+            // validate date
             if (jdcDate.getDate() == null) {
                 datecomplete = false;
                 JOptionPane.showMessageDialog(this, "Incomplete Information", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -415,9 +419,10 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
                 timecomplete = true;
             }
 
+            // if all validation completed without error
             if (pnumcomplete && datecomplete && timecomplete && organizerComplete) {
 
-                event.setSocietyMem(sm);
+                event.setSocietyMem(memberReg);
                 event.setCategory(category);
                 event.setName(name);
                 event.setDate(eventDate);

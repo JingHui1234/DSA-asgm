@@ -96,6 +96,7 @@ public class VenueBooking extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -269,9 +270,6 @@ public class VenueBooking extends javax.swing.JFrame {
                 .addComponent(jButtonConfirm)
                 .addContainerGap())
         );
-
-        jTextFieldNum.getAccessibleContext().setAccessibleParent(null);
-        jButtonClickToCont.getAccessibleContext().setAccessibleParent(null);
 
         pack();
         setLocationRelativeTo(null);
