@@ -245,7 +245,7 @@ public class AddNewVenue extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAddNewTypeActionPerformed
 
     private void jButtonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmActionPerformed
-        // read file and store into arraylist(venueList)
+      // read file and store into arraylist(venueList)
         venueList = venuefile.reader("VenueFile.txt");
         boolean successful = false;
 
@@ -262,9 +262,10 @@ public class AddNewVenue extends javax.swing.JFrame {
             jLabelEmptyCapacity.setText("Venue capacity cannot be empty!");
         } else {
             // proceed if no empty field
+            try {
                 Venue newVenue = new Venue();
                 boolean validate;
-                int capacity = 0;
+                int capacity=0;
                 String name = jTextFieldNewVenueName.getText();
                 String type = (String) jComboBoxNewVenueType.getEditor().getItem();
 
@@ -273,17 +274,19 @@ public class AddNewVenue extends javax.swing.JFrame {
                     if (newVenue.validateCapacity(capacity)) {
                         validate = true;
                     } else {
-                        JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity()
-                                + "and must more than " + Venue.getMaxCapacity());
+                        JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity() 
+                                                        + "and must more than " + Venue.getMaxCapacity());
                         jTextFieldAddNewCapacity.setText("");
                         validate = false;
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Only number is allowed!");
+                    JOptionPane.showMessageDialog(null,"Only number is allowed!");
                     jTextFieldAddNewCapacity.setText("");
                     validate = false;
                 }
-
+                                                            
+                
+                
                 name = name.toUpperCase();
                 type = type.toUpperCase();
                 newVenue = new Venue(name, type, capacity);
@@ -297,21 +300,21 @@ public class AddNewVenue extends javax.swing.JFrame {
                         break;
                     } else {
                         try {
-                            capacity = Integer.parseInt(jTextFieldAddNewCapacity.getText());
-                            if (newVenue.validateCapacity(capacity)) {
-                                validate = true;
-                                successful = true;
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity()
-                                        + "and must more than " + Venue.getMaxCapacity());
-                                jTextFieldAddNewCapacity.setText("");
-                                validate = false;
-                            }
-                        } catch (NumberFormatException e) {
-                            System.out.println("" + e);
-                            successful = false;
-                            jLabelEmptyCapacity.setText("Invalid integer detected!");
+                        capacity = Integer.parseInt(jTextFieldAddNewCapacity.getText());
+                        if (newVenue.validateCapacity(capacity)) {
+                            validate = true;
+                            successful = true;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity()
+                                    + "and must more than " + Venue.getMaxCapacity());
+                            jTextFieldAddNewCapacity.setText("");
+                            validate = false;
                         }
+                    } catch (NumberFormatException e) {
+                        System.out.println("" + e);
+                        successful = false;
+                        jLabelEmptyCapacity.setText("Invalid integer detected!");
+                    }
                     }
                 }
 
@@ -324,8 +327,13 @@ public class AddNewVenue extends javax.swing.JFrame {
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Failed to add new venue!");
-
+                
                 }
+            } catch (HeadlessException | NumberFormatException e) {
+                System.out.println("" + e);
+                jLabelEmptyCapacity.setText("Please enter valid integer!");
+                jTextFieldAddNewCapacity.setText("");
+            }
         }
     }//GEN-LAST:event_jButtonConfirmActionPerformed
 
