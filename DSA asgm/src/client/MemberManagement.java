@@ -597,7 +597,7 @@ public class MemberManagement extends javax.swing.JFrame {
         String societyName_key = txtSocietyName.getText();
         
         JTextArea jtaMemberList = new JTextArea(100, 200);
-        String str = String.format("%140s %s\n",societyName_key, "Member List\n");
+        String str = String.format("%140s %s\n",societyName_key, "MEMBER LIST\n");
         
         str += String.format("%s\t\t %s\t\t %s\t\t %s\t\t %s\t\t\t %s\n",
                 "Name", "Student ID", "Contact No.", "Programme", "Society Name", "Position");
@@ -621,7 +621,7 @@ public class MemberManagement extends javax.swing.JFrame {
             String position = societyMemberList.getEntry(i).getPosition();
             String joinedDate = societyMemberList.getEntry(i).getJoinedDate();
             
-            str += String.format("%s\t\t %s\t\t %s\t\t %s\t\t %s\t %s\n", name, studentID, contactNo, programme, societyName, position, joinedDate);
+            str += String.format("%s\t\t %s\t\t %s\t\t %s\t\t %s\t\t %s\n", name, studentID, contactNo, programme, societyName, position, joinedDate);
         }
         
         societyMemberList.clear();

@@ -346,7 +346,6 @@ public class SocietyDriver extends javax.swing.JFrame {
         String dateReg;
         String fees;
         String targetMemNum;
-        String currentMemNum;
 
         for (int i = 1; i <= societyList.getLength(); i++) {
             id = Integer.toString(societyList.getEntry(i).getSocietyID());

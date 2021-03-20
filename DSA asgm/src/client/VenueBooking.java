@@ -50,68 +50,16 @@ public class VenueBooking extends javax.swing.JFrame {
         jTextFieldStartTime.setEditable(false);
         jTextFieldEndTime.setEditable(false);
         jTextFieldNum.setEditable(false);
+        jComboBoxVenue1.setEnabled(false);
         jComboBoxVenue2.setEnabled(false);
         jComboBoxVenue3.setEnabled(false);
-
+        jButtonConfirm.setEnabled(false);
+        
         jTextFieldEventName.setText(v_event.getName());
         jTextFieldDate.setText(v_event.getDate().toString());
         jTextFieldStartTime.setText(v_event.getStartTime().toString());
         jTextFieldEndTime.setText(v_event.getEndTime().toString());
         jTextFieldNum.setText(Integer.toString(v_event.getNumOfParticipant()));
-
-        // read file and store into arraylist(venueList and bookingList)
-        venueList = venuefile.reader("VenueFile.txt");
-        bookingList = bookingfile.reader("BookingDetailsFile.txt");
-
-        // check which venue available for listing for user to choose, matched date, matched time, available time
-        boolean available = true;
-        num = 0;
-        for (int i = 1; i <= venueList.length(); i++) {
-            for (int j = 1; j <= bookingList.length(); j++) {
-                if (venueList.getEntry(i).getVenueName().equals(bookingList.getEntry(j).getBookedVenue().getVenueName())) {
-                    if (v_event.getDate().isEqual(bookingList.getEntry(j).getEvent().getDate())) {
-                        if (v_event.getStartTime().isAfter(bookingList.getEntry(j).getEvent().getEndTime()) || v_event.getEndTime().isBefore(bookingList.getEntry(j).getEvent().getStartTime())) {
-                            available = true;
-                        } else {
-                            available = false;
-                            break;
-                        }
-                    } else {
-                        available = true;
-                    }
-                } else {
-                    available = true;
-                }
-            }
-
-            // loop those available venue into the drop down list
-            if (available) {
-                if (v_event.getNumOfParticipant() <= venueList.getEntry(i).getCapacity()) {
-                    avaVenue[num] = venueList.getEntry(i).getVenueName();
-                    num++;
-                }
-                // if no venue available, prompt a message              
-            }
-        }
-
-        if (num == 0) {
-//            JOptionPane.showMessageDialog(null, "No venue available, please make a new registration.");
-//      JOptionPane.showMessageDialog(null, "ssdfsdffddf");
-           
-            new EventDriver().setVisible(true);
-             this.dispose();
-           
-           
-
-            // go back jing hui part
-        }
-
-        for (int k = 0; k < num; k++) {
-            jComboBoxVenue1.addItem(avaVenue[k]);
-            jComboBoxVenue2.addItem(avaVenue[k]);
-            jComboBoxVenue3.addItem(avaVenue[k]);
-        }
-
     }
 
     /**
@@ -144,6 +92,8 @@ public class VenueBooking extends javax.swing.JFrame {
         jLabelBookingVenue = new javax.swing.JLabel();
         jTextFieldStartTime = new javax.swing.JTextField();
         jLabelEmptyVenue = new javax.swing.JLabel();
+        jButtonClickToCont = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -198,17 +148,31 @@ public class VenueBooking extends javax.swing.JFrame {
         jLabelEmptyVenue.setForeground(new java.awt.Color(255, 0, 0));
         jLabelEmptyVenue.setText(" ");
 
+        jButtonClickToCont.setText("Click To Choose Venue");
+        jButtonClickToCont.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClickToContActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("***Please check your event details!");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(179, 179, 179))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(158, 158, 158)
+                .addComponent(jLabelBookingVenue, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabelBookingVenue, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(140, 140, 140))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -219,48 +183,55 @@ public class VenueBooking extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldEventName, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldDate))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jTextFieldEventName)
+                                    .addComponent(jTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(131, 131, 131))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jTextFieldStartTime)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(16, 16, 16))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelNum, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldNum, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jTextFieldEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabelVenue1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBoxVenue1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabelVenue2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                    .addComponent(jLabelVenue3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabelVenue2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabelVenue3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBoxVenue3, 0, 258, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxVenue3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jComboBoxVenue2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabelEmptyVenue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(37, 37, 37))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(179, 179, 179))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabelEmptyVenue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(33, 33, 33))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabelVenue1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButtonClickToCont, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jComboBoxVenue1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(21, 21, 21))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelNum, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldNum, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(11, 11, 11)
+                .addContainerGap()
                 .addComponent(jLabelBookingVenue, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEventName)
                     .addComponent(jTextFieldEventName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -279,6 +250,8 @@ public class VenueBooking extends javax.swing.JFrame {
                     .addComponent(jLabelNum)
                     .addComponent(jTextFieldNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonClickToCont)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelVenue1)
                     .addComponent(jComboBoxVenue1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -292,10 +265,13 @@ public class VenueBooking extends javax.swing.JFrame {
                     .addComponent(jComboBoxVenue3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelEmptyVenue)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addComponent(jButtonConfirm)
                 .addContainerGap())
         );
+
+        jTextFieldNum.getAccessibleContext().setAccessibleParent(null);
+        jButtonClickToCont.getAccessibleContext().setAccessibleParent(null);
 
         pack();
         setLocationRelativeTo(null);
@@ -326,7 +302,7 @@ public class VenueBooking extends javax.swing.JFrame {
 
     public void booking() throws HeadlessException {
         if (jComboBoxVenue1.getSelectedIndex() != 0) {
-            
+
             MemberRegistration organizer = v_event.getSocietyMem();
             String name = v_event.getName();
             String category = v_event.getCategory();
@@ -338,20 +314,18 @@ public class VenueBooking extends javax.swing.JFrame {
             String bookedVenue2 = (String) jComboBoxVenue2.getEditor().getItem();
             String bookedVenue3 = (String) jComboBoxVenue3.getEditor().getItem();
             Venue venue = new Venue();
-      
-            
+
             for (int i = 1; i <= venueList.length(); i++) {
-                if(bookedVenue1.equals(venueList.getEntry(i).getVenueName()))
-                {
+                if (bookedVenue1.equals(venueList.getEntry(i).getVenueName())) {
                     venue = venueList.getEntry(i);
                     break;
                 }
-                
+
             }
-            
+
             Event event = new Event(organizer, name, category, date, startTime, endTime, numOfParticipants);
             BookingDetails bookedDetails = new BookingDetails(event, venue);
-            
+
             bookingList.insert(bookedDetails);
 
             if (jComboBoxVenue2.getSelectedIndex() != 0) {
@@ -407,6 +381,60 @@ public class VenueBooking extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_formWindowClosing
 
+    private void jButtonClickToContActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClickToContActionPerformed
+        // TODO add your handling code here:
+        // read file and store into arraylist(venueList and bookingList)
+        venueList = venuefile.reader("VenueFile.txt");
+        bookingList = bookingfile.reader("BookingDetailsFile.txt");
+
+        // check which venue available for listing for user to choose, matched date, matched time, available time
+        boolean available = true;
+        num = 0;
+        for (int i = 1; i <= venueList.length(); i++) {
+            for (int j = 1; j <= bookingList.length(); j++) {
+                if (venueList.getEntry(i).getVenueName().equals(bookingList.getEntry(j).getBookedVenue().getVenueName())) {
+                    if (v_event.getDate().isEqual(bookingList.getEntry(j).getEvent().getDate())) {
+                        if (v_event.getStartTime().isAfter(bookingList.getEntry(j).getEvent().getEndTime()) || v_event.getEndTime().isBefore(bookingList.getEntry(j).getEvent().getStartTime())) {
+                            available = true;
+                        } else {
+                            available = false;
+                            break;
+                        }
+                    } else {
+                        available = true;
+                    }
+                } else {
+                    available = true;
+                }
+            }
+
+            // loop those available venue into the drop down list
+            if (available) {
+                if (v_event.getNumOfParticipant() <= venueList.getEntry(i).getCapacity()) {
+                    avaVenue[num] = venueList.getEntry(i).getVenueName();
+                    jComboBoxVenue1.setEnabled(true);
+                    jButtonConfirm.setEnabled(false);
+                    jButtonClickToCont.setEnabled(false);
+                    jButtonClickToCont.setVisible(false);
+                    num++;
+                }
+                
+            }
+        }
+        // if no venue available, prompt a message  
+        if (num == 0) {
+            JOptionPane.showMessageDialog(null, "No venue available, please make a new registration.");
+            new EventRegistrationDriver().setVisible(true);
+            this.dispose();
+        }
+
+        for (int k = 0; k < num; k++) {
+            jComboBoxVenue1.addItem(avaVenue[k]);
+            jComboBoxVenue2.addItem(avaVenue[k]);
+            jComboBoxVenue3.addItem(avaVenue[k]);
+        }
+    }//GEN-LAST:event_jButtonClickToContActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -446,10 +474,12 @@ public class VenueBooking extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JButton jButtonClickToCont;
     private javax.swing.JButton jButtonConfirm;
     private javax.swing.JComboBox<String> jComboBoxVenue1;
     private javax.swing.JComboBox<String> jComboBoxVenue2;
     private javax.swing.JComboBox<String> jComboBoxVenue3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelBookingVenue;
     private javax.swing.JLabel jLabelEmptyVenue;
     private javax.swing.JLabel jLabelEndTime;
