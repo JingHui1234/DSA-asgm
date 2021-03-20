@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class Event implements Serializable{
     
-    private SocietyMember societyMem;
+    private MemberRegistration societyMem;
     private String category;
     private String name;
     private LocalDate date;
@@ -27,7 +27,7 @@ public class Event implements Serializable{
     public Event() {
     }
 
-    public Event(SocietyMember societyMem, String name, String category, LocalDate date, LocalTime startTime, LocalTime endTime, int numOfParticipant) {
+    public Event(MemberRegistration societyMem, String name, String category, LocalDate date, LocalTime startTime, LocalTime endTime, int numOfParticipant) {
         this.societyMem = societyMem;
         this.name = name;
         this.category = category; 
@@ -79,7 +79,7 @@ public class Event implements Serializable{
         return endTime;
     }
 
-    public SocietyMember getSocietyMem() {
+    public MemberRegistration getSocietyMem() {
         return societyMem;
     }
     
@@ -107,7 +107,7 @@ public class Event implements Serializable{
         this.endTime = endTime;
     }
 
-    public void setSocietyMem(SocietyMember societyMem) {
+    public void setSocietyMem(MemberRegistration societyMem) {
         this.societyMem = societyMem;
     }
 

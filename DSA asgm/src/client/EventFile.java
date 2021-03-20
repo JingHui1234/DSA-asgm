@@ -59,7 +59,7 @@ public class EventFile {
                 
                 Student student = new Student(name, studentID, contactNo, programme);
                 Society society = new Society(societyID, societyName, dateReg,feesPerPerson,targetMemNum);
-                SocietyMember registration = new SocietyMember(student, society, position, joinedDate);
+                MemberRegistration registration = new MemberRegistration(student, society, position, joinedDate);
                 Event event = new Event(registration, eventName, category, date, startTime, endTime, partiNo);
                 eventList.add(event);
             }

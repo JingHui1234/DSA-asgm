@@ -15,7 +15,7 @@ public class EventDriver extends javax.swing.JFrame {
 
     private InfiniteListInterface<Event> eventList = new DoublyLinkedList<>();
     private ListInterface<BookingDetails> bookingList = new ArrayList<>();
-    private InfiniteSortedListInterface<SocietyMember> memberList = new SortedLinkedList<>();
+    private InfiniteSortedListInterface<MemberRegistration> memberList = new SortedLinkedList<>();
 
     private final EventFile eventFile = new EventFile();
     private final BookingDetailsFile bdfile = new BookingDetailsFile();
@@ -546,7 +546,7 @@ public class EventDriver extends javax.swing.JFrame {
     private void jbtOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtOKActionPerformed
   
         int updatePos;
-        SocietyMember sm = new SocietyMember();
+        MemberRegistration sm = new MemberRegistration();
         boolean organizerComplete = false;
         int participantNum;
         Event updateEvent = new Event();

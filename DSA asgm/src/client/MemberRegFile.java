@@ -9,7 +9,7 @@ package client;
 
 import adt.SortedLinkedList;
 import entity.Society;
-import entity.SocietyMember;
+import entity.MemberRegistration;
 import entity.Student;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,8 +23,8 @@ import java.time.LocalDate;
  */
 public class MemberRegFile {
     
-    public SortedLinkedList<SocietyMember> reader (String fileName){
-        SortedLinkedList <SocietyMember> memberRegistrationList = new SortedLinkedList<>();
+    public SortedLinkedList<MemberRegistration> reader (String fileName){
+        SortedLinkedList <MemberRegistration> memberRegistrationList = new SortedLinkedList<>();
         BufferedReader reader = null;
         
         try {
@@ -54,7 +54,7 @@ public class MemberRegFile {
                 
                 Student student = new Student(name, studentID, contactNo, programme);
                 Society society = new Society(societyID, societyName, dateReg,feesPerPerson,targetMemNum);
-                SocietyMember registration = new SocietyMember(student, society, position, joinedDate);
+                MemberRegistration registration = new MemberRegistration(student, society, position, joinedDate);
                 memberRegistrationList.add(registration);
             }
         } catch (Exception e) {
@@ -63,7 +63,7 @@ public class MemberRegFile {
         return memberRegistrationList;
     }
     
-    public void writer(SocietyMember registration, String fileName){
+    public void writer(MemberRegistration registration, String fileName){
         BufferedWriter writer = null;
         try{
             writer = new BufferedWriter(new FileWriter(fileName, true));
@@ -78,13 +78,13 @@ public class MemberRegFile {
         }
     }
     
-    public void rewrite(SortedLinkedList<SocietyMember> memberRegistrationList, String fileName){
+    public void rewrite(SortedLinkedList<MemberRegistration> memberRegistrationList, String fileName){
         BufferedWriter writer = null;
         try{
             writer = new BufferedWriter(new FileWriter(fileName));
             
             for (int i = 0; i < memberRegistrationList.getLength(); i++){
-                SocietyMember registration = memberRegistrationList.getEntry(i+1);
+                MemberRegistration registration = memberRegistrationList.getEntry(i+1);
                 
                 writer.write(registration.toString());
                 writer.newLine();

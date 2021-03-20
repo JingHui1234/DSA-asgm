@@ -245,13 +245,35 @@ public class EditVenue extends javax.swing.JFrame {
             jLabelEmptyCapacity.setText("Venue capacity cannot be empty!");
         } else {
             // proceed if no empty field
+            Venue editedVenue = new Venue();
+            int capacity = 0;
+            
             try {
+                boolean validate;
                 String name = jTextFieldVenueName.getText();
                 String type = (String) jComboBoxVenueType.getEditor().getItem();
-                int capacity = Integer.parseInt(jTextFieldCapacity.getText());
+
+                try {
+                    capacity = Integer.parseInt(jTextFieldCapacity.getText());
+                    if (editedVenue.validateCapacity(capacity)) {
+                        validate = true;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Capacity cannot less than" + Venue.getMinCapacity()
+                                + "and must more than " + Venue.getMaxCapacity());
+                        jTextFieldCapacity.setText("");
+                        validate = false;
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Only number is allowed!");
+                    jTextFieldCapacity.setText("");
+                    validate = false;
+                }
+                
+                            
+                
                 name = name.toUpperCase();
                 type = type.toUpperCase();
-                Venue editedVenue = new Venue(name, type, capacity);
+                editedVenue = new Venue(name, type, capacity);
 
                 // check whether the entry is matched with any element in the array list, if successful, then just edit the element
                 for (int i = 1; i <= venueList.length(); i++) {

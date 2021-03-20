@@ -9,7 +9,7 @@ import adt.ArrayList;
 import adt.ListInterface;
 import entity.BookingDetails;
 import entity.Event;
-import entity.SocietyMember;
+import entity.MemberRegistration;
 import entity.Venue;
 import java.awt.HeadlessException;
 import java.time.LocalDate;
@@ -327,7 +327,7 @@ public class VenueBooking extends javax.swing.JFrame {
     public void booking() throws HeadlessException {
         if (jComboBoxVenue1.getSelectedIndex() != 0) {
             
-            SocietyMember organizer = v_event.getSocietyMem();
+            MemberRegistration organizer = v_event.getSocietyMem();
             String name = v_event.getName();
             String category = v_event.getCategory();
             LocalDate date = v_event.getDate();

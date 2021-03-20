@@ -9,7 +9,7 @@ package client;
 
 import adt.SortedLinkedList;
 import entity.Society;
-import entity.SocietyMember;
+import entity.MemberRegistration;
 import entity.Student;
 import java.awt.Font;
 import java.time.LocalDate;
@@ -27,8 +27,8 @@ import adt.SortedListInterface;
  */
 public class MemberManagement extends javax.swing.JFrame {
 
-    private static InfiniteSortedListInterface<SocietyMember> memberRegistrationList = new SortedLinkedList<SocietyMember>();
-    private static InfiniteSortedListInterface<SocietyMember> societyMemberList = new SortedLinkedList<SocietyMember>();
+    private static InfiniteSortedListInterface<MemberRegistration> memberRegistrationList = new SortedLinkedList<MemberRegistration>();
+    private static InfiniteSortedListInterface<MemberRegistration> societyMemberList = new SortedLinkedList<MemberRegistration>();
     MemberRegFile memberRegistrationFile = new MemberRegFile();
     private String storeJoinedDate = "";
     private String storeStudentID = "";
@@ -362,7 +362,7 @@ public class MemberManagement extends javax.swing.JFrame {
                     //add to list
                     Student student = new Student(name, studentID, contactNo, programme);
                     
-                    SocietyMember registration = new SocietyMember(student, societyInfo, position, joinedDate);
+                    MemberRegistration registration = new MemberRegistration(student, societyInfo, position, joinedDate);
                     memberRegistrationList.add(registration);
                
                     //insert into text file
@@ -420,7 +420,7 @@ public class MemberManagement extends javax.swing.JFrame {
 
                     //System.out.println("display after: " + memberRegistrationList);
                     //remove from text file
-                    memberRegistrationFile.rewrite((SortedLinkedList<SocietyMember>) memberRegistrationList, "memberRegistration.txt");
+                    memberRegistrationFile.rewrite((SortedLinkedList<MemberRegistration>) memberRegistrationList, "memberRegistration.txt");
                   
                     //remove from table
                     memberTable.removeRow(jTableMemberList.getSelectedRow());
@@ -485,7 +485,7 @@ public class MemberManagement extends javax.swing.JFrame {
                     //System.out.println(memberRegistrationList.getEntry(i));
                     memberRegistrationList.remove(memberRegistrationList.getEntry(i));
                     i--;
-                    memberRegistrationFile.rewrite((SortedLinkedList<SocietyMember>) memberRegistrationList, "memberRegistration.txt");              
+                    memberRegistrationFile.rewrite((SortedLinkedList<MemberRegistration>) memberRegistrationList, "memberRegistration.txt");              
                 }
             }
             //memberRegistrationFile.rewrite((SortedLinkedList<SocietyMemberRegistration>) memberRegistrationList, "memberRegistration.txt");
@@ -555,7 +555,7 @@ public class MemberManagement extends javax.swing.JFrame {
                         //remove from list
                         memberRegistrationList.remove(memberRegistrationList.getEntry(i));
                         //remove from text file
-                        memberRegistrationFile.rewrite((SortedLinkedList<SocietyMember>) memberRegistrationList, "memberRegistration.txt");
+                        memberRegistrationFile.rewrite((SortedLinkedList<MemberRegistration>) memberRegistrationList, "memberRegistration.txt");
                         //remove from table
                         memberTable.removeRow(jTableMemberList.getSelectedRow());
                         remove = true;
@@ -565,7 +565,7 @@ public class MemberManagement extends javax.swing.JFrame {
                         try {
                             //add to list
                             Student student = new Student(name, studentID, contactNo, programme);                          
-                            SocietyMember registration = new SocietyMember(student, societyInfo, position, joinedDate);
+                            MemberRegistration registration = new MemberRegistration(student, societyInfo, position, joinedDate);
                             memberRegistrationList.add(registration);
 
                             //insert into text file

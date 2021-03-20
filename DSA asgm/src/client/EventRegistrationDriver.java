@@ -17,7 +17,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
 
     private InfiniteListInterface<Event> eventList = new DoublyLinkedList<>();
     private SortedListInterface<Society> societyList = new SortedArrayList<>();
-    private InfiniteSortedListInterface<SocietyMember> memberList = new SortedLinkedList<>();
+    private InfiniteSortedListInterface<MemberRegistration> memberList = new SortedLinkedList<>();
 
     private final EventFile eventFile = new EventFile();
     private final SocietyFile societyFile = new SocietyFile();
@@ -339,7 +339,7 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
         boolean pnumcomplete;
         int participantNum = 0;
         boolean organizerComplete = false;
-        SocietyMember sm = new SocietyMember();
+        MemberRegistration sm = new MemberRegistration();
 
         if (!jtfEventName.getText().isBlank() && !jtfOrgName.getText().isBlank()) {
 
