@@ -49,7 +49,6 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
         }
     }
 
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -436,7 +435,8 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
                         new VenueBooking(event).setVisible(true);
                         this.dispose();
                     } else {
-                        JOptionPane.showMessageDialog(null, "This event already created before", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "This event already created before",
+                                "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (NullPointerException e) {
                     JOptionPane.showMessageDialog(null, "File error", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -455,8 +455,8 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jbtNext1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtNext1ActionPerformed
-       new EventDriver().setVisible(true);
-       this.dispose();
+        new EventDriver().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jbtNext1ActionPerformed
 
     /**
@@ -526,6 +526,5 @@ public class EventRegistrationDriver extends javax.swing.JFrame {
     private javax.swing.JTextField jtfNoParticipant;
     private javax.swing.JTextField jtfOrgName;
     // End of variables declaration//GEN-END:variables
-
 
 }

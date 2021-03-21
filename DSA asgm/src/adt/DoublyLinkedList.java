@@ -267,7 +267,6 @@ public class DoublyLinkedList<T> implements UnsortedListInterface<T>, Serializab
     @Override
     public String displayBackward() {
         String outputStr = "";
-        int number = 1;
         Node currentNode = lastNode;
 
         while (currentNode != null) {
@@ -280,7 +279,6 @@ public class DoublyLinkedList<T> implements UnsortedListInterface<T>, Serializab
     @Override
     public String toString() {
         String outputStr = "";
-        int number = 1;
         Node currentNode = firstNode;
 
         while (currentNode != null) {

@@ -585,7 +585,8 @@ public class EventDriver extends javax.swing.JFrame {
                     updateEvent = eventList.getEntry(updatePos);
 
                     // get the original event
-                    Event oldEvent = new Event(updateEvent.getSocietyMem(), updateEvent.getName(), updateEvent.getCategory(),
+                    Event oldEvent = new Event(updateEvent.getSocietyMem(), updateEvent.getName(),
+                            updateEvent.getCategory(), 
                             updateEvent.getDate(), updateEvent.getStartTime(), updateEvent.getEndTime(),
                             updateEvent.getNumOfParticipant());
 
@@ -599,7 +600,8 @@ public class EventDriver extends javax.swing.JFrame {
                         for (int i = 1; i <= bookingList.length(); i++) {
 
                             if (oldEvent.equals(bookingList.getEntry(i).getEvent())) {
-                                bookingList.replace(i, new BookingDetails(updateEvent, bookingList.getEntry(i).getBookedVenue()));
+                                bookingList.replace(i, new BookingDetails(updateEvent, 
+                                        bookingList.getEntry(i).getBookedVenue()));
 
                             }
                         }
