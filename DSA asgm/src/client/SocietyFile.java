@@ -45,10 +45,6 @@ public class SocietyFile {
     public void writer(Society society, String fileName) {
         BufferedWriter writer = null;
         try {
-            PrintWriter writer1 = new PrintWriter(fileName);
-            writer1.print("");
-            writer1.close();
-            
             writer = new BufferedWriter(new FileWriter(fileName, true));
             writer.write(society.toString());
             writer.newLine();
