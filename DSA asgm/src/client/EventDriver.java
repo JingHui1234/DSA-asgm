@@ -222,7 +222,7 @@ public class EventDriver extends javax.swing.JFrame {
         jcbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Meeting", "Workshop", "Fund Raising", "Talk", "Annual General Meeting", "One-day Camp", "Competition", "Seminar", "Sports Carnival" }));
         jcbCategory.setEnabled(false);
 
-        jbtOK.setText("Ok");
+        jbtOK.setText("OK");
         jbtOK.setEnabled(false);
         jbtOK.setOpaque(false);
         jbtOK.addActionListener(new java.awt.event.ActionListener() {

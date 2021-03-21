@@ -204,7 +204,15 @@ public class MemberManagement extends javax.swing.JFrame {
             new String [] {
                 "Name", "Student ID", "Contact No.", "Programme", "Society", "Position", "Joined Date"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableMemberList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableMemberListMouseClicked(evt);
@@ -656,6 +664,7 @@ public class MemberManagement extends javax.swing.JFrame {
             String joinedDate = societyMemberList.getEntry(i).getJoinedDate();
             
             str += String.format("%-15s\t %12s\t %12s\t\t %-35s\t %-18s\t %s\n", name, studentID, contactNo, programme, position, joinedDate);
+//            str += String.format("%-30s%-40s%-60s%-80s%-100s%-150s\n", name, studentID, contactNo, programme, position, joinedDate);
         }
         
         societyMemberList.clear();

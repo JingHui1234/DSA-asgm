@@ -532,7 +532,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jbtOK">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ok"/>
+        <Property name="text" type="java.lang.String" value="OK"/>
         <Property name="enabled" type="boolean" value="false"/>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
