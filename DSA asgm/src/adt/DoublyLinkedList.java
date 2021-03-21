@@ -52,19 +52,19 @@ public class DoublyLinkedList<T> implements UnsortedListInterface<T>, Serializab
     }
 
     @Override
-    public boolean add(int newPosition, T newEntry) {
+    public boolean add(int addPosition, T newEntry) {
         boolean addSuccessful = true;
         Node newNode = new Node(newEntry);
 
-        if (newPosition >= 1 && newPosition <= numOfEntries + 1) {
+        if (addPosition >= 1 && addPosition <= numOfEntries + 1) {
             Node nodeBefore = firstNode;
 
-            if (isEmpty() || newPosition == 1) {  // add to the first node
+            if (isEmpty() || addPosition == 1) {  // add to the first node
                 newNode.next = firstNode;
                 firstNode.previous = newNode;
                 firstNode = newNode;
             } else {
-                for (int i = 1; i < newPosition - 1; i++) {
+                for (int i = 1; i < addPosition - 1; i++) {
                     nodeBefore = nodeBefore.next;
                 }
                 newNode.previous = nodeBefore;
@@ -116,9 +116,7 @@ public class DoublyLinkedList<T> implements UnsortedListInterface<T>, Serializab
                 }
 
             } else if (givenPosition == numOfEntries) {  // delete last entry
-                result = lastNode.data;
-                lastNode = lastNode.previous;
-                lastNode.next = null;
+                return removeLast();
 
             } else {
                 Node nodeBefore = firstNode;
