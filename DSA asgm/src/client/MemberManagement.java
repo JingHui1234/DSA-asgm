@@ -592,12 +592,12 @@ public class MemberManagement extends javax.swing.JFrame {
                     }
                     
                     if (memberValidity){
+                        //remove from table
+                        memberTable.removeRow(jTableMemberList.getSelectedRow());
                         //remove from list
                         memberRegistrationList.remove(memberRegistrationList.getEntry(i));
                         //remove from text file
                         memberRegistrationFile.rewrite((SortedLinkedList<MemberRegistration>) memberRegistrationList, "memberRegistration.txt");
-                        //remove from table
-                        memberTable.removeRow(jTableMemberList.getSelectedRow());
                         remove = true;
                     }
                     
@@ -663,7 +663,7 @@ public class MemberManagement extends javax.swing.JFrame {
             String position = societyMemberList.getEntry(i).getPosition();
             String joinedDate = societyMemberList.getEntry(i).getJoinedDate();
             
-            str += String.format("%-15s\t %12s\t %12s\t\t %-35s\t %-18s\t %s\n", name, studentID, contactNo, programme, position, joinedDate);
+            str += String.format("%-25s\t %12s\t %12s\t\t %-15s\t %-18s\t %s\n", name, studentID, contactNo, programme, position, joinedDate);
 //            str += String.format("%-30s%-40s%-60s%-80s%-100s%-150s\n", name, studentID, contactNo, programme, position, joinedDate);
         }
         
