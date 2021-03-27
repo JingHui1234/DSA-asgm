@@ -639,13 +639,14 @@ public class MemberManagement extends javax.swing.JFrame {
         JTextArea jtaMemberList = new JTextArea(100, 200);
         String str = String.format("%140s %s\n",societyName_key, "MEMBER LIST\n");
         
-        str += String.format("%s\t\t  %s\t\t  %s\t\t %s\t\t\t %s\t\t %s\n",
+//        str += String.format("%s\t\t  %s\t\t  %s\t\t %s\t\t\t %s\t\t %s\n",
+//                "Name", "Student ID", "Contact No.", "Programme", "Position", "Joined Date");
+
+        str += String.format("%-25s\t %20s\t %12s\t\t %-25s\t\t %-35s\t %s\n",
                 "Name", "Student ID", "Contact No.", "Programme", "Position", "Joined Date");
         
-//        str += String.format("%s\t\t %s\t\t %s\t\t %s\t\t %s\t\t\t %s\n",
-//                "Name", "Student ID", "Contact No.", "Programme", "Society Name", "Position");
         
-        str += String.format("%s\n", "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        str += String.format("%s\n", "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         
         for(int i = 1; i <= memberRegistrationList.getLength(); i++){
             if (societyName_key.equals(memberRegistrationList.getEntry(i).getSociety().getSocietyName())) {
@@ -663,8 +664,8 @@ public class MemberManagement extends javax.swing.JFrame {
             String position = societyMemberList.getEntry(i).getPosition();
             String joinedDate = societyMemberList.getEntry(i).getJoinedDate();
             
-            str += String.format("%-25s\t %12s\t %12s\t\t %-15s\t %-18s\t %s\n", name, studentID, contactNo, programme, position, joinedDate);
-//            str += String.format("%-30s%-40s%-60s%-80s%-100s%-150s\n", name, studentID, contactNo, programme, position, joinedDate);
+            str += String.format("%-25s\t %20s\t %12s\t\t %-45s\t %-25s\t %s\n", name, studentID, contactNo, programme, position, joinedDate);
+            
         }
         
         societyMemberList.clear();
@@ -675,7 +676,7 @@ public class MemberManagement extends javax.swing.JFrame {
         jtaMemberList.setFont(memberListFont);
         JFrame listFrame = new JFrame();
         listFrame.add(jtaMemberList);
-        listFrame.setSize(1300, 800);
+        listFrame.setSize(1500, 800);
         listFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         listFrame.setVisible(true);
     }//GEN-LAST:event_btnMemberListActionPerformed

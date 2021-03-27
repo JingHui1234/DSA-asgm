@@ -74,7 +74,7 @@ public class SocietyDriver extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Date Reg", "Fees", "Members"
+                "ID", "Name", "Date Reg", "Fees", "Target Members"
             }
         ) {
             boolean[] canEdit = new boolean [] {
