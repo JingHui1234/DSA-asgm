@@ -23,14 +23,6 @@ public class Society implements Serializable, Comparable<Society>{
         this.targetMemNum = numOfMembers;
     }
 
-    public Society(int societyID, String societyName, String dateReg, double feesPerPerson, int targetMemNum, int currentMemNum) {
-        this.societyID = societyID;
-        this.societyName = societyName;
-        this.dateReg = dateReg;
-        this.feesPerPerson = feesPerPerson;
-        this.targetMemNum = targetMemNum;
-        
-    }
    
     public Society() {
     }
